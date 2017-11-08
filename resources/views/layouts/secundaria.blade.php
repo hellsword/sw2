@@ -35,8 +35,6 @@
     <link rel="stylesheet" href="{{ asset('css/boton.css') }}">
 
 
-
-		<!-- Estilos CSS -->	
 	</head>
 	<body id="top">
 
@@ -154,7 +152,7 @@
 						<div class="3u">
 							<section>
 								<h3>¿Qué buscas?</h3>
-								<input type="text" name="busca" value="Camión 3/4"><br>
+								<input type="text" name="busca" placeholder="Camión 3/4"><br>
 
 								<label>Personalice su busqueda:</label>
 							    <select class="form-control" id="sel1" >
