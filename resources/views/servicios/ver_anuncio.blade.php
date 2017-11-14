@@ -32,6 +32,7 @@
 					
 					<div style="text-align: left">
 						<h3>{{$servicio -> titulo}}</h3>
+						<h5 style="color: blue"> Autor: {{$autor -> nombre}} {{$autor -> apellido}}</h5>
 						
 						Valoración: ★★★★★ 
 						<div style="border-top: 1px solid silver;"></div><br>

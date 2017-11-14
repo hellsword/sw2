@@ -12,23 +12,24 @@
 		<meta name="keywords" content="" />
 		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
 
-		<script type="text/javascript" src="{!! asset('js/jquery.min.js') !!}"></script>
-		<script type="text/javascript" src="{!! asset('js/skel.min.js') !!}"></script>
-		<script type="text/javascript" src="{!! asset('js/skel-layers.min.js') !!}"></script>
-		<script type="text/javascript" src="{!! asset('js/init.js') !!}"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
 
-		<!-- BARRA DE NAVEGACION -->
-	<link rel="stylesheet" href="{{ asset('extra/css/bootstrap.css') }}">
-	<link rel="stylesheet" href="{{ asset('extra/css/pe-icon-7-stroke.css') }}">
-	<link rel="stylesheet" href="{{ asset('extra/css/ct-navbar.css') }}">
+    <script src="extra/js/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="extra/js/bootstrap.js" type="text/javascript"></script>
+    <script src="extra/js/ct-navbar.js"></script>
 
-  <script type="text/javascript" src="{!! asset('extra/js/jquery-1.10.2.js') !!}"></script>
-  <script type="text/javascript" src="{!! asset('extra/js/bootstrap.js') !!}"></script>
-  <script type="text/javascript" src="{!! asset('extra/js/ct-navbar.js') !!}"></script>
+    <link href="extra/css/bootstrap.css" rel="stylesheet" />
+    <link href="extra/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <link href="extra/css/ct-navbar.css" rel="stylesheet" />  
 
-  <link rel="stylesheet" href="{{ asset('css/skel.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/style-xlarge.css') }}">
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-xlarge.css" />
+		</noscript>
 
 
  <!--ESTILO PARA LOS BOTONES-->

@@ -101,6 +101,7 @@ class ServiciosController extends Controller
             $anuncio->condicion = 0;
             $anuncio->precio_serv = $request->get('precio_serv');
             $anuncio->region = $request->get('region');
+            $anuncio->provincia = $request->get('provincia');
             $anuncio->comuna = $request->get('comuna');
             $anuncio->tipo_servicio = $request->get('tipo');
 
@@ -176,24 +177,8 @@ class ServiciosController extends Controller
             //Se recorren y asignan los array
             while($cont < count($file)){
 
-                //se le asigna un nombre aleatorio a la imagen
-                /*$random = str_random(30);
-                $nombre = $random.'-'.$file[$cont]->getClientOriginalName();
-                $path = public_path( 'uploads/'.$nombre );
-                $url = '/uploads/'.$nombre;
-                $image = Image::make( $file[$cont] -> getRealPath() );
-                //cambia el tamano de la imagen
-                $image->resize(640, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-                //guarda la imagen en el directorio public/uploads
-                $image->save($path);*/
-
-               // $image = Image::make( $file[$cont] -> getRealPath() );
-                //$image = (string) Image::make( $file[$cont] -> getRealPath() )->encode('data-url');
                 $temp = file_get_contents($file[$cont] );
                 $image = base64_encode($temp);
-
 
                 $imagen = new Imagenes;
                 $imagen->id_foto = $cont;
@@ -229,10 +214,10 @@ class ServiciosController extends Controller
 
 
                $pdf = PDF::loadView('servicios.pdf', ["anuncio" => $anuncio,"total" => $totalPagar,"comprobante" => $numero_aleatorio,"fecha" => $fechaActual,"fechaV" => $fechaVencimiento,"duracion" => $duracion]);
-               return $pdf->download('factura.pdf');
+               return $pdf->download('cupon.pdf');
         }
 
-        return Redirect::to('/');
+        return Redirect::to('/servicios');
 
     }
 
@@ -241,7 +226,10 @@ class ServiciosController extends Controller
         $servicio = DB::table('anuncio')->where('id_anuncio', $id_anuncio)->first();
         $imagenes = DB::table('fotos')->where('id_anuncio', $id_anuncio)->get();
 
-        return view("servicios.ver_anuncio", ['servicio' => $servicio, 'imagenes' => $imagenes]);
+        $orden = DB::table('orden')->where('id_anuncio', $id_anuncio)->first();
+        $autor = DB::table('users')->where('id', $orden->id_cliente)->first();
+
+        return view("servicios.ver_anuncio", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor]);
     }
 
   }

@@ -81,7 +81,7 @@
                                 <p>
                                     <label>Provincia</label>
                                     <span class="field">
-                                    <select name="region" id="region" class="uniformselect" required="">
+                                    <select name="provincia" id="provincia" class="uniformselect" required="">
                                     @foreach($provincias as $provincia)
                                     <option>{{$provincia -> PROVINCIA_NOMBRE}}</option>
                                     @endforeach
@@ -92,7 +92,7 @@
                                 <p>
                                     <label>Comuna</label>
                                     <span class="field">
-                                    <select name="region" id="region" class="uniformselect" required="">
+                                    <select name="comuna" id="comuna" class="uniformselect" required="">
                                     @foreach($comunas as $comuna)
                                     <option>{{$comuna -> COMUNA_NOMBRE}}</option>
                                     @endforeach
