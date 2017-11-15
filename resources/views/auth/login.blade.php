@@ -1,42 +1,47 @@
 @extends('layouts.inicial')
 @section('contenido')
 
+<style type="text/css">
+    label{
+        text-align: left;
+    }
+</style>
+
 <section id="two" class="wrapper style1">
     <header class="major">
         <h2>Login</h2>
     </header>
     <div class="container" align="center">
-        <form class="form-horizontal" method="POST" action="{{ route('login') }}" style="width: 40%; text-align: left;">
+    <div class="widgetcontent">
+        <form class="stdform" method="POST" action="{{ route('login') }}" style="width: 60%;">
             {{ csrf_field() }}
 
-            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                E-Mail Address:<br>
-
-                <div class="col-md-6">
-                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}" >
+                <p>
+                    <label>E-Mail Address:</label>
+                    <span class="field"><input type="text" name="email" class="input-large" value="{{ old('email') }}" /></span>
 
                     @if ($errors->has('email'))
                         <span class="help-block">
                             <strong>{{ $errors->first('email') }}</strong>
                         </span>
                     @endif
-                </div>
+                </p>
             </div>
 
             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                <br>Contraseña:<br>
+                <label>Contraseña:</label>
 
-                <div class="col-md-6">
-                    <input id="password" type="password" class="form-control" name="password" required>
+                    <span class="field"><input type="password" name="password" class="input-large" required /></span>
 
                     @if ($errors->has('password'))
                         <span class="help-block">
                             <strong>{{ $errors->first('password') }}</strong>
                         </span>
                     @endif
-                </div>
             </div>
 
+            <!--
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">
                     <div class="checkbox">
@@ -54,16 +59,16 @@
                     </a>
                 </div>
             </div><br>
+            -->
 
-            <div class="form-group">
-                <div class="row" >
-                    <div class="6u" align="right"> <a href="/" class="button special"  >Cancelar</a> </div>
-                    <div id="aceptar" class="6u" align="left"> <button type="submit" class="button special">
-                        Aceptar</button> 
-                    </div>
-                </div>
-            </div>
+            <br>
+            <p class="stdformbutton">
+                <button onclick="location.href = '/';" class="btn">Cancelar</button>
+                <button class="btn btn-primary">Aceptar</button>
+            </p>
+
         </form>
+    </div>
     </div>
 </section>
 

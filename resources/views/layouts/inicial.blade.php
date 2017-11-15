@@ -12,15 +12,34 @@
 		<meta name="keywords" content="" />
 		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
 
+<!--
+		<script src="extra/js/bootstrap.js" type="text/javascript"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
 
+	
+		<link href="extra/css/bootstrap.css" rel="stylesheet" />
+
+		<link rel="stylesheet" href="css/skel.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/style-xlarge.css">
+-->
+
+
+		<!-- Al borrar esto y dejar solo lo de arriba se vuelve responsive pero se ve mal la vista ver_anuncio -->
 		<script type="text/javascript" src="{!! asset('js/jquery.min.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('js/skel.min.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('js/skel-layers.min.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('js/init.js') !!}"></script>
-		<!-- Estilos CSS -->	
+			
 		<link rel="stylesheet" href="{{ asset('css/skel.css') }}">
 		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 		<link rel="stylesheet" href="{{ asset('css/style-xlarge.css') }}">
+
+ <!--ESTILO PARA LOS BOTONES-->
+    <link rel="stylesheet" href="{{ asset('css/boton.css') }}">
 
 
 	</head>

@@ -180,8 +180,12 @@
                         
                     </div><!--#wizard-->
                     {!!Form::close()!!}
+
                     <!-- END OF DEFAULT WIZARD -->
                 </div><!--widgetcontent-->  
+                <div align="right">
+                <button onclick="location.href = '/';" class="btn btn-danger" >Volver</button>
+                </div>
             </div>
     </div>
     </div>

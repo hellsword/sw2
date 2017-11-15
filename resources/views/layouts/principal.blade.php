@@ -150,7 +150,9 @@
 					<p style="color: white;">Su mejor opción para buscar mudanzas, fletes y mecanicos <a href="ht
 					tp://templated.co"></a></p>
 					<ul class="actions">
-						<li><a href="{{ route('usuarios_cliente.create') }}" class="button big special">Registrarse</a></li>
+						@if(!Auth::check())
+							<li><a href="{{ route('usuarios_cliente.create') }}" class="button big special">Registrarse</a></li>
+						@endif
 						<li><a href="#elements" class="button big btn-success">Publique ya su anuncio</a></li>
 					</ul>
 				</div>
