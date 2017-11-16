@@ -66,7 +66,7 @@
                       </a>
                     </li> 
                     <li>
-                      <a href="servicios">
+                      <a href="/servicios">
                           <i class="pe-7s-portfolio">
                           </i>
                           <p>Servicios</p>
@@ -80,7 +80,11 @@
                       </a>
                     </li> 
                     <li>
-                      <a href="servicios/create">
+                      @if(Auth::check())
+                      	<a href="/servicios/create">
+                      @else
+                      	<a href="/login2">
+                      @endif
                           <i class="pe-7s-note2">
                           </i>
                           <p>Publique su aviso</p>
@@ -94,12 +98,12 @@
                                 <i class="pe-7s-user"></i>
                                 <p>{{ Auth::user()->nombre}}</p>
                             </a>
-                            @if(Auth::user()->tipo=='admin')
+                        @if(Auth::user()->tipo=='admin')
                         <ul class="dropdown-menu">
                             <li><a href="#">Ver perfil</a></li>
                             <li><a href="#">Anuncios</a></li>
-                            <li><a href="#">Favoritos</a></li>
-                            <li><a href="usuarios">Lista Usuarios</a></li>
+                            <li><a href="/favoritos">Favoritos</a></li>
+                            <li><a href="/usuarios">Lista Usuarios</a></li>
                             <li><a href="{{ route('usuarios.create') }}">Crear Usuarios</a></li>
                             <li class="divider"></li>
                             <li><a href="{{url('/logout')}}">Salir</a></li>
@@ -107,16 +111,16 @@
                           @elseif(Auth::user()->tipo=='secretaria')
                            <ul class="dropdown-menu">
                             <li><a href="#">Ver perfil</a></li>
-                            <li><a href="anuncios">Anuncios</a></li>
-                            <li><a href="#">Favoritos</a></li>
-                            <li><a href="usuarios">Lista Usuarios</a></li>
+                            <li><a href="/anuncios">Anuncios</a></li>
+                            <li><a href="/favoritos">Favoritos</a></li>
+                            <li><a href="/usuarios">Lista Usuarios</a></li>
                             <li><a href="{{url('/logout')}}">Salir</a></li>
                           </ul>
                           @else
                            <ul class="dropdown-menu">
                             <li><a href="#">Ver perfil</a></li>
-                            <li><a href="#">Mis anuncios</a></li>
-                            <li><a href="#">Favoritos</a></li>
+                            <li><a href="/mis_anuncios">Mis anuncios</a></li>
+                            <li><a href="/favoritos">Favoritos</a></li>
                             <li><a href="#">Another action</a></li>
                             <li><a href="usuarios.tarjeta.create">Vincular tarjeta</a></li>
                             <li class="divider"></li>
@@ -126,7 +130,7 @@
                     </li>
                     @else
                     <li><a href="{{ route('usuarios_cliente.create') }}" class="button special">Registrarse</a></li>
-                    <li><a href="login2" class="button special">Iniciar sesión</a></li>
+                    <li><a href="/login2" class="button special">Iniciar sesión</a></li>
                     @endif
                  </ul>
                  <form class="navbar-form navbar-right navbar-search-form" role="search">                  
@@ -152,8 +156,10 @@
 					<ul class="actions">
 						@if(!Auth::check())
 							<li><a href="{{ route('usuarios_cliente.create') }}" class="button big special">Registrarse</a></li>
+							<li><a href="/login2" class="button big btn-success">Publique ya su anuncio</a></li>
+						@else
+							<li><a href="/servicios/create" class="button big btn-success">Publique ya su anuncio</a></li>
 						@endif
-						<li><a href="#elements" class="button big btn-success">Publique ya su anuncio</a></li>
 					</ul>
 				</div>
 			</section>

@@ -1,17 +1,10 @@
 @extends('layouts.secundaria')
 @section('contenido')
 
+	<h2>Mis Anuncios</h2>
+
 	<!-- pull-right:posiciona el elemento a la derecha de la pantalla -->
 	@foreach ($servicios as $servicio)
-
-		<?php $val = 0; ?>
-		@if(Auth::check())
-			@if(Auth::user()->id == $servicio->id_cliente)
-				<?php $val = 1; ?>
-			@endif
-		@endif
-
-		{{$val}}
 
 		<hr>
 		<div class="row" >
@@ -40,14 +33,7 @@
 				<section>
 					${{$servicio -> precio_serv}} <br>
 					Valoración: ★★★★★ <br>
-					@if(Auth::check())
-						{!!Form::open(array('url'=>'favoritos', 'method'=>'POST', 'class'=>'stdform', 'id'=>'formu', 'name'=>'formu', 'autocomplete'=>'off'))!!}
-							<input type="hidden" name="id_anuncio" value="{{$servicio -> id_anuncio}}">
-							<a class="button" href="javascript:;" onclick="document.getElementById('formu').submit(); alert('Anuncio añadido');">Añadir a favoritos</a>
-						{!!Form::close()!!}
-					@else
-						<a href="login2" class="button ">Añadir a favoritos</a>
-					@endif
+					
 				</section>
 			</div>
 		</div>

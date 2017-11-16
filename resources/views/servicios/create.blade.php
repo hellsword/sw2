@@ -45,10 +45,9 @@
                         <div id="wiz1step1" class="formwiz">
                             <h4 class="widgettitle">Paso 1: Información Básica</h4>
                             
-                                <p> Escoja el título que tendrá su anuncio</p>
                                 <p>
                                     <label>Título</label>
-                                    <span class="field"><input type="text" name="titulo" id="titulo" class="input-xxlarge" required="" /></span>
+                                    <span class="field"><input type="text" name="titulo" id="titulo" class="input-xxlarge" required="" placeholder="Escoja el título que tendrá su anuncio" /></span>
                                 </p>
 
                                 <p>

@@ -3,35 +3,38 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+//hacemos referencias a redirect para hacer algunas redirrecciones
+use Illuminate\Support\Facades\Redirect;
 
+//para tebajar con la clase DB de laravel.
 use DB;
+use Illuminate\Contracts\Auth\Guard;
+use Closure;
+use Session;
 
-class HomeController extends Controller
+class MisAnunciosController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected $auth;
+   
+    //vamos a declarar un constructor:
+    public function __construct(Guard $auth)
     {
-        $this->middleware('auth');
+        //le diremos que gestione el acceso por usuario 
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
 
 
+    public function index(Guard $auth){
+
+    	$this->middleware('auth');
+        $this->auth =$auth;
+        
         $servicios = DB::table('anuncio as a')
         ->join ('orden as o', 'a.id_anuncio', '=' , 'o.id_anuncio')
         ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
         ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
         ->where('f.id_foto', '=', '0')
+        ->where('o.id_cliente', '=', $this->auth->user()->id)
         ->select('a.id_anuncio as id_anuncio',
                 'a.titulo as titulo',
                 'a.descripcion as descripcion',
@@ -43,10 +46,10 @@ class HomeController extends Controller
                 'u.apellido as apellido',
                 'f.foto as foto'
                 )
-        ->take(4)
-        ->orderBy('a.id_anuncio', 'desc')
-        ->get();
+        ->paginate(5);
 
-        return view('/home', ['servicios'=> $servicios]);
+        return view('mis_anuncios.index', ["servicios" => $servicios]);
     }
+
+
 }

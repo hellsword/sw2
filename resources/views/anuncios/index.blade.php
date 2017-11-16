@@ -8,6 +8,8 @@
 		</div>
 	@endif
 -->
+
+
 	<div class="row">
 		<div class = "col-lg-8 col-md-8 col-sm-8 col-xs-12">
 			<h3>Lista de Anuncios del Sistema</h3>
@@ -32,7 +34,7 @@
 					<td>
 					{!! Form::model($anuncios, ['method'=>'PATCH', 'route'=>['anuncios.update', $a->id_anuncio]]) !!}
             {{Form::token()}}
-							 <!-- <a href="#" class="boton verde">Aceptar</a>-->
+							
 							   <button class="boton verde"" type="submit">Aceptar</button>
             {!!Form::close()!!}
 
@@ -45,5 +47,7 @@
 			@endif
 		{{$anuncios->render()}}
 		</div>
+
+		
 
 @stop

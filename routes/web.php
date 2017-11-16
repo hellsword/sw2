@@ -15,7 +15,10 @@
 //Route::post('usuarios.tarjeta.store','UserController@tarjeta_store');
 //Route::post('/servicios/ver_anuncio','ServiciosController@ver_anuncio');
 
+
 Route::resource('/','HomeController');
+Route::resource('/favoritos','FavoritoController');
+Route::resource('/mis_anuncios','MisAnunciosController');
 Route::resource('/servicios','ServiciosController');
 //Route::resource('/auth','AuthController');
 Route::resource('/auth','AuthController');

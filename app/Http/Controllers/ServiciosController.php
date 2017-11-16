@@ -30,12 +30,7 @@ class ServiciosController extends Controller
     public function __construct(Guard $auth)
     {
         //le diremos que gestione el acceso por usuario 
-        $this->middleware('auth');
-        $this->auth =$auth;
-
-
     }
-    //comentario de prueba 
 
     public function index(){
         
@@ -44,7 +39,8 @@ class ServiciosController extends Controller
         ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
         ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
         ->where('f.id_foto', '=', '0')
-        ->select('a.id_anuncio as id_anuncio',
+        ->select('o.id_cliente as id_cliente',
+                'a.id_anuncio as id_anuncio',
                 'a.titulo as titulo',
                 'a.descripcion as descripcion',
                 'a.precio_serv as precio_serv',
@@ -62,7 +58,10 @@ class ServiciosController extends Controller
         //return view('servicios.pdf');
     }
 
-    public function create(){
+    public function create(Guard $auth){
+
+        $this->middleware('auth');
+        $this->auth =$auth;
 
          $regiones=DB::table('region')->get();
 
@@ -73,7 +72,11 @@ class ServiciosController extends Controller
         return view('servicios.create',['regiones'=> $regiones,'provincias'=> $provincias, 'comunas'=> $comunas]);
     }
 
-    public function store(Request $request){ 
+    public function store(Request $request, Guard $auth){ 
+
+
+        $this->middleware('auth');
+        $this->auth =$auth;
 
     $tipoServicio=$request->get('tipo'); //captura el tipo de servicio
 
