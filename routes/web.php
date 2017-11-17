@@ -26,6 +26,9 @@ Route::resource('/usuarios','UserController');
 Route::resource('usuarios_cliente','User2Controller');
 Route::resource('/secretarias','SecretariaController');
 
+
+Route::resource('/cupones','CuponController');
+
 Route::resource('/anuncios','AnuncioController');
 Auth::routes();
 //para poder cerrar seccion

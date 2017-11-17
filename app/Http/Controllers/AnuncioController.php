@@ -42,10 +42,12 @@ class AnuncioController extends Controller
 
         $anuncios = DB::table('orden as o')
          ->join ('anuncio as a', 'o.id_anuncio', '=' ,'a.id_anuncio')
+         //->join ('cupones as c', 'c.id_anuncio', '=' ,'a.id_anuncio')
          ->where('o.id_secretaria','=',$query)   
          ->where('a.condicion','=',0)  
-         ->select('a.titulo','a.descripcion','a.condicion','a.id_anuncio')
+         ->select('a.titulo','a.descripcion','a.condicion','a.id_anuncio','a.forma_pago')
          ->paginate(5);
+
 
 
        return view('anuncios.index', ["anuncios" => $anuncios]);

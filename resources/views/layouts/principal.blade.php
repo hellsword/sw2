@@ -121,7 +121,7 @@
                             <li><a href="#">Ver perfil</a></li>
                             <li><a href="/mis_anuncios">Mis anuncios</a></li>
                             <li><a href="/favoritos">Favoritos</a></li>
-                            <li><a href="#">Another action</a></li>
+                            <li><a href="/cupones">Subir Cupón</a></li>
                             <li><a href="usuarios.tarjeta.create">Vincular tarjeta</a></li>
                             <li class="divider"></li>
                             <li><a href="{{url('/logout')}}">Salir</a></li>
