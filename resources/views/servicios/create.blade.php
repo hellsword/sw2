@@ -248,6 +248,8 @@
                                     '<p>'+
                                         '<label>Nombre del titular: </label>'+
                                             '<div class="4u"><input id="nombre" type="text" class="input-xxlarge" name="nombre" value="" required placeholder="Nombre"></div>'+
+                                    '</p>'+
+                                    '<p>'+
                                             '<label>Apellidos del titular: </label>'+
                                             '<div class="4u"><input id="apellidos" type="text" class="input-xxlarge" name="apellidos" value="" required placeholder="Apellidos"></div>'+
                                     '</p><br>'+

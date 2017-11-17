@@ -22,7 +22,7 @@
 		<script type="text/javascript" src="{!! asset('js/skel-layers.min.js') !!}"></script>
 		<script type="text/javascript" src="{!! asset('js/init.js') !!}"></script>
 			
-		<link rel="stylesheet" href="{{ asset('css/skel.css') }}">
+		
 		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 		<link rel="stylesheet" href="{{ asset('css/style-xlarge.css') }}">
 

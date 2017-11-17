@@ -32,7 +32,10 @@ class ServiciosController extends Controller
         //le diremos que gestione el acceso por usuario 
     }
 
-    public function index(){
+    public function index(Guard $auth){
+
+        $this->middleware('auth');
+        $this->auth =$auth;
         
         $servicios = DB::table('anuncio as a')
         ->join ('orden as o', 'a.id_anuncio', '=' , 'o.id_anuncio')
@@ -53,9 +56,12 @@ class ServiciosController extends Controller
                 )
         ->paginate(5);
 
-        return view('servicios.index', ["servicios" => $servicios]);
-
-        //return view('servicios.pdf');
+        if($this->auth->user()){
+            $favoritos = DB::table('favoritos')->where('id_cliente', $this->auth->user()->id)->get();
+            return view('servicios.index', ["servicios" => $servicios, "favoritos" => $favoritos]);
+        }
+        else
+            return view('servicios.index', ["servicios" => $servicios]);
     }
 
     public function create(Guard $auth){
@@ -78,7 +84,7 @@ class ServiciosController extends Controller
         $this->middleware('auth');
         $this->auth =$auth;
 
-    $tipoServicio=$request->get('tipo'); //captura el tipo de servicio
+        $tipoServicio=$request->get('tipo'); //captura el tipo de servicio
 
       $tituloAnuncio=$request->get('titulo'); //captura el titulo del anuncio
       $duracion=$request->get('tiempo2'); //captura el titulo del anuncio
@@ -224,15 +230,27 @@ class ServiciosController extends Controller
 
     }
 
-    public function show($id_anuncio)
+    public function show($id_anuncio, Guard $auth)
     {
+        $this->middleware('auth');
+        $this->auth =$auth;
+
         $servicio = DB::table('anuncio')->where('id_anuncio', $id_anuncio)->first();
         $imagenes = DB::table('fotos')->where('id_anuncio', $id_anuncio)->get();
-
         $orden = DB::table('orden')->where('id_anuncio', $id_anuncio)->first();
         $autor = DB::table('users')->where('id', $orden->id_cliente)->first();
 
-        return view("servicios.ver_anuncio", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor]);
+        $face = DB::table('contacto')->where('id', $orden->id_cliente)->where('medio', 'facebook')->first();
+        $fono = DB::table('contacto')->where('id', $orden->id_cliente)->where('medio', 'telefono')->first();
+
+        if($this->auth->user()){
+            $favoritos = DB::table('favoritos')->where('id_cliente', $this->auth->user()->id)->get();
+            return view("servicios.ver_anuncio", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor, "favoritos" => $favoritos, "face" => $face, "fono" => $fono]);
+        }
+        else
+            return view("servicios.ver_anuncio", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor, "face" => $face, "fono" => $fono]);
+
+        
     }
 
   }

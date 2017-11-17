@@ -8,6 +8,19 @@
 
 
 <br><br><br>
+
+	<?php $val = 0; ?>
+	@if(Auth::check())
+		@if(Auth::user()->id == $autor->id)
+			<?php $val = 1; ?>
+		@endif
+
+		@foreach ($favoritos as $favorito)
+			@if($servicio->id_anuncio == $favorito->id_anuncio)
+				<?php $val = 1; ?>
+			@endif
+		@endforeach
+	@endif
 	
 
 
@@ -48,8 +61,30 @@
 							<p>&nbsp;&nbsp;&nbsp;Comuna: {{$servicio -> comuna}}</p>
 						</section>
 
-						<a href="#" class="w3-button w3-red ">Añadir a favoritos</a>
-						<a href="#" class="w3-button w3-orange">Contactar anunciante</a>
+						
+
+						@if($val == 0)
+							@if(Auth::check())
+								{!!Form::open(array('url'=>'favoritos', 'method'=>'POST', 'class'=>'stdform', 'id'=>'formu', 'name'=>'formu', 'autocomplete'=>'off'))!!}
+									<input type="hidden" name="id_anuncio" value="{{$servicio -> id_anuncio}}">
+									<a class="w3-button w3-red " href="javascript:;" onclick="document.getElementById('formu').submit(); alert('Anuncio añadido');">Añadir a favoritos</a>
+									<a href="javascript:;" class="w3-button w3-orange" onclick="mostrar()">Contactar anunciante</a>
+								{!!Form::close()!!}
+							@else
+								<a href="login2" class="w3-button w3-red ">Añadir a favoritos</a>
+								<a href="javascript:;" class="w3-button w3-orange" onclick="mostrar()">Contactar anunciante</a>
+							@endif
+						@else
+							<a class="w3-button w3-red " style="text-decoration:line-through;">Añadir a favoritos</a>
+							<a href="javascript:;" class="w3-button w3-orange" onclick="mostrar()">Contactar anunciante</a>
+						@endif
+
+						<ul id="lista_contacto" class="icons" style='display:none;' >
+							<li><a href="{{$face->contacto}}" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a class="icon fa-phone"><span class="label">Instagram</span></a></li>  {{$fono->contacto}}
+						</ul>
+
+						
 					</div>
 				</section>
 			</div>
@@ -71,6 +106,8 @@
 
 
 	<script>
+
+	//SLIDESHOW PARA LAS IMAGENES
 	var slideIndex = 1;
 	showDivs(slideIndex);
 
@@ -88,6 +125,13 @@
 	  }
 	  x[slideIndex-1].style.display = "block";  
 	}
+
+
+	//FUNCION PARA MOSTRAR INFORMACION DE CONTACTO DEL ANUNCIANTE
+	function mostrar(){
+		document.getElementById('lista_contacto').style.display = 'block';
+	}
+
 	</script>
 
 

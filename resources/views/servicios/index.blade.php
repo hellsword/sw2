@@ -9,9 +9,15 @@
 			@if(Auth::user()->id == $servicio->id_cliente)
 				<?php $val = 1; ?>
 			@endif
+
+			@foreach ($favoritos as $favorito)
+				@if($servicio->id_anuncio == $favorito->id_anuncio)
+					<?php $val = 1; ?>
+				@endif
+			@endforeach
 		@endif
 
-		{{$val}}
+		
 
 		<hr>
 		<div class="row" >
@@ -38,15 +44,19 @@
 			</div>
 			<div class="4u">
 				<section>
-					${{$servicio -> precio_serv}} <br>
+					<label style="color: #DE5122; font-size: 18px">${{$servicio -> precio_serv}}</label> <br>
 					Valoración: ★★★★★ <br>
-					@if(Auth::check())
-						{!!Form::open(array('url'=>'favoritos', 'method'=>'POST', 'class'=>'stdform', 'id'=>'formu', 'name'=>'formu', 'autocomplete'=>'off'))!!}
-							<input type="hidden" name="id_anuncio" value="{{$servicio -> id_anuncio}}">
-							<a class="button" href="javascript:;" onclick="document.getElementById('formu').submit(); alert('Anuncio añadido');">Añadir a favoritos</a>
-						{!!Form::close()!!}
+					@if($val == 0)
+						@if(Auth::check())
+							{!!Form::open(array('url'=>'favoritos', 'method'=>'POST', 'class'=>'stdform', 'id'=>'formu', 'name'=>'formu', 'autocomplete'=>'off'))!!}
+								<input type="hidden" name="id_anuncio" value="{{$servicio -> id_anuncio}}">
+								<a class="button" href="javascript:;" onclick="document.getElementById('formu').submit(); alert('Anuncio añadido');">Añadir a favoritos</a>
+							{!!Form::close()!!}
+						@else
+							<a href="login2" class="button ">Añadir a favoritos</a>
+						@endif
 					@else
-						<a href="login2" class="button ">Añadir a favoritos</a>
+						<a class="button" style="text-decoration:line-through;">Añadir a favoritos</a>
 					@endif
 				</section>
 			</div>

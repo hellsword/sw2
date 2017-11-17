@@ -1,4 +1,4 @@
-@extends('layouts.secundaria')
+@extends('layouts.secundaria2')
 @section('contenido')
 
 
@@ -77,7 +77,7 @@
 
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">Guardar</button>
-                <button class="btn btn-danger" type="reset">Cancelar</button>
+                <a href="/usuarios" class="btn btn-danger">Cancelar</a>
             </div>
             {!!Form::close()!!}
             </fieldset>
