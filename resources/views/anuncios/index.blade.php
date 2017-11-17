@@ -23,19 +23,24 @@
 					<th>ID</th>
 					<th>Titulo</th>
 					<th>Descripción</th>
-					<th>Condicion</th>
+				
 				</thead>
 				@foreach ($anuncios as $a)
 				<tr>
 					<td>{{$a -> id_anuncio}}</td>
 					<td>{{$a -> titulo}}</td>
 					<td>{{$a -> descripcion}}</td>
-					<td>{{$a -> condicion}}</td>
+				
 					<td>
 					{!! Form::model($anuncios, ['method'=>'PATCH', 'route'=>['anuncios.update', $a->id_anuncio]]) !!}
             {{Form::token()}}
-							
-							   <button class="boton verde"" type="submit">Aceptar</button>
+            <button class="boton verde"" type="submit">Aceptar</button>
+            @if($a -> forma_pago =="2")
+				<br><font size=4 color="#00FFFF" face="Comic Sans MS,arial,verdana">Pagado</font>
+			@else
+			 <br><font size=4 color="red" face="Comic Sans MS,arial,verdana">Pendiente</font>
+			@endif				   
+
             {!!Form::close()!!}
 
 					

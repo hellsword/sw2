@@ -113,6 +113,17 @@ class ServiciosController extends Controller
             $anuncio->provincia = $request->get('provincia');
             $anuncio->comuna = $request->get('comuna');
             $anuncio->tipo_servicio = $request->get('tipo');
+            if($tipoPago=='efectivo'){
+
+          $anuncio->forma_pago = 1;// 1 si es en efectivo 
+          $anuncio->save(); 
+            }else{
+
+          $anuncio->forma_pago = 0;// 0 si es con tarjeta 
+          $anuncio->save(); 
+
+            }
+
 
             //Ingresa los datos de la persona o el vehiculo
             if($tipoServicio == 'mecanico' || $tipoServicio == 'otros_per'){
@@ -141,7 +152,7 @@ class ServiciosController extends Controller
                 $anuncio->patente = $request->get('patente');
             }
 
-            $anuncio->save();  
+            
 
 
             //AGREGAR DATOS A TABLA FORMA_PAGO
@@ -214,7 +225,6 @@ class ServiciosController extends Controller
               $mod_date = strtotime($fechaActual."+ 20 days");
               $fechaVencimiento=date("d-m-Y",$mod_date);
 
-          
 
                 $anuncio=DB::table('anuncio as a')
                 ->where('a.titulo','=',$tituloAnuncio)     
@@ -225,7 +235,7 @@ class ServiciosController extends Controller
                $pdf = PDF::loadView('servicios.pdf', ["anuncio" => $anuncio,"total" => $totalPagar,"comprobante" => $numero_aleatorio,"fecha" => $fechaActual,"fechaV" => $fechaVencimiento,"duracion" => $duracion]);
                return $pdf->download('cupon.pdf');
         }
-
+ 
         return Redirect::to('/servicios');
 
     }
