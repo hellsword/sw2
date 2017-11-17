@@ -25,11 +25,7 @@
     <link href="extra/css/pe-icon-7-stroke.css" rel="stylesheet" />
     <link href="extra/css/ct-navbar.css" rel="stylesheet" />  
 
-		<noscript>
-			<link rel="stylesheet" href="css/skel.css" />
-			<link rel="stylesheet" href="css/style.css" />
-			<link rel="stylesheet" href="css/style-xlarge.css" />
-		</noscript>
+		
 
 
  <!--ESTILO PARA LOS BOTONES-->
@@ -165,7 +161,7 @@
 						<div class="3u">
 							<section>
 								<h3>¿Qué buscas?</h3>
-								<input type="text" name="busca" placeholder="Camión 3/4"><br>
+								@include('servicios.search')
 
 								<label>Personalice su busqueda:</label>
 							    <select class="form-control" id="sel1" >

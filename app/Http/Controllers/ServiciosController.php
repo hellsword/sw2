@@ -32,36 +32,43 @@ class ServiciosController extends Controller
         //le diremos que gestione el acceso por usuario 
     }
 
-    public function index(Guard $auth){
+    public function index(Guard $auth, Request $request){
 
         $this->middleware('auth');
         $this->auth =$auth;
-        
-        $servicios = DB::table('anuncio as a')
-        ->join ('orden as o', 'a.id_anuncio', '=' , 'o.id_anuncio')
-        ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
-        ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
-        ->where('f.id_foto', '=', '0')
-        ->select('o.id_cliente as id_cliente',
-                'a.id_anuncio as id_anuncio',
-                'a.titulo as titulo',
-                'a.descripcion as descripcion',
-                'a.precio_serv as precio_serv',
-                'a.tipo_servicio as tipo_servicio',
-                'a.region as region',
-                'a.comuna as comuna',
-                'u.nombre as nombre',
-                'u.apellido as apellido',
-                'f.foto as foto'
-                )
-        ->paginate(5);
 
-        if($this->auth->user()){
-            $favoritos = DB::table('favoritos')->where('id_cliente', $this->auth->user()->id)->get();
-            return view('servicios.index', ["servicios" => $servicios, "favoritos" => $favoritos]);
+        if($request){
+            $query=trim($request->get('searchText'));
+        
+            $servicios = DB::table('anuncio as a')
+            ->join ('orden as o', 'a.id_anuncio', '=' , 'o.id_anuncio')
+            ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
+            ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
+            ->where('f.id_foto', '=', '0')
+            ->where('a.titulo', 'LIKE', '%'.$query.'%')     //BUSCA POR EL TITULO DEL ANUNCIO
+            //->orWhere('a.descripcion', 'LIKE', '%'.$query.'%')      //BUSCA POR LA DESCRIPCION
+            //->orWhere('a.tipo_servicio', 'LIKE', '%'.$query.'%')        //BUSCA POR EL TIPO DE SERVICIO
+            ->select('o.id_cliente as id_cliente',
+                    'a.id_anuncio as id_anuncio',
+                    'a.titulo as titulo',
+                    'a.descripcion as descripcion',
+                    'a.precio_serv as precio_serv',
+                    'a.tipo_servicio as tipo_servicio',
+                    'a.region as region',
+                    'a.comuna as comuna',
+                    'u.nombre as nombre',
+                    'u.apellido as apellido',
+                    'f.foto as foto'
+                    )
+            ->paginate(5);
+
+            if($this->auth->user()){
+                $favoritos = DB::table('favoritos')->where('id_cliente', $this->auth->user()->id)->get();
+                return view('servicios.index', ["servicios" => $servicios, "favoritos" => $favoritos, "searchText" => $query]);
+            }
+            else
+                return view('servicios.index', ["servicios" => $servicios, "searchText" => $query]);
         }
-        else
-            return view('servicios.index', ["servicios" => $servicios]);
     }
 
     public function create(Guard $auth){
