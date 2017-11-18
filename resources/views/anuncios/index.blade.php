@@ -39,11 +39,10 @@
             
             {!!Form::open(array('url'=>'anuncios/ver_cupon', 'method'=>'POST', 'autocomplete'=>'off'))!!}
             {{Form::token()}}
-            <input type="" name="id_anuncio" value="{{$a->id_anuncio}}">
+            <br><font size=4 color="#00FFFF" face="Comic Sans MS,arial,verdana">Pagado</font>
+            <input type="" name="id_anuncio" value="{{$a->id_anuncio}}" hidden>
             <button class="boton azul"" type="submit">Cupon</button>
                {!!Form::close()!!}
-				<br><font size=4 color="#00FFFF" face="Comic Sans MS,arial,verdana">Pagado</font>
-
 			@else
 			 <br><font size=4 color="red" face="Comic Sans MS,arial,verdana">Pendiente</font>
 			@endif	
