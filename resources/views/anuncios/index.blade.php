@@ -49,7 +49,7 @@
 			@endif	
 				{!! Form::model($anuncios, ['method'=>'PATCH', 'route'=>['anuncios.update', $a->id_anuncio]]) !!}
             {{Form::token()}}
-            <button class="boton verde"" type="submit">Aceptar</button>
+            <button class="boton verde" type="submit">Aceptar</button>
                  {!!Form::close()!!}			   
 
        
