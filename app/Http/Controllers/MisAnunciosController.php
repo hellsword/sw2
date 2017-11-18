@@ -24,31 +24,36 @@ class MisAnunciosController extends Controller
 
 
 
-    public function index(Guard $auth){
+    public function index(Guard $auth, Request $request){
 
     	$this->middleware('auth');
         $this->auth =$auth;
         
-        $servicios = DB::table('anuncio as a')
-        ->join ('orden as o', 'a.id_anuncio', '=' , 'o.id_anuncio')
-        ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
-        ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
-        ->where('f.id_foto', '=', '0')
-        ->where('o.id_cliente', '=', $this->auth->user()->id)
-        ->select('a.id_anuncio as id_anuncio',
-                'a.titulo as titulo',
-                'a.descripcion as descripcion',
-                'a.precio_serv as precio_serv',
-                'a.tipo_servicio as tipo_servicio',
-                'a.region as region',
-                'a.comuna as comuna',
-                'u.nombre as nombre',
-                'u.apellido as apellido',
-                'f.foto as foto'
-                )
-        ->paginate(5);
+        if($request){
+            $query=trim($request->get('searchText'));
 
-        return view('mis_anuncios.index', ["servicios" => $servicios]);
+            $servicios = DB::table('anuncio as a')
+            ->join ('orden as o', 'a.id_anuncio', '=' , 'o.id_anuncio')
+            ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
+            ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
+            ->where('f.id_foto', '=', '0')
+            ->where('o.id_cliente', '=', $this->auth->user()->id)
+            ->where('a.titulo', 'LIKE', '%'.$query.'%')     //BUSCA POR EL TITULO DEL ANUNCIO
+            ->select('a.id_anuncio as id_anuncio',
+                    'a.titulo as titulo',
+                    'a.descripcion as descripcion',
+                    'a.precio_serv as precio_serv',
+                    'a.tipo_servicio as tipo_servicio',
+                    'a.region as region',
+                    'a.comuna as comuna',
+                    'u.nombre as nombre',
+                    'u.apellido as apellido',
+                    'f.foto as foto'
+                    )
+            ->paginate(5);
+
+            return view('mis_anuncios.index', ["servicios" => $servicios, "searchText" => $query]);
+        }
     }
 
 
