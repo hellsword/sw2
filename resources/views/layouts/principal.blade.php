@@ -48,9 +48,9 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand navbar-brand-logo" href="http://www.creative-tim.com">
+                <a class="navbar-brand navbar-brand-logo" href="/">
                       <div class="logo">
-                      <img src="https://www.bankbazaar.com/images/common/offerflow/car-loan-landing-hungry-more-sticky-v2.png">
+                      <img src="http://s3.amazonaws.com/seminuevos-migration/dealer_publiya/97/97_1449005711_770.png">
                       </div>
                       <div class="brand"> MUMEFLET </div>
                 </a>
