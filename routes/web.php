@@ -15,7 +15,7 @@
 //Route::post('usuarios.tarjeta.store','UserController@tarjeta_store');
 //Route::post('/servicios/ver_anuncio','ServiciosController@ver_anuncio');
 
-
+Route::post('/anuncios/ver_cupon','CuponController@verCupon');
 Route::resource('/','HomeController');
 Route::resource('/favoritos','FavoritoController');
 Route::resource('/mis_anuncios','MisAnunciosController');
@@ -30,6 +30,8 @@ Route::resource('/secretarias','SecretariaController');
 Route::resource('/cupones','CuponController');
 
 Route::resource('/anuncios','AnuncioController');
+
+
 Auth::routes();
 //para poder cerrar seccion
 

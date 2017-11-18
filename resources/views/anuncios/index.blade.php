@@ -32,16 +32,27 @@
 					<td>{{$a -> descripcion}}</td>
 				
 					<td>
-					{!! Form::model($anuncios, ['method'=>'PATCH', 'route'=>['anuncios.update', $a->id_anuncio]]) !!}
-            {{Form::token()}}
-            <button class="boton verde"" type="submit">Aceptar</button>
+			
+		
+
             @if($a -> forma_pago =="2")
+            
+            {!!Form::open(array('url'=>'anuncios/ver_cupon', 'method'=>'POST', 'autocomplete'=>'off'))!!}
+            {{Form::token()}}
+            <input type="" name="id_anuncio" value="{{$a->id_anuncio}}">
+            <button class="boton azul"" type="submit">Cupon</button>
+               {!!Form::close()!!}
 				<br><font size=4 color="#00FFFF" face="Comic Sans MS,arial,verdana">Pagado</font>
+
 			@else
 			 <br><font size=4 color="red" face="Comic Sans MS,arial,verdana">Pendiente</font>
-			@endif				   
+			@endif	
+				{!! Form::model($anuncios, ['method'=>'PATCH', 'route'=>['anuncios.update', $a->id_anuncio]]) !!}
+            {{Form::token()}}
+            <button class="boton verde"" type="submit">Aceptar</button>
+                 {!!Form::close()!!}			   
 
-            {!!Form::close()!!}
+       
 
 					
 					</td>

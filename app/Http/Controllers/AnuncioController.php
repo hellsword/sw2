@@ -14,6 +14,7 @@ use App\Anuncio;
 use App\Vehiculo;
 use App\Orden;
 use App\Forma_pago;
+use App\Cupones;
 
 use Image; 
 use DB;
