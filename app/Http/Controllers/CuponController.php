@@ -151,9 +151,24 @@ class CuponController extends Controller
         $orden = DB::table('orden')->where('id_anuncio', $id_anuncio)->first();
         $autor = DB::table('users')->where('id', $orden->id_cliente)->first();
 
-            return view("cupones.create", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor]);
+      return view("cupones.create", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor]);
 
         
     }
 
+    public function verCupon(Request $request,Guard $auth)
+    {
+        $this->middleware('auth');
+        $this->auth =$auth;
+        $id_anuncio=$request->get('id_anuncio');
+
+       
+        $cupon = DB::table('cupones')->where('id_anuncio', $id_anuncio)->get();
+        
+   return view("anuncios.ver_cupon", [ 'cupon' => $cupon]);
+
+
+    
+
   }
+}
