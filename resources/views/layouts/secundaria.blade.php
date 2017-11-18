@@ -25,7 +25,11 @@
     <link href="extra/css/pe-icon-7-stroke.css" rel="stylesheet" />
     <link href="extra/css/ct-navbar.css" rel="stylesheet" />  
 
-		
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-xlarge.css" />
+		</noscript>
 
 
  <!--ESTILO PARA LOS BOTONES-->

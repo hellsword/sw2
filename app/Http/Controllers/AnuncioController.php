@@ -35,22 +35,25 @@ class AnuncioController extends Controller
 
     }
 
-    public function index(){
+    public function index(Guard $auth, Request $request){
 
-    //Obtiene el id del usuario logueado
-        $query=$this->auth->user()->id;
+        $this->middleware('auth');
+        $this->auth =$auth;
 
-        $anuncios = DB::table('orden as o')
-         ->join ('anuncio as a', 'o.id_anuncio', '=' ,'a.id_anuncio')
-         //->join ('cupones as c', 'c.id_anuncio', '=' ,'a.id_anuncio')
-         ->where('o.id_secretaria','=',$query)   
-         ->where('a.condicion','=',0)  
-         ->select('a.titulo','a.descripcion','a.condicion','a.id_anuncio','a.forma_pago')
-         ->paginate(5);
+        if($request){
+            $query=trim($request->get('searchText'));
 
+            $anuncios = DB::table('orden as o')
+             ->join ('anuncio as a', 'o.id_anuncio', '=' ,'a.id_anuncio')
+             //->join ('cupones as c', 'c.id_anuncio', '=' ,'a.id_anuncio')
+             ->where('o.id_secretaria','=',$this->auth->user()->id)   
+             ->where('a.condicion','=',0)  
+             ->where('a.titulo', 'LIKE', '%'.$query.'%')     //BUSCA POR EL TITULO DEL ANUNCIO
+             ->select('a.titulo','a.descripcion','a.condicion','a.id_anuncio','a.forma_pago')
+             ->paginate(5);
 
-
-       return view('anuncios.index', ["anuncios" => $anuncios]);
+            return view('anuncios.index', ["anuncios" => $anuncios, "searchText" => $query]);
+        }
 
        
     }
