@@ -46,8 +46,8 @@ class ServiciosController extends Controller
             ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
             ->where('f.id_foto', '=', '0')
             ->where('a.titulo', 'LIKE', '%'.$query.'%')     //BUSCA POR EL TITULO DEL ANUNCIO
-            //->orWhere('a.descripcion', 'LIKE', '%'.$query.'%')      //BUSCA POR LA DESCRIPCION
-            //->orWhere('a.tipo_servicio', 'LIKE', '%'.$query.'%')        //BUSCA POR EL TIPO DE SERVICIO
+            ->where('a.descripcion', 'LIKE', '%'.$query.'%')      //BUSCA POR LA DESCRIPCION
+            ->where('a.tipo_servicio', 'LIKE', '%'.$query.'%')        //BUSCA POR EL TIPO DE SERVICIO
             ->select('o.id_cliente as id_cliente',
                     'a.id_anuncio as id_anuncio',
                     'a.titulo as titulo',
