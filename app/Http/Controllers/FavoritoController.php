@@ -28,28 +28,33 @@ class FavoritoController extends Controller
     }
 
 
-    public function index(){
-        
-        $servicios = DB::table('anuncio as a')
-        ->join ('orden as o', 'a.id_anuncio', '=' , 'o.id_anuncio')
-        ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
-        ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
-        ->join ('favoritos as fav', 'a.id_anuncio', '=' , 'fav.id_anuncio')
-        ->where('f.id_foto', '=', '0')
-        ->select('a.id_anuncio as id_anuncio',
-                'a.titulo as titulo',
-                'a.descripcion as descripcion',
-                'a.precio_serv as precio_serv',
-                'a.tipo_servicio as tipo_servicio',
-                'a.region as region',
-                'a.comuna as comuna',
-                'u.nombre as nombre',
-                'u.apellido as apellido',
-                'f.foto as foto'
-                )
-        ->paginate(5);
+    public function index(Request $request){
 
-        return view('favoritos.index', ["servicios" => $servicios]);
+        if($request){
+            $query=trim($request->get('searchText'));
+        
+            $servicios = DB::table('anuncio as a')
+            ->join ('orden as o', 'a.id_anuncio', '=' , 'o.id_anuncio')
+            ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
+            ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
+            ->join ('favoritos as fav', 'a.id_anuncio', '=' , 'fav.id_anuncio')
+            ->where('f.id_foto', '=', '0')
+            ->where('a.titulo', 'LIKE', '%'.$query.'%') 
+            ->select('a.id_anuncio as id_anuncio',
+                    'a.titulo as titulo',
+                    'a.descripcion as descripcion',
+                    'a.precio_serv as precio_serv',
+                    'a.tipo_servicio as tipo_servicio',
+                    'a.region as region',
+                    'a.comuna as comuna',
+                    'u.nombre as nombre',
+                    'u.apellido as apellido',
+                    'f.foto as foto'
+                    )
+            ->paginate(5);
+
+            return view('favoritos.index', ["servicios" => $servicios, "searchText" => $query]);
+        }
     }
 
 

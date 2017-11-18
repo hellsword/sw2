@@ -17,7 +17,6 @@
 			@endforeach
 		@endif
 
-		
 
 		<hr>
 		<div class="row" >

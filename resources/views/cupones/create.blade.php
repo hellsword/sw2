@@ -56,7 +56,7 @@
                           <p>
                                 <label>Subir Cupon:</label>
                                 <!-- VER LA PROPIEDAD multiple PARA AGREGAR VARIOS ARCHIVOS -->
-                                <span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="image/*" multiple="" onchange="loadFile(event)" /></span>
+                                <span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="*" multiple="" onchange="loadFile(event)" /></span>
                                 </p>
 
                  <div class="form-group">

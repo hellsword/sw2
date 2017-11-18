@@ -165,7 +165,7 @@
 						<div class="3u">
 							<section>
 								<h3>¿Qué buscas?</h3>
-								<input type="text" name="busca" placeholder="Camión 3/4"><br>
+								@include('servicios.search')
 
 								<label>Personalice su busqueda:</label>
 							    <select class="form-control" id="sel1" >
