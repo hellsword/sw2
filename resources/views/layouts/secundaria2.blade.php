@@ -212,6 +212,7 @@
 		<!-- Footer -->
 			<footer id="footer">
 				<div class="container">
+				<!--
 					<div class="row double">
 						<div class="6u">
 							<div class="row collapse-at-2">
@@ -247,8 +248,9 @@
 							</ul>
 						</div>
 					</div>
+					-->
 					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li>
+						<li>&copy; MUMEFLET. All rights reserved.</li>
 						<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
 						<li>Images: <a href="http://unsplash.com">Unsplash</a></li>
 					</ul>

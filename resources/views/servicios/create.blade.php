@@ -8,7 +8,7 @@
 </style>
 
     <div class="pagetitle">
-        <h1>MUMEFLET</h1> <span>Creación de nuevo anuncio</span>
+        <a href="/"><h1>MUMEFLET</h1></a> <span>Creación de nuevo anuncio</span>
     </div><!--pagetitle-->
 
     <!-- CAMBIAR POR LOS DATOS PARA CREAR UN ANUNCIO -->

@@ -45,9 +45,7 @@ class ServiciosController extends Controller
             ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
             ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
             ->where('f.id_foto', '=', '0')
-            ->where('a.titulo', 'LIKE', '%'.$query.'%')     //BUSCA POR EL TITULO DEL ANUNCIO
-            ->where('a.descripcion', 'LIKE', '%'.$query.'%')      //BUSCA POR LA DESCRIPCION
-            ->where('a.tipo_servicio', 'LIKE', '%'.$query.'%')        //BUSCA POR EL TIPO DE SERVICIO
+            ->where(\DB::raw("CONCAT(a.titulo, ' ', a.tipo_servicio, ' ', a.descripcion)"), 'LIKE', '%'.$query.'%')     //BUSCA POR EL TITULO DEL ANUNCIO
             ->select('o.id_cliente as id_cliente',
                     'a.id_anuncio as id_anuncio',
                     'a.titulo as titulo',
@@ -62,12 +60,14 @@ class ServiciosController extends Controller
                     )
             ->paginate(5);
 
+            $regiones=DB::table('region')->get();
+
             if($this->auth->user()){
                 $favoritos = DB::table('favoritos')->where('id_cliente', $this->auth->user()->id)->get();
-                return view('servicios.index', ["servicios" => $servicios, "favoritos" => $favoritos, "searchText" => $query]);
+                return view('servicios.index', ["servicios" => $servicios, "favoritos" => $favoritos, 'regiones'=> $regiones, "searchText" => $query]);
             }
             else
-                return view('servicios.index', ["servicios" => $servicios, "searchText" => $query]);
+                return view('servicios.index', ["servicios" => $servicios, 'regiones'=> $regiones, "searchText" => $query]);
         }
     }
 

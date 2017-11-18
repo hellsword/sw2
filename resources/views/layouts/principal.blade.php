@@ -151,7 +151,7 @@
 			<section id="banner">
 				<div class="inner">
 					<h2>MUMEFLET</h2>
-					<p style="color: white;">Su mejor opción para buscar mudanzas, fletes y mecanicos <a href="ht
+					<p style="color: white;">Su mejor opción para buscar mudanzas, fletes y mecánicos <a href="ht
 					tp://templated.co"></a></p>
 					<ul class="actions">
 						@if(!Auth::check())
@@ -216,6 +216,7 @@
 		<!-- Footer -->
 			<footer id="footer">
 				<div class="container">
+				<!--
 					<div class="row double">
 						<div class="6u">
 							<div class="row collapse-at-2">
@@ -251,8 +252,9 @@
 							</ul>
 						</div>
 					</div>
+					-->
 					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li>
+						<li>&copy; MUMEFLET. All rights reserved.</li>
 						<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
 						<li>Images: <a href="http://unsplash.com">Unsplash</a></li>
 					</ul>

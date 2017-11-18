@@ -167,7 +167,7 @@
 								<h3>¿Qué buscas?</h3>
 								@include('servicios.search')
 
-								<label>Personalice su busqueda:</label>
+								<label>Personalice su busqueda por categorías:</label>
 							    <select class="form-control" id="sel1" >
 							        <option>Mudanza</option>
 							        <option>Flete</option>
@@ -179,9 +179,30 @@
 							        <option>Camioneta</option>
 							        <option>dsad</option>
 							        <option>wqeqweq</option>
+							    </select> <br>
+
+							    <label>Personalice su busqueda por lugar:</label>
+							    <select class="form-control" id="sel1" >
+							        <option>Maule</option>
+							        <option>Flete</option>
+							        <option>Grua</option>
+							        <option>Mecánico</option>
+							    </select> <br>
+							    <select class="form-control" id="sel2">
+							        <option>Talca</option>
+							        <option>Camioneta</option>
+							        <option>dsad</option>
+							        <option>wqeqweq</option>
+							    </select> <br>
+							    <select class="form-control" id="sel2">
+							        <option>Talca</option>
+							        <option>Camioneta</option>
+							        <option>dsad</option>
+							        <option>wqeqweq</option>
 							    </select> 
 							</section>
 							<hr />
+							<!--
 							<section>
 								<h3>Categorias</h3>
 								<ul class="actions">
@@ -195,6 +216,7 @@
 									<li><a href="#" class="button alt">Grua</a></li>
 								</ul>
 							</section>
+							-->
 						</div>
 						<!-- AQUI INICIA EL CONTENIDO -->
 						<div class="9u pull-right">
@@ -209,6 +231,7 @@
 		<!-- Footer -->
 			<footer id="footer">
 				<div class="container">
+					<!--
 					<div class="row double">
 						<div class="6u">
 							<div class="row collapse-at-2">
@@ -244,8 +267,9 @@
 							</ul>
 						</div>
 					</div>
+					-->
 					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li>
+						<li>&copy; MUMEFLET. All rights reserved.</li>
 						<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
 						<li>Images: <a href="http://unsplash.com">Unsplash</a></li>
 					</ul>
