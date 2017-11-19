@@ -69,35 +69,30 @@
                                 <p>
                                     <label>Región</label>
                                     <span class="field">
-                                    <select name="region" id="region" class="uniformselect" required="">
+                                    <select name="region" id="region" class="uniformselect" required="" onclick="provinciaP()">
                                     @foreach($regiones as $region)
                                     <option>{{$region -> REGION_NOMBRE}}</option>
                                     @endforeach
                                     </select>
                                     </span>
                                 </p>
-                                
+                                  <div id="provincia">
                                 <p>
-                                    <label>Provincia</label>
-                                    <span class="field">
-                                    <select name="provincia" id="provincia" class="uniformselect" required="">
-                                    @foreach($provincias as $provincia)
-                                    <option>{{$provincia -> PROVINCIA_NOMBRE}}</option>
-                                    @endforeach
-                                    </select>
-                                    </span>
-                                </p>
+                                 
+                                    <div id="cambio_provincia">
+                                    
+                              
+                                </div>
+                            </div>
+                                  </p>
 
                                 <p>
-                                    <label>Comuna</label>
-                                    <span class="field">
-                                    <select name="comuna" id="comuna" class="uniformselect" required="">
-                                    @foreach($comunas as $comuna)
-                                    <option>{{$comuna -> COMUNA_NOMBRE}}</option>
-                                    @endforeach
-                                    </select>
-                                    </span>
-                                </p>
+                                
+                               <label>Comuna:</label>
+                                <span class="field"><input type="text" id="comuna" name="comuna" class="input-xxlarge" /></span>
+
+                                  </p>
+
                                 
                         </div><!--#wiz1step1-->
                         
@@ -216,6 +211,224 @@
 
     });
 
+ function provinciaP() {
+        //Limpia el contenido del <div> con id="cambia_servicio"
+        var cambio_provincia = document.getElementById("cambio_provincia");   
+        cambio_provincia.parentNode.removeChild(cambio_provincia);
+
+        var region = document.getElementById("region").value;     //Obtiene el tipo seleccionado
+        
+      if (region == 'Arica y Parinacota'){
+              var str = '<div id="cambio_provincia">'+
+                                '<label>Provincia</label><br>'+
+                                    '<span class="field" >'+
+                                   '<select name="provincia" id="provincia" class="uniformselect" required="">'+
+                                    '<option>Arica</option>'+
+                                    '<option>Parinacota</option>'+  
+                                    '</select>'+
+                                    '</span>'+
+                                    '</div>';
+         document.getElementById('provincia').innerHTML = str;
+        
+        }else if(region == 'Tarapacá'){
+              
+            var str = '<div id="cambio_provincia">'+
+                                '<label>Provincia</label><br>'+
+                                    '<span class="field" >'+
+                                   '<select name="provincia" id="provincia" class="uniformselect" required="">'+
+                                    '<option>Iquique</option>'+
+                                    '<option>Tamarugal</option>'+
+                                    '</select>'+
+                                    '</span>'+
+                                    '</div>';
+         document.getElementById('provincia').innerHTML = str;
+        }else if (region == 'Antofagasta'){
+              var str = '<div id="cambio_provincia">'+
+                                '<label>Provincia</label><br>'+
+                                    '<span class="field" >'+
+                                   '<select name="provincia" id="provincia" class="uniformselect" required="">'+
+                                    '<option>Antofagasta</option>'+
+                                    '<option>El Loa</option>'+
+                                    '<option>Tocopilla</option>'+
+                                    '<option>Taltal</option>'+
+                                    '</select>'+
+                                    '</span>'+
+                                    '</div>';
+         document.getElementById('provincia').innerHTML = str;
+        }else if (region == 'Atacama'){
+              var str = '<div id="cambio_provincia">'+
+                                '<label>Provincia</label><br>'+
+                                    '<span class="field" >'+
+                                   '<select name="provincia" id="provincia" class="uniformselect" required="">'+
+                                    '<option>Copiapó</option>'+
+                                    '<option>Chañaral</option>'+
+                                    '<option>Huasco</option>'+
+                                    '</select>'+
+                                    '</span>'+
+                                    '</div>';
+         document.getElementById('provincia').innerHTML = str;
+        }else if (region == 'Coquimbo'){
+              var str = '<div id="cambio_provincia">'+
+                                '<label>Provincia</label><br>'+
+                                    '<span class="field" >'+
+                                   '<select name="provincia" id="provincia" class="uniformselect" required="">'+
+                                    '<option>Elqui</option>'+
+                                    '<option>Choapa</option>'+
+                                    '<option>Limarí</option>'+
+                                    '</select>'+
+                                    '</span>'+
+                                    '</div>';
+         document.getElementById('provincia').innerHTML = str;
+        }else if (region == 'Valparaíso'){
+              var str = '<div id="cambio_provincia">'+
+                                '<label>Provincia</label><br>'+
+                                    '<span class="field" >'+
+                                   '<select name="provincia" id="provincia" class="uniformselect" required="">'+
+                                    '<option>Valparaíso</option>'+
+                                    '<option>Isla de Pascua</option>'+
+                                    '<option>Los Andes</option>'+
+                                    '<option>Petorca</option>'+
+                                    '<option>Quillota</option>'+
+                                    '<option>San Antonio</option>'+
+                                    '<option>Marga Marga</option>'+
+
+                                    '</select>'+
+                                    '</span>'+
+                                    '</div>';
+         document.getElementById('provincia').innerHTML = str;
+        }else if (region == 'Región del Libertador Gral. Bernardo O’Higgins'){
+              var str = '<div id="cambio_provincia">'+
+                                '<label>Provincia</label><br>'+
+                                    '<span class="field" >'+
+                                   '<select name="provincia" id="provincia" class="uniformselect" required="">'+
+                                    '<option>Cachapoal</option>'+
+                                    '<option>Cardenal Caro</option>'+
+                                    '<option>Colchagua</option>'+
+                                    '</select>'+
+                                    '</span>'+
+                                    '</div>';
+         document.getElementById('provincia').innerHTML = str;
+        }else if (region == 'Región del Maule'){
+              var str = '<div id="cambio_provincia">'+
+                                '<label>Provincia</label><br>'+
+                                    '<span class="field" >'+
+                                   '<select name="provincia" id="provincia" class="uniformselect" required="">'+
+                                    '<option>Talca</option>'+
+                                    '<option>Cauquenes</option>'+
+                                    '<option>Curepto</option>'+
+                                    '<option>Curicó</option>'+
+                                    '<option>Linares</option>'+     
+                                    '</select>'+
+                                    '</span>'+
+                                    '</div>';
+         document.getElementById('provincia').innerHTML = str;
+        }else if (region == 'Región del Biobío'){
+              var str = '<div id="cambio_provincia">'+
+                                '<label>Provincia</label><br>'+
+                                    '<span class="field" >'+
+                                   '<select name="provincia" id="provincia" class="uniformselect" required="">'+
+                                    '<option>Concepción</option>'+
+                                    '<option>Arauco</option>'+
+                                    '<option>Biobío</option>'+
+                                    '<option>Ñuble</option>'+
+
+                                    '</select>'+
+                                    '</span>'+
+                                    '</div>';
+         document.getElementById('provincia').innerHTML = str;
+        }else if (region == 'Región de la Araucanía'){
+              var str = '<div id="cambio_provincia">'+
+                                '<label>Provincia</label><br>'+
+                                    '<span class="field" >'+
+                                   '<select name="provincia" id="provincia" class="uniformselect" required="">'+
+                                    '<option>Cautín</option>'+
+                                    '<option>Malleco</option>'+
+                                    '</select>'+
+                                    '</span>'+
+                                    '</div>';
+         document.getElementById('provincia').innerHTML = str;
+        }else if (region == 'Región de Los Lagos'){
+              var str = '<div id="cambio_provincia">'+
+                                '<label>Provincia</label><br>'+
+                                    '<span class="field" >'+
+                                   '<select name="provincia" id="provincia" class="uniformselect" required="">'+
+                                    '<option>Valdivia</option>'+
+                                    '<option>Ranco</option>'+
+                                    '</select>'+
+                                    '</span>'+
+                                    '</div>';
+         document.getElementById('provincia').innerHTML = str;
+        }else if (region == 'Región Aisén del Gral. Carlos Ibáñez del Campo'){
+              var str = '<div id="cambio_provincia">'+
+                                '<label>Provincia</label><br>'+
+                                    '<span class="field" >'+
+                                   '<select name="provincia" id="provincia" class="uniformselect" required="">'+
+                                    '<option>Coyhaique</option>'+
+                                    '<option>Aisén</option>'+
+                                     '<option>Capitán Prat</option>'+
+                                    '<option>General Carrera</option>'+
+
+                                    '</select>'+
+                                    '</span>'+
+                                    '</div>';
+         document.getElementById('provincia').innerHTML = str;
+        }else if (region == 'Región de Magallanes y de la Antártica Chilena'){
+              var str = '<div id="cambio_provincia">'+
+                                '<label>Provincia</label><br>'+
+                                    '<span class="field" >'+
+                                   '<select name="provincia" id="provincia" class="uniformselect" required="">'+
+                                    '<option>Magallanes</option>'+
+                                    '<option>Antártica Chilena</option>'+
+                                     '<option>Tierra del Fuego</option>'+
+                                    '<option>Ultima Esperanza</option>'+
+                                    
+                                    '</select>'+
+                                    '</span>'+
+                                    '</div>';
+         document.getElementById('provincia').innerHTML = str;
+        }else if (region == 'Región Metropolitana de Santiago'){
+              var str = '<div id="cambio_provincia">'+
+                                '<label>Provincia</label><br>'+
+                                    '<span class="field" >'+
+                                   '<select name="provincia" id="provincia" class="uniformselect" required="">'+
+                                    '<option>Santiago</option>'+
+                                    '<option>Cordillera</option>'+
+                                     '<option>Chacabuco</option>'+
+                                    '<option>Maipo</option>'+
+                                    '<option>Melipilla</option>'+
+                                    '<option>Talagante</option>'+
+                                    '</select>'+
+                                    '</span>'+
+                                    '</div>';
+         document.getElementById('provincia').innerHTML = str;
+        }else if (region == 'Región de Los Ríos'){
+              var str = '<div id="cambio_provincia">'+
+                                '<label>Provincia</label><br>'+
+                                    '<span class="field" >'+
+                                   '<select name="provincia" id="provincia" class="uniformselect" required="">'+
+                                    '<option>Llanquihue</option>'+
+                                    '<option>Chiloé</option>'+
+                                     '<option>Osorno</option>'+
+                                    '<option>Palena</option>'+
+                                   
+                                    '</select>'+
+                                    '</span>'+
+                                    '</div>';
+         document.getElementById('provincia').innerHTML = str;
+        }else if (region == 'Región de Ñuble'){
+              var str = '<div id="cambio_provincia">'+
+                                '<label>Provincia</label><br>'+
+                                    '<span class="field" >'+
+                                   '<select name="provincia" id="provincia" class="uniformselect" required="">'+
+                                    '<option>Diguillín</option>'+
+                                    '<option>Itata</option>'+
+                                     '<option>Punilla</option>'+ 
+                                    '</select>'+
+                                    '</span>'+
+                                    '</div>';
+         document.getElementById('provincia').innerHTML = str;
+        }
+    }
 
 
        //Escoger modo de pago
@@ -355,6 +568,8 @@ var loadFile = function(event) {
             total.value = tiempo.value*5290;
         }
 
+
+   
 
 
     //$("p").append(" <b>Appended text</b>.");
