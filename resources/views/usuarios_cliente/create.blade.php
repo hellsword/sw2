@@ -23,6 +23,7 @@
                         @endif
                     </div>
                 </div>
+                <br>
 
                 <div class="form-group{{ $errors->has('apellido') ? ' has-error' : '' }}">
                     Apellido:<br>
@@ -75,6 +76,7 @@
                         @endif
                     </div>
                 </div>
+                <br>
 
                 <div class="form-group">
                     Confirme la contraseña:<br>
@@ -91,7 +93,7 @@
                     <div class="col-md-6">
                         <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Ej: 73728321822" value="" required>
                     </div>
-                </div>
+                </div><br>
                 <div class="form-group">
                     Facebook:<br>
                     <div class="col-md-6">
