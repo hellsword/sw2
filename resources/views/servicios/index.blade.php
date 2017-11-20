@@ -17,7 +17,7 @@
 			@endforeach
 		@endif
 
-
+		
 		<hr>
 		<div class="row" >
 			<div class="4u" style="vertical-align: middle;" >
@@ -38,6 +38,8 @@
 					Servicio: {{$servicio -> tipo_servicio}} <br>
 					<div style="border-bottom: 1px solid silver;"></div>
 					Lugar: {{$servicio -> region}}, {{$servicio -> comuna}} <br>
+					<div style="border-bottom: 1px solid silver;"></div>
+					Creado el: {{$servicio -> fecha}}<br>
 					<div style="border-bottom: 1px solid silver;"></div>
 				</section>
 			</div>

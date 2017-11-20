@@ -1,4 +1,4 @@
-@extends('layouts.secundaria2')
+@extends('layouts.secundaria_gestion')
 @section('contenido')
 
     

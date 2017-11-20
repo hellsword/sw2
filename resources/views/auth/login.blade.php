@@ -7,6 +7,9 @@
     }
 </style>
 
+<!-- BOTONES -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <section id="two" class="wrapper style1">
     <header class="major">
         <h2>Login</h2>
@@ -63,8 +66,8 @@
 
             <br>
             <p class="stdformbutton">
-                <button onclick="location.href = '/';" class="btn">Cancelar</button>
-                <button class="btn btn-primary">Aceptar</button>
+                <button onclick="location.href = '/';" class="w3-button w3-red w3-round-xxlarge">Cancelar</button>
+                <button class="w3-button w3-blue w3-round-xxlarge">Aceptar</button>
             </p>
 
         </form>

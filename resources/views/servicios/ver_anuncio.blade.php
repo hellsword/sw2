@@ -67,16 +67,16 @@
 							@if(Auth::check())
 								{!!Form::open(array('url'=>'favoritos', 'method'=>'POST', 'class'=>'stdform', 'id'=>'formu', 'name'=>'formu', 'autocomplete'=>'off'))!!}
 									<input type="hidden" name="id_anuncio" value="{{$servicio -> id_anuncio}}">
-									<a class="w3-button w3-red " href="javascript:;" onclick="document.getElementById('formu').submit(); alert('Anuncio añadido');">Añadir a favoritos</a>
-									<a href="javascript:;" class="w3-button w3-orange" onclick="mostrar()">Contactar anunciante</a>
+									<a class="w3-button w3-red w3-round-xlarge" href="javascript:;" onclick="document.getElementById('formu').submit(); alert('Anuncio añadido');">Añadir a favoritos</a>
+									<a href="javascript:;" class="w3-button w3-orange w3-round-xlarge" onclick="mostrar()">Contactar anunciante</a>
 								{!!Form::close()!!}
 							@else
-								<a href="login2" class="w3-button w3-red ">Añadir a favoritos</a>
-								<a href="javascript:;" class="w3-button w3-orange" onclick="mostrar()">Contactar anunciante</a>
+								<a href="/login2" class="w3-button w3-red w3-round-xlarge">Añadir a favoritos</a>
+								<a href="javascript:;" class="w3-button w3-orange w3-round-xlarge" onclick="mostrar()">Contactar anunciante</a>
 							@endif
 						@else
-							<a class="w3-button w3-red " style="text-decoration:line-through;">Añadir a favoritos</a>
-							<a href="javascript:;" class="w3-button w3-orange" onclick="mostrar()">Contactar anunciante</a>
+							<a class="w3-button w3-red w3-round-xlarge " style="text-decoration:line-through;">Añadir a favoritos</a>
+							<a href="javascript:;" class="w3-button w3-orange w3-round-xlarge" onclick="mostrar()">Contactar anunciante</a>
 						@endif
 
 						<ul id="lista_contacto" class="icons" style='display:none;' >

@@ -40,12 +40,17 @@ class ServiciosController extends Controller
         if($request){
             $query=trim($request->get('searchText'));
         
+        if($request->get('vehiculo') != null){
             $servicios = DB::table('anuncio as a')
             ->join ('orden as o', 'a.id_anuncio', '=' , 'o.id_anuncio')
             ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
             ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
+            ->join ('vehiculo as v', 'a.patente', '=' , 'v.patente')
             ->where('f.id_foto', '=', '0')
             ->where(\DB::raw("CONCAT(a.titulo, ' ', a.tipo_servicio, ' ', a.descripcion)"), 'LIKE', '%'.$query.'%')     //BUSCA POR EL TITULO DEL ANUNCIO
+            ->where('a.tipo_servicio', 'LIKE', '%'.$request->get('sub_categoria').'%')
+            ->where('a.comuna', 'LIKE', '%'.$request->get('comuna').'%')
+            ->where('v.categoria', 'LIKE', '%'.$request->get('vehiculo').'%')
             ->select('o.id_cliente as id_cliente',
                     'a.id_anuncio as id_anuncio',
                     'a.titulo as titulo',
@@ -56,18 +61,50 @@ class ServiciosController extends Controller
                     'a.comuna as comuna',
                     'u.nombre as nombre',
                     'u.apellido as apellido',
-                    'f.foto as foto'
+                    'f.foto as foto',
+                    'o.fecha as fecha'
                     )
             ->paginate(5);
+        }
+        else{
+            $servicios = DB::table('anuncio as a')
+            ->join ('orden as o', 'a.id_anuncio', '=' , 'o.id_anuncio')
+            ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
+            ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
+            ->where('f.id_foto', '=', '0')
+            ->where(\DB::raw("CONCAT(a.titulo, ' ', a.tipo_servicio, ' ', a.descripcion)"), 'LIKE', '%'.$query.'%')     //BUSCA POR EL TITULO DEL ANUNCIO
+            ->where('a.tipo_servicio', 'LIKE', '%'.$request->get('sub_categoria').'%')
+            ->where('a.comuna', 'LIKE', '%'.$request->get('comuna').'%')
+            ->select('o.id_cliente as id_cliente',
+                    'a.id_anuncio as id_anuncio',
+                    'a.titulo as titulo',
+                    'a.descripcion as descripcion',
+                    'a.precio_serv as precio_serv',
+                    'a.tipo_servicio as tipo_servicio',
+                    'a.region as region',
+                    'a.comuna as comuna',
+                    'u.nombre as nombre',
+                    'u.apellido as apellido',
+                    'f.foto as foto',
+                    'o.fecha as fecha'
+                    )
+            ->paginate(5);
+        }
 
             $regiones=DB::table('region')->get();
 
+            $categorias=DB::table('categorias')->get();
+
+            $sub_categorias=DB::table('sub_categorias')->get();
+
+            $categoria_vehiculos=DB::table('categoria_vehiculo')->get();
+
             if($this->auth->user()){
                 $favoritos = DB::table('favoritos')->where('id_cliente', $this->auth->user()->id)->get();
-                return view('servicios.index', ["servicios" => $servicios, "favoritos" => $favoritos, 'regiones'=> $regiones, "searchText" => $query]);
+                return view('servicios.index', ["servicios" => $servicios, "favoritos" => $favoritos, 'regiones'=> $regiones, "searchText" => $query, 'categorias'=> $categorias, 'sub_categorias'=> $sub_categorias, 'categoria_vehiculos'=> $categoria_vehiculos]);
             }
             else
-                return view('servicios.index', ["servicios" => $servicios, 'regiones'=> $regiones, "searchText" => $query]);
+                return view('servicios.index', ["servicios" => $servicios, 'regiones'=> $regiones, "searchText" => $query, 'categorias'=> $categorias, 'sub_categorias'=> $sub_categorias, 'categoria_vehiculos'=> $categoria_vehiculos]);
         }
     }
 
@@ -82,7 +119,13 @@ class ServiciosController extends Controller
 
          $comunas = DB::table('comuna')->get();
 
-        return view('servicios.create',['regiones'=> $regiones,'provincias'=> $provincias, 'comunas'=> $comunas]);
+         $categorias=DB::table('categorias')->get();
+
+         $sub_categorias=DB::table('sub_categorias')->get();
+
+         $categoria_vehiculos=DB::table('categoria_vehiculo')->get();
+
+        return view('servicios.create',['regiones'=> $regiones,'provincias'=> $provincias, 'comunas'=> $comunas, 'categorias'=> $categorias, 'sub_categorias'=> $sub_categorias, 'categoria_vehiculos'=> $categoria_vehiculos]);
     }
 
     public function store(Request $request, Guard $auth){ 

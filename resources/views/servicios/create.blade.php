@@ -53,12 +53,14 @@
                                 <p>
                                     <label>Tipo servicio</label>
                                         <select name="tipo" id="tipo" class="uniformselect" onchange="cambio_tipo()" required="">
-                                          <option value="humano" disabled style="background-color: pink" >Servicio personas</option>
-                                            <option value="mecanico" >Mecánico</option>
-                                            <option value="otros_per" >Otros servicios</option>
-                                          <option value="vehiculo" disabled="" style="background-color: pink" >Servicio vehículos</option>
-                                            <option value="transporte" >Transportes/Mudanzas</option>
-                                            <option value="arriendo" >Arriendo</option>
+                                        @foreach($categorias as $categoria)
+                                            <option value="{{$categoria -> nombre}}" disabled style="background-color: pink" >{{$categoria -> nombre_completo}}</option>
+                                            @foreach($sub_categorias as $sub_categoria)
+                                                @if($sub_categoria->id_categoria == $categoria->id_categoria)
+                                                    <option value="{{$sub_categoria -> sub_categoria}}" >{{$sub_categoria -> nombre_completo}}</option>
+                                                @endif
+                                            @endforeach
+                                        @endforeach
                                         </select>
                                 </p>
 

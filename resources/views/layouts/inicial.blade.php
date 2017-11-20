@@ -13,8 +13,6 @@
 		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
 
 
-		<script type="text/javascript" src="{!! asset('extra/js/bootstrap.js') !!}"></script>
-		<link rel="stylesheet" href="{{ asset('extra/css/bootstrap.css') }}">
 
 		<!-- Al borrar esto y dejar solo lo de arriba se vuelve responsive pero se ve mal la vista ver_anuncio -->
 		<script type="text/javascript" src="{!! asset('js/jquery.min.js') !!}"></script>

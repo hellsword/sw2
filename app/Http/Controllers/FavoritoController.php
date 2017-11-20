@@ -28,7 +28,10 @@ class FavoritoController extends Controller
     }
 
 
-    public function index(Request $request){
+    public function index(Guard $auth, Request $request){
+
+        $this->middleware('auth');
+        $this->auth =$auth;
 
         if($request){
             $query=trim($request->get('searchText'));
@@ -38,6 +41,7 @@ class FavoritoController extends Controller
             ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
             ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
             ->join ('favoritos as fav', 'a.id_anuncio', '=' , 'fav.id_anuncio')
+            ->where('o.id_cliente', '=', $this->auth->user()->id)
             ->where('f.id_foto', '=', '0')
             ->where('a.titulo', 'LIKE', '%'.$query.'%') 
             ->select('a.id_anuncio as id_anuncio',
@@ -53,7 +57,15 @@ class FavoritoController extends Controller
                     )
             ->paginate(5);
 
-            return view('favoritos.index', ["servicios" => $servicios, "searchText" => $query]);
+            $regiones=DB::table('region')->get();
+
+            $categorias=DB::table('categorias')->get();
+
+            $sub_categorias=DB::table('sub_categorias')->get();
+
+            $categoria_vehiculos=DB::table('categoria_vehiculo')->get();
+
+            return view('favoritos.index', ["servicios" => $servicios, 'regiones'=> $regiones, "searchText" => $query, 'categorias'=> $categorias, 'sub_categorias'=> $sub_categorias, 'categoria_vehiculos'=> $categoria_vehiculos]);
         }
     }
 
