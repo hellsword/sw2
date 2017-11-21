@@ -264,7 +264,9 @@
 <script type="text/javascript">
 	$( document ).ready(function() {
 	    $( "select#categoria" ).click(function() {
-	    	if ($( "select#categoria" ).val() == 1) {
+
+	    	var seleccion = parseInt($( "select#categoria" ).val());
+	    	
 	    		//Elimina y genera nuevas opciones para el select
 	    		$('#sub_categoria')
 				    .find('option')
@@ -272,27 +274,12 @@
 				    .end()
 				    .append('<option value="" >Todos</option>'+
 				    		'@foreach($sub_categorias as $sub_categoria)'+
-				    			'@if($sub_categoria->id_categoria == 1)'+
+				    			'@if($sub_categoria->id_categoria == '+seleccion+')'+
 	                            	'<option value="{{$sub_categoria -> sub_categoria}}" >{{$sub_categoria -> nombre_completo}}</option>'+
 	                            '@endif'+
 	                        '@endforeach')
 				;
-	    	}
-	    	else if ($( "select#categoria" ).val() == 2) {
-	    		//Elimina y genera nuevas opciones para el select
-	    		$('#sub_categoria')
-				    .find('option')
-				    .remove()
-				    .end()
-				    .append('<option value="" >Todos</option>'+
-				    		'@foreach($sub_categorias as $sub_categoria)'+
-				    			'@if($sub_categoria->id_categoria == 2)'+
-	                            	'<option value="{{$sub_categoria -> sub_categoria}}" >{{$sub_categoria -> nombre_completo}}</option>'+
-	                            '@endif'+
-	                        '@endforeach')
-				;			
-			}
-
+	    	
 		});
 
 
