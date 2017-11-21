@@ -186,7 +186,7 @@
 							    </select> 
 							    <h6>Sub Categorias</h6>
 							    <select class="form-control" id="sub_categoria" name="sub_categoria">
-									<option value="" >-</option>
+									<option value="" >Todos</option>
 							    </select> 
 							    <h6>Vehiculos</h6>
 							    <select class="form-control" id="categoria_vehiculo" name="vehiculo">
@@ -198,21 +198,21 @@
 
 							    <h6>Lugar</h6>
 							    <select class="form-control" id="sel1" >
-							    	<option value="" >Todos</option>
+							    	<option value="" >-</option>
 							        <option>Todos</option>
 							        <option>Flete</option>
 							        <option>Grua</option>
 							        <option>Mecánico</option>
 							    </select> <br>
 							    <select class="form-control" id="sel2">
-							    	<option value="" >Todos</option>
+							    	<option value="" >-</option>
 							        <option>Talca</option>
 							        <option>Camioneta</option>
 							        <option>dsad</option>
 							        <option>wqeqweq</option>
 							    </select> <br>
 							    <select class="form-control" id="comuna" name="comuna">
-							    	<option value="" >Todos</option>
+							    	<option value="" >-</option>
 							        <option>Talca</option>
 							        <option>Camioneta</option>
 							        <option>dsad</option>
@@ -266,7 +266,29 @@
 	    $( "select#categoria" ).click(function() {
 
 	    	var seleccion = parseInt($( "select#categoria" ).val());
-	    	
+	    	<?php $seleccion = seleccion; ?>
+
+	    	var str =   '<option value="" >{{$seleccion}}</option>'+
+			    		'@foreach($sub_categorias as $sub_categoria)'+
+			    			@if($sub_categoria->id_categoria == 1 )
+                            	'<option value="{{$sub_categoria -> sub_categoria}}" >{{$sub_categoria -> nombre_completo}}</option>'+
+                            @endif
+                        '@endforeach';
+
+	    		//Elimina y genera nuevas opciones para el select
+	    		$('#sub_categoria')
+				    .find('option')
+				    .remove()
+				    .end()
+				    .append(str)
+				;
+				console.log(seleccion);
+
+
+
+
+			/*
+			if ($( "select#categoria" ).val() == 1) {
 	    		//Elimina y genera nuevas opciones para el select
 	    		$('#sub_categoria')
 				    .find('option')
@@ -274,15 +296,29 @@
 				    .end()
 				    .append('<option value="" >Todos</option>'+
 				    		'@foreach($sub_categorias as $sub_categoria)'+
-				    			'@if($sub_categoria->id_categoria == '+seleccion+')'+
+				    			'@if($sub_categoria->id_categoria == 1)'+
 	                            	'<option value="{{$sub_categoria -> sub_categoria}}" >{{$sub_categoria -> nombre_completo}}</option>'+
 	                            '@endif'+
 	                        '@endforeach')
 				;
+	    	}
+	    	else if ($( "select#categoria" ).val() == 2) {
+	    		//Elimina y genera nuevas opciones para el select
+	    		$('#sub_categoria')
+				    .find('option')
+				    .remove()
+				    .end()
+				    .append('<option value="" >Todos</option>'+
+				    		'@foreach($sub_categorias as $sub_categoria)'+
+				    			'@if($sub_categoria->id_categoria == 2)'+
+	                            	'<option value="{{$sub_categoria -> sub_categoria}}" >{{$sub_categoria -> nombre_completo}}</option>'+
+	                            '@endif'+
+	                        '@endforeach')
+				;			
+			}
+			*/
 	    	
 		});
-
-
 
 	});
 </script>
