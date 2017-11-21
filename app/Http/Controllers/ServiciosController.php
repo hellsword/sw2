@@ -170,7 +170,7 @@ class ServiciosController extends Controller
           $anuncio->save(); 
             }else{
 // 0 si es con tarjeta,lo dejaremos en 2 lo que significa que ya pago automaticamente
-          $anuncio->forma_pago = 2;
+          $anuncio->forma_pago = 0;
           $anuncio->save(); 
 
             }
