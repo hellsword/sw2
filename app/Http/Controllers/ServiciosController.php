@@ -215,7 +215,7 @@ class ServiciosController extends Controller
             }
             $pago->modo = Input::get('modo_pago');
             $pago->fecha_pago = '';
-            $pago->anexo = '';
+           
             $pago->save();  
 
 
