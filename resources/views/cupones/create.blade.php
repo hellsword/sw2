@@ -49,10 +49,9 @@
                             <p>&nbsp;&nbsp;&nbsp;Comuna: {{$servicio -> comuna}}</p>
                         </section>
  {!!Form::open(array('url'=>'cupones', 'method'=>'POST', 'class'=>'stdform', 'files' => true, 'name'=>'formu', 'enctype' => 'multipart/form-data', 'autocomplete'=>'off'))!!}
-                         <p>
-                            <label>ID Anuncio:</label>
-                              <input type="text" name="id_anuncio" value="{{$servicio -> id_anuncio}}" class="input-xxlarge" />
-                          </p>
+                       
+                        <input type="" name="id_anuncio" value="{{$servicio -> id_anuncio}}" hidden>
+                        
                           <p>
                                 <label>Subir Cupon:</label>
                                 <!-- VER LA PROPIEDAD multiple PARA AGREGAR VARIOS ARCHIVOS -->
