@@ -43,6 +43,9 @@
             <input type="" name="id_anuncio" value="{{$a->id_anuncio}}" hidden>
             <button class="boton azul"" type="submit">Cupon</button>
                {!!Form::close()!!}
+               @elseif($a -> forma_pago =="0")
+               <br><font size=4 color="#00FFFF" face="Comic Sans MS,arial,verdana">Pagado</font>
+              
 			@else
 			 <br><font size=4 color="red" face="Comic Sans MS,arial,verdana">Pendiente</font>
 			@endif	

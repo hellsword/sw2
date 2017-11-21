@@ -163,6 +163,7 @@ class ServiciosController extends Controller
             $anuncio->provincia = $request->get('provincia');
             $anuncio->comuna = $request->get('comuna');
             $anuncio->tipo_servicio = $request->get('tipo');
+           
             if($tipoPago=='efectivo'){
 
           $anuncio->forma_pago = 1;// 1 si es en efectivo 
