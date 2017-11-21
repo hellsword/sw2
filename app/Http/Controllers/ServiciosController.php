@@ -71,6 +71,7 @@ class ServiciosController extends Controller
             ->join ('orden as o', 'a.id_anuncio', '=' , 'o.id_anuncio')
             ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
             ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
+            ->where('a.condicion', '=', '1')
             ->where('f.id_foto', '=', '0')
             ->where(\DB::raw("CONCAT(a.titulo, ' ', a.tipo_servicio, ' ', a.descripcion)"), 'LIKE', '%'.$query.'%')     //BUSCA POR EL TITULO DEL ANUNCIO
             ->where('a.tipo_servicio', 'LIKE', '%'.$request->get('sub_categoria').'%')

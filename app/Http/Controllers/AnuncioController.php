@@ -49,7 +49,6 @@ class AnuncioController extends Controller
              //->join ('cupones as c', 'c.id_anuncio', '=' ,'a.id_anuncio')
              ->where('o.id_secretaria','=',$this->auth->user()->id)   
              ->where('a.condicion','=',0)  
-             ->where('a.titulo', 'LIKE', '%'.$query.'%')     //BUSCA POR EL TITULO DEL ANUNCIO
              ->select('a.titulo','a.descripcion','a.condicion','a.id_anuncio','a.forma_pago')
              ->paginate(5);
 
