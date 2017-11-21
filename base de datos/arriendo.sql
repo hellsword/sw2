@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2017 a las 01:58:27
+-- Tiempo de generación: 21-11-2017 a las 03:13:59
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -693,6 +693,14 @@ CREATE TABLE `secretaria` (
   `anuncios_pend` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `secretaria`
+--
+
+INSERT INTO `secretaria` (`id_secretaria`, `anuncios_pend`) VALUES
+(3, 6),
+(5, 6);
+
 -- --------------------------------------------------------
 
 --
@@ -760,7 +768,7 @@ INSERT INTO `users` (`id`, `rut`, `nombre`, `apellido`, `email`, `password`, `ti
 (3, '18938323-5', 'Fernanda', 'Fernandez', 'secretaria@ucm.cl', '$2y$10$tAoGISY0s4T0jikX4JCQpOBEGMDODSpmC34bDsMdenNU9eLcQ6aBy', 'secretaria', 'tAJGk1dZrROY50wOYLZjnQORGQ8s6tARlQP6GxkKNoW4JN0uaradGJr95ywf', '2017-10-17 00:55:50.0', '2017-10-17 00:55:50.0'),
 (5, '172232323-2', 'Constanza', 'Contreras', 'secretaria2@ucm.cl', '$2y$10$G9AAb3zvRTJd3mSQaL9Tv.dY15n6hwpi1DjstN882WEVcZNBX49jy', 'secretaria', NULL, '2017-10-18 07:03:02.0', '2017-10-18 07:03:02.0'),
 (7, '1832832324-5', 'Alfonso', 'Patamala', 'cliente4@ucm.cl', '$2y$10$1Nx0CdeN4yMYKEg6vCyjgev0PxA6N63iIXsSUh8b8uKpOfJQoGkMa', 'cliente', NULL, '2017-10-18 08:04:06.0', '2017-10-18 08:04:06.0'),
-(8, '1734234234-5', 'Susana', 'Castillo', 'cliente2@ucm.cl', '$2y$10$oy5hmF1Fe/6qo5By742VweZrk.v9wvF5MOO7XqR0tgPIFSvJ0mz8u', 'cliente', 'lX4NuFHTde02easax7RBmQCHGO7ewgB9vUWxQ82N1qeUOIPObpIdDpNevNiv', '2017-10-18 21:01:18.0', '2017-10-18 21:01:18.0'),
+(8, '1734234234-5', 'Susana', 'Castillo', 'cliente2@ucm.cl', '$2y$10$oy5hmF1Fe/6qo5By742VweZrk.v9wvF5MOO7XqR0tgPIFSvJ0mz8u', 'cliente', 'CINNGZ2GJ6wkiwtYDHWyd2YMjNQ6g3C11wcZ15ZCG5luldX5dXp4aK3Cl0jE', '2017-10-18 21:01:18.0', '2017-10-18 21:01:18.0'),
 (9, '173626363-k', 'Pedro', 'Perez', 'cliente3@ucm.cl', '$2y$10$/IG1.odVPfrb1wXauGNT7.RIMMdaEDwkQdQlU1YyOkQzJy7E5FisG', 'cliente', 'FxcG6JvNwzEzAz0kVt5yIeyfEFOp3q3hXlQOvX9pu0KQP38bsUVj8JZ7txiz', '2017-10-18 21:03:40.0', '2017-10-18 21:03:40.0');
 
 -- --------------------------------------------------------
@@ -916,7 +924,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `forma_pago`
 --
 ALTER TABLE `forma_pago`
-  MODIFY `num_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `num_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --

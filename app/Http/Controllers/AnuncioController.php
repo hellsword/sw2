@@ -53,7 +53,16 @@ class AnuncioController extends Controller
              ->select('a.titulo','a.descripcion','a.condicion','a.id_anuncio','a.forma_pago')
              ->paginate(5);
 
-            return view('anuncios.index', ["anuncios" => $anuncios, "searchText" => $query]);
+
+            $regiones=DB::table('region')->get();
+
+            $categorias=DB::table('categorias')->get();
+
+            $sub_categorias=DB::table('sub_categorias')->get();
+
+            $categoria_vehiculos=DB::table('categoria_vehiculo')->get();
+
+            return view('anuncios.index', ["anuncios" => $anuncios, 'regiones'=> $regiones, "searchText" => $query, 'categorias'=> $categorias, 'sub_categorias'=> $sub_categorias, 'categoria_vehiculos'=> $categoria_vehiculos]);
         }
 
        
