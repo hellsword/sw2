@@ -8,11 +8,11 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">x</span>
 				</button>
-				<h4 class="modal-title">Eliminar Usuario: {{$usu->id}}</h4>
+				<h4 class="modal-title">Eliminar Usuario ID: {{$usu->id}}</h4>
 			</div>
 
 			<div class="modal-body">
-				<p>Confirme si desea eliminar el Usuario {{$usu->id}}</p>
+				<p>Confirme si desea eliminar el Usuario</p>
 			</div>
 
 			<div class="modal-footer">

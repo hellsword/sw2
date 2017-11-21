@@ -42,7 +42,7 @@
 					</td>
 					@endif
 				</tr>
-				<!--@include('usuarios.modal')-->
+				@include('usuarios.modal')
 				@endforeach
 			</table>
 			@endif

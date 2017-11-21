@@ -102,7 +102,6 @@
                         <ul class="dropdown-menu">
                             <li><a href="#">Ver perfil</a></li>
                             <li><a href="#">Anuncios</a></li>
-                            <li><a href="/favoritos">Favoritos</a></li>
                             <li><a href="/usuarios">Lista Usuarios</a></li>
                             <li><a href="{{ route('usuarios.create') }}">Crear Usuarios</a></li>
                             <li class="divider"></li>
@@ -112,7 +111,6 @@
                            <ul class="dropdown-menu">
                             <li><a href="#">Ver perfil</a></li>
                             <li><a href="/anuncios">Anuncios</a></li>
-                            <li><a href="/favoritos">Favoritos</a></li>
                             <li><a href="/usuarios">Lista Usuarios</a></li>
                             <li><a href="{{url('/logout')}}">Salir</a></li>
                           </ul>

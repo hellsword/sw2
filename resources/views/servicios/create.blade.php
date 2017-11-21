@@ -487,11 +487,11 @@
                  
                                     '<p>'+
                                         '<label>Duración del anuncio (meses): </label>'+
-                                        '<span class="field"><input type="text" id="tiempo2" name="tiempo2" class="input-small input-spinner" onchange="calcula_total2()"/></span>'+
+                                        '<span class="field"><input type="text" id="tiempo" name="tiempo" class="input-small input-spinner" onchange="calcula_total2()"/></span>'+
                                     '</p>'+
                                     '<p>'+
                                         '<label>Total: </label>'+
-                                        '<span class="field"><input type="text" id="total2" name="total2" class="input-xxlarge" value="" readonly/></span>'+
+                                        '<span class="field"><input type="text" id="total" name="total" class="input-xxlarge" value="" readonly/></span>'+
                                     '</p>'+
                                 '</div><br>';
 
@@ -558,8 +558,8 @@ var loadFile = function(event) {
         }
 
  function calcula_total2(){
-            var tiempo = document.getElementById("tiempo2");
-            var total = document.getElementById("total2");
+            var tiempo = document.getElementById("tiempo");
+            var total = document.getElementById("total");
             
             total.value = tiempo.value*5290;
         }

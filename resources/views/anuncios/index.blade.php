@@ -38,14 +38,15 @@
             @if($a -> forma_pago =="2")
             
 	            {!!Form::open(array('url'=>'anuncios/ver_cupon', 'method'=>'POST', 'autocomplete'=>'off'))!!}
-	            
+	            <input type="" name="id_anuncio" value="{{$a->id_anuncio}}" hidden>
 	            <br><font size=4 color="#00FFFF" face="Comic Sans MS,arial,verdana">Pagado</font>
 	            <button class="boton azul"" type="submit">Cupon</button>
+	            {!!Form::close()!!}
 	            	{!!Form::open(array('url'=>'anuncios/actualizar', 'method'=>'POST', 'autocomplete'=>'off'))!!}
 	            	<input type="" name="id_anuncio" value="{{$a->id_anuncio}}" hidden>
 	            <button class="boton verde" type="submit">Aceptar</button>
 	                 {!!Form::close()!!}	
-	               {!!Form::close()!!}
+	               
             @elseif($a -> forma_pago =="0")
 
                <br><font size=4 color="#00FFFF" face="Comic Sans MS,arial,verdana">Pagado</font>
