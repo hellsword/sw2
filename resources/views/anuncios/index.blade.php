@@ -1,4 +1,4 @@
-@extends('layouts.secundaria')
+@extends('layouts.secundaria_gestion')
 @section('contenido')
 
 <!--
@@ -37,22 +37,31 @@
 
             @if($a -> forma_pago =="2")
             
-            {!!Form::open(array('url'=>'anuncios/ver_cupon', 'method'=>'POST', 'autocomplete'=>'off'))!!}
-            {{Form::token()}}
-            <br><font size=4 color="#00FFFF" face="Comic Sans MS,arial,verdana">Pagado</font>
-            <input type="" name="id_anuncio" value="{{$a->id_anuncio}}" hidden>
-            <button class="boton azul"" type="submit">Cupon</button>
-               {!!Form::close()!!}
-               @elseif($a -> forma_pago =="0")
+	            {!!Form::open(array('url'=>'anuncios/ver_cupon', 'method'=>'POST', 'autocomplete'=>'off'))!!}
+	            
+	            <br><font size=4 color="#00FFFF" face="Comic Sans MS,arial,verdana">Pagado</font>
+	            <button class="boton azul"" type="submit">Cupon</button>
+	            	{!!Form::open(array('url'=>'anuncios/actualizar', 'method'=>'POST', 'autocomplete'=>'off'))!!}
+	            	<input type="" name="id_anuncio" value="{{$a->id_anuncio}}" hidden>
+	            <button class="boton verde" type="submit">Aceptar</button>
+	                 {!!Form::close()!!}	
+	               {!!Form::close()!!}
+            @elseif($a -> forma_pago =="0")
+
                <br><font size=4 color="#00FFFF" face="Comic Sans MS,arial,verdana">Pagado</font>
+               	{!!Form::open(array('url'=>'anuncios/actualizar', 'method'=>'POST', 'autocomplete'=>'off'))!!}
+	            	<input type="" name="id_anuncio" value="{{$a->id_anuncio}}" hidden>
+	            <button class="boton verde" type="submit">Aceptar</button>
+	                 {!!Form::close()!!}	
               
 			@else
-			 <br><font size=4 color="red" face="Comic Sans MS,arial,verdana">Pendiente</font>
+				 <br><font size=4 color="red" face="Comic Sans MS,arial,verdana">Pendiente</font>
+				 	{!!Form::open(array('url'=>'anuncios/actualizar', 'method'=>'POST', 'autocomplete'=>'off'))!!}
+	            	<input type="" name="id_anuncio" value="{{$a->id_anuncio}}" hidden>
+	            <button class="boton verde" type="submit">Aceptar</button>
+	                 {!!Form::close()!!}	
 			@endif	
-				{!! Form::model($anuncios, ['method'=>'PATCH', 'route'=>['anuncios.update', $a->id_anuncio]]) !!}
-            {{Form::token()}}
-            <button class="boton verde" type="submit">Aceptar</button>
-                 {!!Form::close()!!}			   
+					   
 
        
 

@@ -264,13 +264,16 @@
 <script type="text/javascript">
 	$( document ).ready(function() {
 	    $( "select#categoria" ).click(function() {
-
+	    	
 	    	var seleccion = parseInt($( "select#categoria" ).val());
-	    	<?php $seleccion = seleccion; ?>
+	    	var num = 1;
+	    	<?php $seleccion = 1; ?>
+
+	    	
 
 	    	var str =   '<option value="" >{{$seleccion}}</option>'+
 			    		'@foreach($sub_categorias as $sub_categoria)'+
-			    			@if($sub_categoria->id_categoria == 1 )
+			    			@if($sub_categoria->id_categoria == $seleccion )
                             	'<option value="{{$sub_categoria -> sub_categoria}}" >{{$sub_categoria -> nombre_completo}}</option>'+
                             @endif
                         '@endforeach';
@@ -282,7 +285,7 @@
 				    .end()
 				    .append(str)
 				;
-				console.log(seleccion);
+				//console.log(seleccion);
 
 
 

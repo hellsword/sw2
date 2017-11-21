@@ -75,11 +75,11 @@ class AnuncioController extends Controller
 
    }
 
-       public function update($id_anuncio)
+       public function actualizar(Request $request)
     {
 
         DB::table('anuncio as a')
-        ->where('a.id_anuncio', '=' ,$id_anuncio)
+        ->where('a.id_anuncio', '=' ,$request->get('id_anuncio'))
         ->update(['condicion' => 1]);
    
        return Redirect::to('anuncios');
