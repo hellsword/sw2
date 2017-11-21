@@ -13,7 +13,7 @@ class Forma_pago extends Model
     public $timestamps = false;
 
     protected $fillable = [
-    	'modo', 'anexo', 'fecha_pago'
+    	'modo', 'fecha_pago'
     	
     ];
 }

@@ -214,8 +214,7 @@ class ServiciosController extends Controller
               $pago->num_pago = $lastValue->num_pago + 1 ;
             }
             $pago->modo = Input::get('modo_pago');
-            $pago->fecha_pago = '';
-            $pago->anexo = '';
+            $pago->fecha_pago = date("Y-m-d H:i:s");
             $pago->save();  
 
 
