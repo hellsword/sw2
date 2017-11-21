@@ -26,7 +26,7 @@
 <script type="text/javascript" src="{!! asset('katniss/js/ui.spinner.min.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('katniss/js/chosen.jquery.min.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('katniss/js/jquery.cookie.js') !!}"></script>
-<script type="text/javascript" src="{!! asset('katniss/js/custom.js') !!}"></script>
+<!-- <script type="text/javascript" src="{!! asset('katniss/js/custom.js') !!}"></script>  -->
 <script type="text/javascript" src="{!! asset('katniss/js/forms.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('katniss/js/jquery.smartWizard.min.js') !!}"></script>
 
@@ -57,6 +57,59 @@
         
         jQuery('select, input:checkbox').uniform();
     });
+
+    //Genera una nueva lista de provincias al seleccionar una region
+        $( "select#region" ).click(function(e) {
+            
+            var seleccion = parseInt($( "select#region" ).val());
+            var provincias = <?php echo json_encode($provincias); ?>;
+            var count = Object.keys(provincias).length;
+
+
+            var str =   '<option value="" >Todos</option>';
+
+            for (var i = 0; i < count; i++) {
+                if (provincias[i]['PROVINCIA_REGION_ID'] == seleccion) {
+                    str = str+'<option value="'+provincias[i]['PROVINCIA_ID']+'" >'+provincias[i]['PROVINCIA_NOMBRE']+'</option>';
+                }
+            }
+
+            //Elimina y genera nuevas opciones para el select
+            $('#provincia')
+                .find('option')
+                .remove()
+                .end()
+                .append(str)
+            ;
+            
+        });
+
+
+        //Genera una nueva lista de comunas al seleccionar una provincia
+        $( "select#provincia" ).click(function(e) {
+            
+            var seleccion = parseInt($( "select#provincia" ).val());
+            var comunas = <?php echo json_encode($comunas); ?>;
+            var count = Object.keys(comunas).length;
+
+
+            var str =   '<option value="" >Todos</option>';
+
+            for (var i = 0; i < count; i++) {
+                if (comunas[i]['COMUNA_PROVINCIA_ID'] == seleccion) {
+                    str = str+'<option value="'+comunas[i]['COMUNA_NOMBRE']+'" >'+comunas[i]['COMUNA_NOMBRE']+'</option>';
+                }
+            }
+
+            //Elimina y genera nuevas opciones para el select
+            $('#comuna')
+                .find('option')
+                .remove()
+                .end()
+                .append(str)
+            ;
+            
+        });
 </script>
 
 </body>
