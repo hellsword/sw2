@@ -100,12 +100,17 @@ class ServiciosController extends Controller
 
             $categoria_vehiculos=DB::table('categoria_vehiculo')->get();
 
+            $provincias = DB::table('provincia')->get();
+
+            $comunas = DB::table('comuna')->get();
+
+
             if($this->auth->user()){
                 $favoritos = DB::table('favoritos')->where('id_cliente', $this->auth->user()->id)->get();
-                return view('servicios.index', ["servicios" => $servicios, "favoritos" => $favoritos, 'regiones'=> $regiones, "searchText" => $query, 'categorias'=> $categorias, 'sub_categorias'=> $sub_categorias, 'categoria_vehiculos'=> $categoria_vehiculos]);
+                return view('servicios.index', ["servicios" => $servicios, "favoritos" => $favoritos, 'regiones'=> $regiones, "searchText" => $query, 'categorias'=> $categorias, 'sub_categorias'=> $sub_categorias, 'categoria_vehiculos'=> $categoria_vehiculos ,'provincias'=> $provincias, 'comunas'=> $comunas]);
             }
             else
-                return view('servicios.index', ["servicios" => $servicios, 'regiones'=> $regiones, "searchText" => $query, 'categorias'=> $categorias, 'sub_categorias'=> $sub_categorias, 'categoria_vehiculos'=> $categoria_vehiculos]);
+                return view('servicios.index', ["servicios" => $servicios, 'regiones'=> $regiones, "searchText" => $query, 'categorias'=> $categorias, 'sub_categorias'=> $sub_categorias, 'categoria_vehiculos'=> $categoria_vehiculos, 'provincias'=> $provincias, 'comunas'=> $comunas]);
         }
     }
 
@@ -317,15 +322,6 @@ class ServiciosController extends Controller
             return view("servicios.ver_anuncio", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor, "face" => $face, "fono" => $fono]);
 
         
-    }
-
-    public function testfunction(Illuminate\Http\Request $request)
-    {
-        if ($request->isMethod('post')){    
-            return response()->json(['response' => 'This is post method']); 
-        }
-
-        return response()->json(['response' => 'This is get method']);
     }
 
   }

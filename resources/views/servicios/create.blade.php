@@ -70,30 +70,24 @@
 
                                 <p>
                                     <label>Región</label>
-                                    <span class="field">
-                                    <select name="region" id="region" class="uniformselect" required="" onclick="provinciaP()">
-                                    @foreach($regiones as $region)
-                                    <option>{{$region -> REGION_NOMBRE}}</option>
-                                    @endforeach
-                                    </select>
-                                    </span>
+                                    <select class="form-control" id="region" name="region">
+                                        <option value="" >Todos</option>
+                                        @foreach($regiones as $region)
+                                            <option value="{{$region -> REGION_ID}}" >{{$region -> REGION_NOMBRE}}</option>
+                                        @endforeach
+                                    </select> 
                                 </p>
-                                  <div id="provincia">
                                 <p>
-                                 
-                                    <div id="cambio_provincia">
-                                    
-                              
-                                </div>
-                            </div>
-                                  </p>
-
+                                  <label>Provincia</label>
+                                  <select class="form-control" id="provincia" name="provincia">
+                                        <option value="" >-</option>
+                                    </select> 
                                 <p>
-                                
-                               <label>Comuna:</label>
-                                <span class="field"><input type="text" id="comuna" name="comuna" class="input-xxlarge" /></span>
-
-                                  </p>
+                                    <label>Comuna</label>
+                                    <select class="form-control" id="comuna" name="comuna">
+                                        <option value="" >-</option>
+                                    </select> 
+                                </p>
 
                                 
                         </div><!--#wiz1step1-->

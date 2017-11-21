@@ -179,14 +179,14 @@
 
 								<h5>Personalice su busqueda por: </h5>
 								<h6>Categorias</h6>
-							    <select class="form-control" id="categoria" >
+							    <select class="form-control" id="categoria" name="categoria">
 							        @foreach($categorias as $categoria)
 	                                    <option value="{{$categoria -> id_categoria}}" >{{$categoria -> nombre_completo}}</option>
 	                                @endforeach
 							    </select> 
 							    <h6>Sub Categorias</h6>
 							    <select class="form-control" id="sub_categoria" name="sub_categoria">
-									<option value="" >Todos</option>
+									<option value="" >-</option>
 							    </select> 
 							    <h6>Vehiculos</h6>
 							    <select class="form-control" id="categoria_vehiculo" name="vehiculo">
@@ -197,26 +197,17 @@
 							    </select> <br>
 
 							    <h6>Lugar</h6>
-							    <select class="form-control" id="sel1" >
-							    	<option value="" >-</option>
-							        <option>Todos</option>
-							        <option>Flete</option>
-							        <option>Grua</option>
-							        <option>Mecánico</option>
+							    <select class="form-control" id="region" name="region">
+							    	<option value="" >Todos</option>
+							    	@foreach($regiones as $region)
+	                                    <option value="{{$region -> REGION_ID}}" >{{$region -> REGION_NOMBRE}}</option>
+	                                @endforeach
 							    </select> <br>
-							    <select class="form-control" id="sel2">
+							    <select class="form-control" id="provincia" name="provincia">
 							    	<option value="" >-</option>
-							        <option>Talca</option>
-							        <option>Camioneta</option>
-							        <option>dsad</option>
-							        <option>wqeqweq</option>
 							    </select> <br>
 							    <select class="form-control" id="comuna" name="comuna">
 							    	<option value="" >-</option>
-							        <option>Talca</option>
-							        <option>Camioneta</option>
-							        <option>dsad</option>
-							        <option>wqeqweq</option>
 							    </select> 
 							</section>
 							<hr />
@@ -241,7 +232,6 @@
 						@yield('contenido')
 						<!-- AQUI TERMINA EL CONTENIDO -->
 						</div>
-
 						{{Form::close()}}
 
 					</div>
@@ -263,63 +253,84 @@
 
 <script type="text/javascript">
 	$( document ).ready(function() {
-	    $( "select#categoria" ).click(function() {
+
+		//Genera una nueva lista de subcategorias al seleccionar una categoria
+	    $( "select#categoria" ).click(function(e) {
 	    	
 	    	var seleccion = parseInt($( "select#categoria" ).val());
-	    	var num = 1;
-	    	<?php $seleccion = 1; ?>
+	    	var sub_categorias = <?php echo json_encode($sub_categorias); ?>;
+	    	var count = Object.keys(sub_categorias).length;
 
+
+	    	var str =   '<option value="" >Todos</option>';
+
+    		for (var i = 0; i < count; i++) {
+    			if (sub_categorias[i]['id_categoria'] == seleccion) {
+                	str = str+'<option value="'+sub_categorias[i]['sub_categoria']+'" >'+sub_categorias[i]['nombre_completo']+'</option>';
+                }
+            }
+
+    		//Elimina y genera nuevas opciones para el select
+    		$('#sub_categoria')
+			    .find('option')
+			    .remove()
+			    .end()
+			    .append(str)
+			;
 	    	
-
-	    	var str =   '<option value="" >{{$seleccion}}</option>'+
-			    		'@foreach($sub_categorias as $sub_categoria)'+
-			    			@if($sub_categoria->id_categoria == $seleccion )
-                            	'<option value="{{$sub_categoria -> sub_categoria}}" >{{$sub_categoria -> nombre_completo}}</option>'+
-                            @endif
-                        '@endforeach';
-
-	    		//Elimina y genera nuevas opciones para el select
-	    		$('#sub_categoria')
-				    .find('option')
-				    .remove()
-				    .end()
-				    .append(str)
-				;
-				//console.log(seleccion);
+		});
 
 
+		//Genera una nueva lista de provincias al seleccionar una region
+	    $( "select#region" ).click(function(e) {
+	    	
+	    	var seleccion = parseInt($( "select#region" ).val());
+	    	var provincias = <?php echo json_encode($provincias); ?>;
+	    	var count = Object.keys(provincias).length;
 
 
-			/*
-			if ($( "select#categoria" ).val() == 1) {
-	    		//Elimina y genera nuevas opciones para el select
-	    		$('#sub_categoria')
-				    .find('option')
-				    .remove()
-				    .end()
-				    .append('<option value="" >Todos</option>'+
-				    		'@foreach($sub_categorias as $sub_categoria)'+
-				    			'@if($sub_categoria->id_categoria == 1)'+
-	                            	'<option value="{{$sub_categoria -> sub_categoria}}" >{{$sub_categoria -> nombre_completo}}</option>'+
-	                            '@endif'+
-	                        '@endforeach')
-				;
-	    	}
-	    	else if ($( "select#categoria" ).val() == 2) {
-	    		//Elimina y genera nuevas opciones para el select
-	    		$('#sub_categoria')
-				    .find('option')
-				    .remove()
-				    .end()
-				    .append('<option value="" >Todos</option>'+
-				    		'@foreach($sub_categorias as $sub_categoria)'+
-				    			'@if($sub_categoria->id_categoria == 2)'+
-	                            	'<option value="{{$sub_categoria -> sub_categoria}}" >{{$sub_categoria -> nombre_completo}}</option>'+
-	                            '@endif'+
-	                        '@endforeach')
-				;			
-			}
-			*/
+	    	var str =   '<option value="" >Todos</option>';
+
+    		for (var i = 0; i < count; i++) {
+    			if (provincias[i]['PROVINCIA_REGION_ID'] == seleccion) {
+                	str = str+'<option value="'+provincias[i]['PROVINCIA_ID']+'" >'+provincias[i]['PROVINCIA_NOMBRE']+'</option>';
+                }
+            }
+
+    		//Elimina y genera nuevas opciones para el select
+    		$('#provincia')
+			    .find('option')
+			    .remove()
+			    .end()
+			    .append(str)
+			;
+	    	
+		});
+
+
+		//Genera una nueva lista de comunas al seleccionar una provincia
+	    $( "select#provincia" ).click(function(e) {
+	    	
+	    	var seleccion = parseInt($( "select#provincia" ).val());
+	    	var comunas = <?php echo json_encode($comunas); ?>;
+	    	var count = Object.keys(comunas).length;
+
+
+	    	var str =   '<option value="" >Todos</option>';
+
+    		for (var i = 0; i < count; i++) {
+    			if (comunas[i]['COMUNA_PROVINCIA_ID'] == seleccion) {
+                	str = str+'<option value="'+comunas[i]['COMUNA_NOMBRE']+'" >'+comunas[i]['COMUNA_NOMBRE']+'</option>';
+                }
+            }
+
+    		//Elimina y genera nuevas opciones para el select
+    		$('#comuna')
+			    .find('option')
+			    .remove()
+			    .end()
+			    .append(str)
+			;
 	    	
 		});
 

@@ -18,6 +18,7 @@
 
 Route::post('/anuncios/actualizar','AnuncioController@actualizar');
 Route::post('/anuncios/ver_cupon','CuponController@verCupon');
+
 Route::resource('/anuncios','AnuncioController');
 Route::resource('/','HomeController');
 Route::resource('/favoritos','FavoritoController');
