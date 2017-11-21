@@ -64,12 +64,19 @@ class CuponController extends Controller
                     )
             ->paginate(5);
 
-       return view('cupones.index', ["servicios" => $servicios, "searchText" => $query]);
-   }
 
+            $regiones=DB::table('region')->get();
 
-  
-           
+            $categorias=DB::table('categorias')->get();
+
+            $sub_categorias=DB::table('sub_categorias')->get();
+
+            $categoria_vehiculos=DB::table('categoria_vehiculo')->get();
+
+            return view('cupones.index', ["servicios" => $servicios, 'regiones'=> $regiones, "searchText" => $query, 'categorias'=> $categorias, 'sub_categorias'=> $sub_categorias, 'categoria_vehiculos'=> $categoria_vehiculos]);
+        }
+
+   
     }
 
     public function create(Guard $auth){
