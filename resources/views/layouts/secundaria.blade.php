@@ -198,20 +198,21 @@
 
 							    <h6>Lugar</h6>
 							    <select class="form-control" id="sel1" >
+							    	<option value="" >Todos</option>
 							        <option>Todos</option>
 							        <option>Flete</option>
 							        <option>Grua</option>
 							        <option>Mecánico</option>
 							    </select> <br>
 							    <select class="form-control" id="sel2">
-							    	<option>Todos</option>
+							    	<option value="" >Todos</option>
 							        <option>Talca</option>
 							        <option>Camioneta</option>
 							        <option>dsad</option>
 							        <option>wqeqweq</option>
 							    </select> <br>
 							    <select class="form-control" id="comuna" name="comuna">
-							    	<option>Todos</option>
+							    	<option value="" >Todos</option>
 							        <option>Talca</option>
 							        <option>Camioneta</option>
 							        <option>dsad</option>
