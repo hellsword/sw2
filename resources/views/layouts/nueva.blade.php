@@ -58,7 +58,34 @@
         jQuery('select, input:checkbox').uniform();
     });
 
-    //Genera una nueva lista de provincias al seleccionar una region
+    
+    //Genera una nueva lista de subcategorias al seleccionar una categoria
+        $( "select#categoria" ).click(function(e) {
+            
+            var seleccion = parseInt($( "select#categoria" ).val());
+            var sub_categorias = <?php echo json_encode($sub_categorias); ?>;
+            var count = Object.keys(sub_categorias).length;
+
+            var str =   '<option value="" >Todos</option>';
+
+            for (var i = 0; i < count; i++) {
+                if (sub_categorias[i]['id_categoria'] == seleccion) {
+                    str = str+'<option value="'+sub_categorias[i]['sub_categoria']+'" >'+sub_categorias[i]['nombre_completo']+'</option>';
+                }
+            }
+
+            //Elimina y genera nuevas opciones para el select
+            $('#sub_categoria')
+                .find('option')
+                .remove()
+                .end()
+                .append(str)
+            ;
+            
+        });
+
+
+        //Genera una nueva lista de provincias al seleccionar una region
         $( "select#region" ).click(function(e) {
             
             var seleccion = parseInt($( "select#region" ).val());
@@ -92,12 +119,11 @@
             var comunas = <?php echo json_encode($comunas); ?>;
             var count = Object.keys(comunas).length;
 
-
             var str =   '<option value="" >Todos</option>';
 
             for (var i = 0; i < count; i++) {
                 if (comunas[i]['COMUNA_PROVINCIA_ID'] == seleccion) {
-                    str = str+'<option value="'+comunas[i]['COMUNA_NOMBRE']+'" >'+comunas[i]['COMUNA_NOMBRE']+'</option>';
+                    str = str+'<option value="'+comunas[i]['COMUNA_ID']+'" >'+comunas[i]['COMUNA_NOMBRE']+'</option>';
                 }
             }
 
@@ -110,6 +136,8 @@
             ;
             
         });
+
+
 </script>
 
 </body>

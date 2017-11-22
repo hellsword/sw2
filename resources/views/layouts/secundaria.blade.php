@@ -261,7 +261,6 @@
 	    	var sub_categorias = <?php echo json_encode($sub_categorias); ?>;
 	    	var count = Object.keys(sub_categorias).length;
 
-
 	    	var str =   '<option value="" >Todos</option>';
 
     		for (var i = 0; i < count; i++) {
@@ -287,7 +286,6 @@
 	    	var seleccion = parseInt($( "select#region" ).val());
 	    	var provincias = <?php echo json_encode($provincias); ?>;
 	    	var count = Object.keys(provincias).length;
-
 
 	    	var str =   '<option value="" >Todos</option>';
 
@@ -315,12 +313,11 @@
 	    	var comunas = <?php echo json_encode($comunas); ?>;
 	    	var count = Object.keys(comunas).length;
 
-
 	    	var str =   '<option value="" >Todos</option>';
 
     		for (var i = 0; i < count; i++) {
     			if (comunas[i]['COMUNA_PROVINCIA_ID'] == seleccion) {
-                	str = str+'<option value="'+comunas[i]['COMUNA_NOMBRE']+'" >'+comunas[i]['COMUNA_NOMBRE']+'</option>';
+                	str = str+'<option value="'+comunas[i]['COMUNA_ID']+'" >'+comunas[i]['COMUNA_NOMBRE']+'</option>';
                 }
             }
 
