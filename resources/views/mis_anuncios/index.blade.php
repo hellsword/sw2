@@ -25,7 +25,7 @@
 					<div style="border-bottom: 1px solid silver;"></div>
 					Servicio: {{$servicio -> tipo_servicio}} <br>
 					<div style="border-bottom: 1px solid silver;"></div>
-					Lugar: {{$servicio -> region}}, {{$servicio -> comuna}} <br>
+					Lugar: {{$servicio -> region}}, {{$servicio -> provincia}}, {{$servicio -> comuna}} <br>
 					<div style="border-bottom: 1px solid silver;"></div>
 				</section>
 			</div>

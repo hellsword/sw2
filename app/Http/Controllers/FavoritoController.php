@@ -41,6 +41,9 @@ class FavoritoController extends Controller
             ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
             ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
             ->join ('favoritos as fav', 'a.id_anuncio', '=' , 'fav.id_anuncio')
+            ->join ('region', 'region.REGION_ID', '=' , 'a.region')
+            ->join ('provincia', 'provincia.PROVINCIA_ID', '=' , 'a.provincia')
+            ->join ('comuna', 'comuna.COMUNA_ID', '=' , 'a.comuna')
             ->where('o.id_cliente', '=', $this->auth->user()->id)
             ->where('f.id_foto', '=', '0')
             ->where('a.titulo', 'LIKE', '%'.$query.'%') 
@@ -49,11 +52,13 @@ class FavoritoController extends Controller
                     'a.descripcion as descripcion',
                     'a.precio_serv as precio_serv',
                     'a.tipo_servicio as tipo_servicio',
-                    'a.region as region',
-                    'a.comuna as comuna',
+                    'region.REGION_NOMBRE as region',
+                    'provincia.PROVINCIA_NOMBRE as provincia',
+                    'comuna.COMUNA_NOMBRE as comuna',
                     'u.nombre as nombre',
                     'u.apellido as apellido',
-                    'f.foto as foto'
+                    'f.foto as foto',
+                    'o.fecha as fecha'
                     )
             ->paginate(5);
 
@@ -65,7 +70,11 @@ class FavoritoController extends Controller
 
             $categoria_vehiculos=DB::table('categoria_vehiculo')->get();
 
-            return view('favoritos.index', ["servicios" => $servicios, 'regiones'=> $regiones, "searchText" => $query, 'categorias'=> $categorias, 'sub_categorias'=> $sub_categorias, 'categoria_vehiculos'=> $categoria_vehiculos]);
+            $provincias = DB::table('provincia')->get();
+
+            $comunas = DB::table('comuna')->get();
+
+            return view('servicios.index', ["servicios" => $servicios, 'regiones'=> $regiones, "searchText" => $query, 'categorias'=> $categorias, 'sub_categorias'=> $sub_categorias, 'categoria_vehiculos'=> $categoria_vehiculos, 'provincias'=> $provincias, 'comunas'=> $comunas]);
         }
     }
 

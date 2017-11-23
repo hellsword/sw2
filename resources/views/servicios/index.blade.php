@@ -1,23 +1,27 @@
 @extends('layouts.secundaria')
 @section('contenido')
 
+	<?php $ruta = $_SERVER['REQUEST_URI']; ?>
+
 	<!-- pull-right:posiciona el elemento a la derecha de la pantalla -->
 	@foreach ($servicios as $servicio)
 
-		<?php $val = 0; ?>
-		@if(Auth::check())
-			@if(Auth::user()->id == $servicio->id_cliente)
-				<?php $val = 1; ?>
-			@endif
-
-			@foreach ($favoritos as $favorito)
-				@if($servicio->id_anuncio == $favorito->id_anuncio)
+		<?php $val = 2; ?>
+		@if($ruta == '/servicios')
+			<?php $val = 0; ?>
+			@if(Auth::check())
+				@if(Auth::user()->id == $servicio->id_cliente)
 					<?php $val = 1; ?>
 				@endif
-			@endforeach
+
+				@foreach ($favoritos as $favorito)
+					@if($servicio->id_anuncio == $favorito->id_anuncio)
+						<?php $val = 1; ?>
+					@endif
+				@endforeach
+			@endif
 		@endif
 
-		
 		<hr>
 		<div class="row" >
 			<div class="4u" style="vertical-align: middle;" >
@@ -37,7 +41,7 @@
 					<div style="border-bottom: 1px solid silver;"></div>
 					Servicio: {{$servicio -> tipo_servicio}} <br>
 					<div style="border-bottom: 1px solid silver;"></div>
-					Lugar: {{$servicio -> region}}, {{$servicio -> comuna}} <br>
+					Lugar: {{$servicio -> region}}, {{$servicio -> provincia}}, {{$servicio -> comuna}} <br>
 					<div style="border-bottom: 1px solid silver;"></div>
 					Creado el: {{$servicio -> fecha}}<br>
 					<div style="border-bottom: 1px solid silver;"></div>
@@ -56,7 +60,7 @@
 						@else
 							<a href="login2" class="button ">Añadir a favoritos</a>
 						@endif
-					@else
+					@elseif($val == 1)
 						<a class="button" style="text-decoration:line-through;">Añadir a favoritos</a>
 					@endif
 				</section>

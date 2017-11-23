@@ -46,8 +46,11 @@ class ServiciosController extends Controller
             ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
             ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
             ->join ('vehiculo as v', 'a.patente', '=' , 'v.patente')
-            ->join ('region', 'region.patente', '=' , 'v.patente')
+            ->join ('region', 'region.REGION_ID', '=' , 'a.region')
+            ->join ('provincia', 'provincia.PROVINCIA_ID', '=' , 'a.provincia')
+            ->join ('comuna', 'comuna.COMUNA_ID', '=' , 'a.comuna')
             ->where('f.id_foto', '=', '0')
+            ->where('a.condicion', '=', '1')
             ->where(\DB::raw("CONCAT(a.titulo, ' ', a.tipo_servicio, ' ', a.descripcion)"), 'LIKE', '%'.$query.'%')     //BUSCA POR EL TITULO DEL ANUNCIO
             ->where('a.tipo_servicio', 'LIKE', '%'.$request->get('sub_categoria').'%')
             ->where('a.region', '=', $request->get('region'))
@@ -60,9 +63,9 @@ class ServiciosController extends Controller
                     'a.descripcion as descripcion',
                     'a.precio_serv as precio_serv',
                     'a.tipo_servicio as tipo_servicio',
-                    'a.region as region',
-                    'a.comuna as comuna',
-                    'u.nombre as nombre',
+                    'region.REGION_NOMBRE as region',
+                    'provincia.PROVINCIA_NOMBRE as provincia',
+                    'comuna.COMUNA_NOMBRE as comuna',
                     'u.apellido as apellido',
                     'f.foto as foto',
                     'o.fecha as fecha'
@@ -74,6 +77,9 @@ class ServiciosController extends Controller
             ->join ('orden as o', 'a.id_anuncio', '=' , 'o.id_anuncio')
             ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
             ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
+            ->join ('region', 'region.REGION_ID', '=' , 'a.region')
+            ->join ('provincia', 'provincia.PROVINCIA_ID', '=' , 'a.provincia')
+            ->join ('comuna', 'comuna.COMUNA_ID', '=' , 'a.comuna')
             ->where('a.condicion', '=', '1')
             ->where('f.id_foto', '=', '0')
             ->where(\DB::raw("CONCAT(a.titulo, ' ', a.tipo_servicio, ' ', a.descripcion)"), 'LIKE', '%'.$query.'%')     //BUSCA POR EL TITULO DEL ANUNCIO
@@ -87,8 +93,9 @@ class ServiciosController extends Controller
                     'a.descripcion as descripcion',
                     'a.precio_serv as precio_serv',
                     'a.tipo_servicio as tipo_servicio',
-                    'a.region as region',
-                    'a.comuna as comuna',
+                    'region.REGION_NOMBRE as region',
+                    'provincia.PROVINCIA_NOMBRE as provincia',
+                    'comuna.COMUNA_NOMBRE as comuna',
                     'u.nombre as nombre',
                     'u.apellido as apellido',
                     'f.foto as foto',
