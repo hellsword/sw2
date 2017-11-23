@@ -46,7 +46,7 @@
 			<div class="4u">
 				<section>
 					<label style="color: #DE5122; font-size: 18px">${{$servicio -> precio_serv}}</label> <br>
-					Valoración: ★★★★★ <br>
+					<!--  Valoración: ★★★★★ <br>  -->
 					@if($val == 0)
 						@if(Auth::check())
 							{!!Form::open(array('url'=>'favoritos', 'method'=>'POST', 'class'=>'stdform', 'id'=>'formu', 'name'=>'formu', 'autocomplete'=>'off'))!!}
