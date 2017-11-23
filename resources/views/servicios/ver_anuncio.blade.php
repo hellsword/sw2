@@ -56,9 +56,9 @@
 							<p>Tipo de servicio: {{$servicio -> tipo_servicio}}</p>
 							Lugar:
 							<div style="border-top: 1px solid silver;"></div><br>
-							<p>&nbsp;&nbsp;&nbsp;Región: {{$servicio -> region}}</p>
-							<p>&nbsp;&nbsp;&nbsp;Provincia: {{$servicio -> provincia}}</p>
-							<p>&nbsp;&nbsp;&nbsp;Comuna: {{$servicio -> comuna}}</p>
+							<p>&nbsp;&nbsp;&nbsp;Región: {{$lugar -> region}}</p>
+							<p>&nbsp;&nbsp;&nbsp;Provincia: {{$lugar -> provincia}}</p>
+							<p>&nbsp;&nbsp;&nbsp;Comuna: {{$lugar -> comuna}}</p>
 						</section>
 
 						

@@ -326,12 +326,22 @@ class ServiciosController extends Controller
         $face = DB::table('contacto')->where('id', $orden->id_cliente)->where('medio', 'facebook')->first();
         $fono = DB::table('contacto')->where('id', $orden->id_cliente)->where('medio', 'telefono')->first();
 
+       $lugar = DB::table('anuncio as a')
+            ->join ('region', 'a.region', '=' , 'region.REGION_ID')
+            ->join ('provincia', 'a.provincia', '=' , 'provincia.PROVINCIA_ID')
+            ->join ('comuna', 'a.comuna', '=' , 'comuna.COMUNA_ID')
+            ->select('region.REGION_NOMBRE as region',
+                    'provincia.PROVINCIA_NOMBRE as provincia',
+                    'comuna.COMUNA_NOMBRE as comuna'
+                    )
+            ->first();
+
         if($this->auth->user()){
             $favoritos = DB::table('favoritos')->where('id_cliente', $this->auth->user()->id)->get();
-            return view("servicios.ver_anuncio", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor, "favoritos" => $favoritos, "face" => $face, "fono" => $fono]);
+            return view("servicios.ver_anuncio", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor, "favoritos" => $favoritos, "face" => $face, "fono" => $fono, "lugar" => $lugar]);
         }
         else
-            return view("servicios.ver_anuncio", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor, "face" => $face, "fono" => $fono]);
+            return view("servicios.ver_anuncio", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor, "face" => $face, "fono" => $fono, "lugar" => $lugar]);
 
         
     }
