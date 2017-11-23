@@ -46,12 +46,13 @@ class ServiciosController extends Controller
             ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
             ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
             ->join ('vehiculo as v', 'a.patente', '=' , 'v.patente')
+            ->join ('region', 'region.patente', '=' , 'v.patente')
             ->where('f.id_foto', '=', '0')
             ->where(\DB::raw("CONCAT(a.titulo, ' ', a.tipo_servicio, ' ', a.descripcion)"), 'LIKE', '%'.$query.'%')     //BUSCA POR EL TITULO DEL ANUNCIO
             ->where('a.tipo_servicio', 'LIKE', '%'.$request->get('sub_categoria').'%')
-            ->where('a.comuna', 'LIKE', '%'.$request->get('region').'%')
-            ->where('a.comuna', 'LIKE', '%'.$request->get('provincia').'%')
-            ->where('a.comuna', 'LIKE', '%'.$request->get('comuna').'%')
+            ->where('a.region', '=', $request->get('region'))
+            ->where('a.provincia', '=', $request->get('provincia'))
+            ->where('a.comuna', '=', $request->get('comuna'))
             ->where('v.categoria', 'LIKE', '%'.$request->get('vehiculo').'%')
             ->select('o.id_cliente as id_cliente',
                     'a.id_anuncio as id_anuncio',
