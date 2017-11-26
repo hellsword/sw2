@@ -37,8 +37,14 @@ class ServiciosController extends Controller
         $this->middleware('auth');
         $this->auth =$auth;
 
-        if($request){
+
+
+    if($request){
             $query=trim($request->get('searchText'));
+
+            $fecha_actual=date('Y-m-d');
+       
+
         
         if($request->get('vehiculo') != null){
             $servicios = DB::table('anuncio as a')
@@ -82,6 +88,9 @@ class ServiciosController extends Controller
             ->join ('comuna', 'comuna.COMUNA_ID', '=' , 'a.comuna')
             ->where('a.condicion', '=', '1')
             ->where('f.id_foto', '=', '0')
+            //condicion para mostrar solo los avisos q esten vijentes 
+            ->where('o.fecha_venc', '>=', $fecha_actual)
+
             ->where(\DB::raw("CONCAT(a.titulo, ' ', a.tipo_servicio, ' ', a.descripcion)"), 'LIKE', '%'.$query.'%')     //BUSCA POR EL TITULO DEL ANUNCIO
             ->where('a.tipo_servicio', 'LIKE', '%'.$request->get('sub_categoria').'%')
             ->where('a.comuna', 'LIKE', '%'.$request->get('region').'%')
@@ -124,6 +133,12 @@ class ServiciosController extends Controller
             else
                 return view('servicios.index', ["servicios" => $servicios, 'regiones'=> $regiones, "searchText" => $query, 'categorias'=> $categorias, 'sub_categorias'=> $sub_categorias, 'categoria_vehiculos'=> $categoria_vehiculos, 'provincias'=> $provincias, 'comunas'=> $comunas]);
         }
+
+
+
+
+
+     
     }
 
     public function create(Guard $auth){
@@ -160,6 +175,8 @@ class ServiciosController extends Controller
 
       $totalPagar=$request->get('total2');
       $tipoPago=$request->get('modo_pago'); //captura el tipo de pago
+      
+       $duracionA=$request->get('tiempo');
 
       try {
 
@@ -253,6 +270,9 @@ class ServiciosController extends Controller
             $orden->duracion = Input::get('tiempo');
             $lastValue = DB::table('secretaria')->orderBy('anuncios_pend', 'asc')->first();
             $orden->id_secretaria = $lastValue->id_secretaria;
+            
+            //vemos la fecha de vencimiento
+            $orden->fecha_venc = date('Y-m-d', strtotime('+'.$duracionA.'month')) ;
             $orden->save();  
 
             //Actualiza los anuncios pendientes de una secretaria
