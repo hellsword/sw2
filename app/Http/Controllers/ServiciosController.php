@@ -45,7 +45,7 @@ class ServiciosController extends Controller
             $fecha_actual=date('Y-m-d');
        
 
-        
+        //Carga un servicio con vehiculo        
         if($request->get('vehiculo') != null){
             $servicios = DB::table('anuncio as a')
             ->join ('orden as o', 'a.id_anuncio', '=' , 'o.id_anuncio')
@@ -78,7 +78,7 @@ class ServiciosController extends Controller
                     )
             ->paginate(5);
         }
-        else{
+        else{   //Carga un servicio con personas  
             $servicios = DB::table('anuncio as a')
             ->join ('orden as o', 'a.id_anuncio', '=' , 'o.id_anuncio')
             ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
@@ -200,14 +200,9 @@ class ServiciosController extends Controller
             $anuncio->tipo_servicio = $request->get('tipo');
            
             if($tipoPago=='efectivo'){
-
-          $anuncio->forma_pago = 1;// 1 si es en efectivo 
-          $anuncio->save(); 
+                $anuncio->forma_pago = 1;// 1 si es en efectivo 
             }else{
-// 0 si es con tarjeta,lo dejaremos en 2 lo que significa que ya pago automaticamente
-          $anuncio->forma_pago = 0;
-          $anuncio->save(); 
-
+                $anuncio->forma_pago = 0; // 0 si es con tarjeta,lo dejaremos en 2 lo que significa que ya pago automaticamente
             }
 
 
@@ -238,7 +233,7 @@ class ServiciosController extends Controller
                 $anuncio->patente = $request->get('patente');
             }
 
-            
+            $anuncio->save(); 
 
 
             //AGREGAR DATOS A TABLA FORMA_PAGO

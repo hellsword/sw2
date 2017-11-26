@@ -59,8 +59,8 @@
                                 </p>
 
                  <div class="form-group">
-                <button class="btn btn-primary" type="submit">Guardar</button>
-                  <a href="/cupones" class="btn btn-danger">Cancelar</a>
+                    <a href="/" class="w3-button w3-red w3-round-xxlarge" role="button">Cancelar</a>
+                    <button class="w3-button w3-blue w3-round-xxlarge" type="submit">Aceptar</button>
             </div>
                              
  {!!Form::close()!!}

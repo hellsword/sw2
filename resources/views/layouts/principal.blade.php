@@ -79,6 +79,7 @@
                           <p>Sobre nosotros</p>
                       </a>
                     </li> 
+                    @if(Auth::check() AND Auth::user()->tipo=='cliente')
                     <li>
                       @if(Auth::check())
                       	<a href="/servicios/create">
@@ -91,6 +92,7 @@
                       </a>
 
                     </li> 
+                    @endif
                     
                     @if(Auth::check())
                     <li class="dropdown">
@@ -100,7 +102,6 @@
                             </a>
                         @if(Auth::user()->tipo=='admin')
                         <ul class="dropdown-menu">
-                            <li><a href="#">Ver perfil</a></li>
                             <li><a href="#">Anuncios</a></li>
                             <li><a href="/usuarios">Lista Usuarios</a></li>
                             <li><a href="{{ route('usuarios.create') }}">Crear Usuarios</a></li>
@@ -109,9 +110,9 @@
                           </ul>
                           @elseif(Auth::user()->tipo=='secretaria')
                            <ul class="dropdown-menu">
-                            <li><a href="#">Ver perfil</a></li>
                             <li><a href="/anuncios">Anuncios</a></li>
                             <li><a href="/usuarios">Lista Usuarios</a></li>
+                            <li class="divider"></li>
                             <li><a href="{{url('/logout')}}">Salir</a></li>
                           </ul>
                           @else
@@ -120,7 +121,6 @@
                             <li><a href="/mis_anuncios">Mis anuncios</a></li>
                             <li><a href="/favoritos">Favoritos</a></li>
                             <li><a href="/cupones">Subir Cupón</a></li>
-                            <li><a href="usuarios.tarjeta.create">Vincular tarjeta</a></li>
                             <li class="divider"></li>
                             <li><a href="{{url('/logout')}}">Salir</a></li>
                           </ul>

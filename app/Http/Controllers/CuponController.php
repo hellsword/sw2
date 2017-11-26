@@ -73,7 +73,11 @@ class CuponController extends Controller
 
             $categoria_vehiculos=DB::table('categoria_vehiculo')->get();
 
-            return view('cupones.index', ["servicios" => $servicios, 'regiones'=> $regiones, "searchText" => $query, 'categorias'=> $categorias, 'sub_categorias'=> $sub_categorias, 'categoria_vehiculos'=> $categoria_vehiculos]);
+            $provincias = DB::table('provincia')->get();
+
+            $comunas = DB::table('comuna')->get();
+
+            return view('cupones.index', ["servicios" => $servicios, 'regiones'=> $regiones, "searchText" => $query, 'categorias'=> $categorias, 'sub_categorias'=> $sub_categorias, 'categoria_vehiculos'=> $categoria_vehiculos,'provincias'=> $provincias, 'comunas'=> $comunas]);
         }
 
    

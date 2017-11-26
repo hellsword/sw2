@@ -15,6 +15,7 @@ use App\Vehiculo;
 use App\Orden;
 use App\Forma_pago;
 use App\Cupones;
+use App\Secretaria;
 
 use Image; 
 use DB;
@@ -78,12 +79,28 @@ class AnuncioController extends Controller
        public function actualizar(Request $request)
     {
 
-        DB::table('anuncio as a')
-        ->where('a.id_anuncio', '=' ,$request->get('id_anuncio'))
-        ->update(['condicion' => 1]);
-   
-       return Redirect::to('anuncios');
- 
 
+        try {
+
+        DB::beginTransaction();
+      
+            DB::table('anuncio as a')
+            ->where('a.id_anuncio', '=' ,$request->get('id_anuncio'))
+            ->update(['condicion' => 1]);
+
+            $secretaria=DB::table('secretaria')->where('id_secretaria', '=', $this->auth->user()->id)->select('anuncios_pend as anuncios_pend')->first();
+
+            Secretaria::where('id_secretaria', $this->auth->user()->id)
+                  ->update(['anuncios_pend' => $secretaria->anuncios_pend-1]);
+
+            DB::commit();
+          
+      } catch (Exception $e) {
+          DB::rollback();
+      }
+
+       return Redirect::to('anuncios');
     }
+
+
   }

@@ -67,93 +67,92 @@
 			              </div>
 			              <!-- Collect the nav links, forms, and other content for toggling -->
 			              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
-			                <ul class="nav navbar-nav navbar-right" >
-			                    <li>
-			                      <a href="/">
-			                          <i class="pe-7s-home">
-			                          </i>
-			                          <p>Home</p>
-			                      </a>
-			                    </li> 
-			                    <li>
-			                      <a href="/servicios">
-			                          <i class="pe-7s-portfolio">
-			                          </i>
-			                          <p>Servicios</p>
-			                      </a>
-			                    </li> 
-			                    <li>
-			                      <a href="#">
-			                          <i class="pe-7s-info">
-			                          </i>
-			                          <p>Sobre nosotros</p>
-			                      </a>
-			                    </li> 
-			                    <li>
-			                      @if(Auth::check())
-			                      	<a href="/servicios/create">
-			                      @else
-			                      	<a href="/login2">
-			                      @endif
-			                          <i class="pe-7s-note2">
-			                          </i>
-			                          <p>Publique su aviso</p>
-			                      </a>
+                <ul class="nav navbar-nav navbar-right" >
+                    <li>
+                      <a href="/">
+                          <i class="pe-7s-home">
+                          </i>
+                          <p>Home</p>
+                      </a>
+                    </li> 
+                    <li>
+                      <a href="/servicios">
+                          <i class="pe-7s-portfolio">
+                          </i>
+                          <p>Servicios</p>
+                      </a>
+                    </li> 
+                    <li>
+                      <a href="#">
+                          <i class="pe-7s-info">
+                          </i>
+                          <p>Sobre nosotros</p>
+                      </a>
+                    </li> 
+                    @if(Auth::check() AND Auth::user()->tipo=='cliente')
+                    <li>
+                      @if(Auth::check())
+                      	<a href="/servicios/create">
+                      @else
+                      	<a href="/login2">
+                      @endif
+                          <i class="pe-7s-note2">
+                          </i>
+                          <p>Publique su aviso</p>
+                      </a>
 
-			                    </li> 
-			                    
-			                    @if(Auth::check())
-			                    <li class="dropdown">
-			                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-			                                <i class="pe-7s-user"></i>
-			                                <p>{{ Auth::user()->nombre}}</p>
-			                            </a>
-			                         @if(Auth::user()->tipo=='admin')
-			                          <ul class="dropdown-menu">
-			                            <li><a href="#">Ver perfil</a></li>
-			                            <li><a href="#">Anuncios</a></li>
-			                            <li><a href="/favoritos">Favoritos</a></li>
-			                            <li><a href="/usuarios">Lista Usuarios</a></li>
-			                            <li><a href="{{ route('usuarios.create') }}">Crear Usuarios</a></li>
-			                            <li class="divider"></li>
-			                            <li><a href="{{url('/logout')}}">Salir</a></li>
-			                          </ul>
-			                          @elseif(Auth::user()->tipo=='secretaria')
-			                           <ul class="dropdown-menu">
-			                            <li><a href="#">Ver perfil</a></li>
-			                            <li><a href="/anuncios">Anuncios</a></li>
-			                            <li><a href="/favoritos">Favoritos</a></li>
-			                            <li><a href="/usuarios">Lista Usuarios</a></li>
-			                            <li><a href="{{url('/logout')}}">Salir</a></li>
-			                          </ul>
-			                          @else
-			                           <ul class="dropdown-menu">
-			                            <li><a href="#">Ver perfil</a></li>
-			                            <li><a href="/mis_anuncios">Mis anuncios</a></li>
-			                            <li><a href="/favoritos">Favoritos</a></li>
-			                            <li><a href="#">Another action</a></li>
-			                            <li><a href="usuarios.tarjeta.create">Vincular tarjeta</a></li>
-			                            <li class="divider"></li>
-			                            <li><a href="{{url('/logout')}}">Salir</a></li>
-			                          </ul>
-			                          @endif
-			                    </li>
-			                    @else
-			                    <li><a href="{{ route('usuarios_cliente.create') }}" class="button special">Registrarse</a></li>
-			                    <li><a href="login2" class="button special">Iniciar sesión</a></li>
-			                    @endif
-			                 </ul>
-			                 <form class="navbar-form navbar-right navbar-search-form" role="search">                  
-			                   <div class="form-group">
-			                        <input type="text" value="" class="form-control" placeholder="Search...">
-			                   </div> 
-			                </form>
-			                
-			              </div><!-- /.navbar-collapse -->
-			            </div><!-- /.container-fluid -->
-			          </nav>
-			        </div><!--  end navbar -->
-			    </div> <!-- end menu-dropdown -->
+                    </li> 
+                    @endif
+                    
+                    @if(Auth::check())
+                    <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="pe-7s-user"></i>
+                                <p>{{ Auth::user()->nombre}}</p>
+                            </a>
+                        @if(Auth::user()->tipo=='admin')
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Anuncios</a></li>
+                            <li><a href="/usuarios">Lista Usuarios</a></li>
+                            <li><a href="{{ route('usuarios.create') }}">Crear Usuarios</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{url('/logout')}}">Salir</a></li>
+                          </ul>
+                          @elseif(Auth::user()->tipo=='secretaria')
+                           <ul class="dropdown-menu">
+                            <li><a href="/anuncios">Anuncios</a></li>
+                            <li><a href="/usuarios">Lista Usuarios</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{url('/logout')}}">Salir</a></li>
+                          </ul>
+                          @else
+                           <ul class="dropdown-menu">
+                            <li><a href="#">Ver perfil</a></li>
+                            <li><a href="/mis_anuncios">Mis anuncios</a></li>
+                            <li><a href="/favoritos">Favoritos</a></li>
+                            <li><a href="/cupones">Subir Cupón</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{url('/logout')}}">Salir</a></li>
+                          </ul>
+                          @endif
+                    </li>
+                    @else
+                    <li><a href="{{ route('usuarios_cliente.create') }}" class="button special">Registrarse</a></li>
+                    <li><a href="/login2" class="button special">Iniciar sesión</a></li>
+                    @endif
+                 </ul>
+                 <form class="navbar-form navbar-right navbar-search-form" role="search">                  
+                   <div class="form-group">
+                        <input type="text" value="" class="form-control" placeholder="Search...">
+                   </div> 
+                </form>
+                
+              </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+          </nav>
+        </div><!--  end navbar -->
+
+    </div> <!-- end menu-dropdown -->
 
 			</header>
 

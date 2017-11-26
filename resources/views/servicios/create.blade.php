@@ -70,7 +70,7 @@
 
                                 <p>
                                     <label>Región</label>
-                                    <select class="form-control" id="region" name="region">
+                                    <select class="form-control" id="region" name="region" required="">
                                         <option value="" >Todos</option>
                                         @foreach($regiones as $region)
                                             <option value="{{$region -> REGION_ID}}" >{{$region -> REGION_NOMBRE}}</option>
@@ -79,12 +79,12 @@
                                 </p>
                                 <p>
                                   <label>Provincia</label>
-                                  <select class="form-control" id="provincia" name="provincia">
+                                  <select class="form-control" id="provincia" name="provincia" required="">
                                         <option value="" >-</option>
                                     </select> 
                                 <p>
                                     <label>Comuna</label>
-                                    <select class="form-control" id="comuna" name="comuna">
+                                    <select class="form-control" id="comuna" name="comuna" required="">
                                         <option value="" >-</option>
                                     </select> 
                                 </p>
@@ -98,41 +98,41 @@
                             <div id="cambia_servicio">
                                 <p>
                                     <label>RUT</label>
-                                    <span class="field"><input type="text" name="rut" class="input-xxlarge" /></span>
+                                    <span class="field"><input type="text" name="rut" class="input-xxlarge" required=""/></span>
                                 </p>
                                 <p>
                                     <label>Nombre</label>
-                                    <span class="field"><input type="text" name="nombre" class="input-xxlarge" /></span>
+                                    <span class="field"><input type="text" name="nombre" class="input-xxlarge" required=""/></span>
                                 </p>
                                 <p>
                                     <label>Apellido</label>
-                                    <span class="field"><input type="text" name="apellido" class="input-xxlarge" /></span>
+                                    <span class="field"><input type="text" name="apellido" class="input-xxlarge" required=""/></span>
                                 </p>
                                 <p>
                                     <label>Profesión</label>
-                                    <span class="field"><input type="text" name="profesion" class="input-xxlarge" /></span>
+                                    <span class="field"><input type="text" name="profesion" class="input-xxlarge" required=""/></span>
                                 </p>
                                 <p>
                                     <label>Años de experiencia</label>
-                                    <span class="field"><input type="text" name="years" class="input-xxlarge" /></span>
+                                    <span class="field"><input type="text" name="years" class="input-xxlarge" required=""/></span>
                                 </p>
                                 <p>
                                     <label>Curriculum</label>
-                                    <span class="field"><input type="text" name="curriculum" class="input-xxlarge" /></span>
+                                    <span class="field"><input type="text" name="curriculum" class="input-xxlarge" required=""/></span>
                                 </p>
                                 <p>
                                     <label>Descripción: (Agregue aquí toda la información adicional para su anuncio)</label>
-                                    <span class="field"><textarea cols="80" rows="5" class="span6" name="descripcion"></textarea></span>
+                                    <span class="field"><textarea cols="80" rows="5" class="span6" name="descripcion" required=""></textarea></span>
                                 </p>
                                 <p>
                                     <label>Defina el precio de su servicio</label>
-                                    <span class="field"><input type="text" name="precio_serv" class="input-xxlarge" /></span>
+                                    <span class="field"><input type="text" name="precio_serv" class="input-xxlarge" required=""/></span>
                                 </p>
                                 
                                 <p>
                                 <label>Subir Imagenes:</label>
                                 <!-- VER LA PROPIEDAD multiple PARA AGREGAR VARIOS ARCHIVOS -->
-                                <span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="image/*" multiple="" onchange="loadFile(event)" /></span>
+                                <span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="image/*" multiple="" onchange="loadFile(event)" required=""/></span>
                                 </p>
 
 
@@ -151,7 +151,7 @@
                                     <p>
                                         <label>Modo de pago</label>
                                            
-                                                <select name="modo_pago" id="modo_pago" class="uniformselect"  onclick="modo_pago1()">
+                                                <select name="modo_pago" id="modo_pago" class="uniformselect"  onclick="modo_pago1()" required="">
                                                 
                                                     <option value="tarjeta" >Tarjeta de crédito</option>
                                                     <option value="efectivo" >Efectivo</option>
@@ -221,17 +221,17 @@
                                 '<label>Pago con Tarjeta</label><br>'+
                                     '<p>'+
                                         '<label>N° Tarjeta: </label>'+
-                                        '<span class="field"><input id="num_tarjeta" type="text" name="num_tarjeta" class="input-xxlarge" onchange="detecta_tarjeta()" value="" required autofocus /></span>'+
+                                        '<span class="field"><input id="num_tarjeta" type="text" name="num_tarjeta" class="input-xxlarge" onchange="detecta_tarjeta()" value="" required autofocus required=""/></span>'+
                                     '</p>'+
 
                                     '<p>'+
                                         '<label>Tipo Tarjeta: </label>'+
-                                        '<span class="field"><input id="tarjeta" type="text" name="tarjeta" class="input-xxlarge" value="" autofocus readonly /></span>'+
+                                        '<span class="field"><input id="tarjeta" type="text" name="tarjeta" class="input-xxlarge" value="" autofocus readonly required=""/></span>'+
                                     '</p>'+
 
                                      '<p>'+
                                         '<label>Fecha de caducidad: </label><div id="row-fluid" class="row-fluid">'+
-                                            '<div class="span1"><input id="mes" type="text" class="form-control" name="mes" value="" required placeholder="MM"></div>'+
+                                            '<div class="span1"><input id="mes" type="text" class="form-control" name="mes" value="" required placeholder="MM" ></div>'+
                                             '<div class="span1"><input id="year" type="text" class="form-control" name="year" value="" required placeholder="YY"></div>'+
                                             '<div class="span1"><input id="c_seguridad" type="text" class="form-control" name="c_seguridad" value="" required placeholder="CVV"></div> <div class="span1"><i class="fa fa-credit-card" aria-hidden="true"></i></div>'+
                                     '</div></p>'+
@@ -247,7 +247,7 @@
 
                                     '<p>'+
                                         '<label>Duración del anuncio (meses): </label>'+
-                                        '<span class="field"><input type="text" id="tiempo" name="tiempo" class="input-small input-spinner" onchange="calcula_total()"/></span>'+
+                                        '<span class="field"><input type="text" id="tiempo" name="tiempo" class="input-small input-spinner" onchange="calcula_total()" required=""/></span>'+
                                     '</p>'+
 
                                     '<p>'+
@@ -269,7 +269,7 @@
                  
                                     '<p>'+
                                         '<label>Duración del anuncio (meses): </label>'+
-                                        '<span class="field"><input type="text" id="tiempo" name="tiempo" class="input-small input-spinner" onchange="calcula_total2()"/></span>'+
+                                        '<span class="field"><input type="text" id="tiempo" name="tiempo" class="input-small input-spinner" onchange="calcula_total2()" required=""/></span>'+
                                     '</p>'+
                                     '<p>'+
                                         '<label>Total: </label>'+
@@ -365,38 +365,38 @@ var loadFile = function(event) {
                 '<h4 class="widgettitle">Paso 2: Información Avanzada</h4>'+
                 '<p>'+
                     '<label>RUT</label>'+
-                    '<span class="field"><input type="text" name="rut" class="input-xxlarge" /></span>'+
+                    '<span class="field"><input type="text" name="rut" class="input-xxlarge" required=""/></span>'+
                 '</p>'+
                 '<p>'+
                     '<label>Nombre</label>'+
-                    '<span class="field"><input type="text" name="nombre" class="input-xxlarge" /></span>'+
+                    '<span class="field"><input type="text" name="nombre" class="input-xxlarge" required=""/></span>'+
                 '</p>'+
                 '<p>'+
                     '<label>Apellido</label>'+
-                    '<span class="field"><input type="text" name="apellido" class="input-xxlarge" /></span>'+
+                    '<span class="field"><input type="text" name="apellido" class="input-xxlarge" required=""/></span>'+
                 '</p>'+
                 '<p>'+
                     '<label>Profesión</label>'+
-                    '<span class="field"><input type="text" name="profesion" class="input-xxlarge" /></span>'+
+                    '<span class="field"><input type="text" name="profesion" class="input-xxlarge" required=""/></span>'+
                 '</p>'+
                 '<p>'+
                     '<label>Años de experiencia</label>'+
-                    '<span class="field"><input type="text" name="years" class="input-xxlarge" /></span>'+
+                    '<span class="field"><input type="text" name="years" class="input-xxlarge" required=""/></span>'+
                 '</p>'+
                 '<p>'+
                     '<label>Curriculum</label>'+
-                    '<span class="field"><input type="text" name="curriculum" class="input-xxlarge" /></span>'+
+                    '<span class="field"><input type="text" name="curriculum" class="input-xxlarge" required=""/></span>'+
                 '</p>'+
                 '<p>'+
                     '<label>Descripción: (Agregue aquí toda la información adicional para su anuncio)</label>'+
-                    '<span class="field"><textarea cols="80" rows="5" class="span6" name="descripcion"></textarea></span>'+
+                    '<span class="field"><textarea cols="80" rows="5" class="span6" name="descripcion" required=""></textarea></span>'+
                 '</p>'+
                 '<p>'+
                     '<label>Precio de su servicio</label>'+
-                    '<span class="field"><input type="text" name="precio_serv" class="input-xxlarge" /></span>'+
+                    '<span class="field"><input type="text" name="precio_serv" class="input-xxlarge" required=""/></span>'+
                 '</p>'+
                 '<label>Subir Imagenes:</label>'+
-                '<span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="image/*" multiple="" onchange="loadFile(event)" /></span>'+
+                '<span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="image/*" multiple="" onchange="loadFile(event)" required=""/></span>'+
                 '</p>'+
                 '<div id="imagenes"></div>'+
             '</div>';
@@ -407,12 +407,12 @@ var loadFile = function(event) {
                 '<h4 class="widgettitle">Paso 2: Información Avanzada</h4>'+
                 '<p>'+
                     '<label>Patente</label>'+
-                    '<span class="field"><input type="text" name="patente" class="input-xxlarge" /></span>'+
+                    '<span class="field"><input type="text" name="patente" class="input-xxlarge" required=""/></span>'+
                 '</p>'+
                 '<p>'+
                     '<label>Categoria</label>'+
                     '<span class="field">'+
-                        '<select class="form-control" id="categoria" name="categoria">'+
+                        '<select class="form-control" id="categoria" name="categoria" required="">'+
                         @foreach($categoria_vehiculos as $cat_vehiculo)
                             '<option value="{{$cat_vehiculo -> nombre}}" >{{$cat_vehiculo -> nombre}}</option>'+
                         @endforeach
@@ -421,18 +421,18 @@ var loadFile = function(event) {
                 '</p>'+
                 '<p>'+
                     '<label>Capacidad</label>'+
-                    '<span class="field"><input type="text" name="capacidad" class="input-xxlarge" /></span>'+
+                    '<span class="field"><input type="text" name="capacidad" class="input-xxlarge" required="" /></span>'+
                 '</p>'+
                 '<p>'+
                     '<label>Descripción: (Agregue aquí toda la información adicional para su anuncio)</label>'+
-                    '<span class="field"><textarea cols="80" rows="5" class="span6" name="descripcion"></textarea></span>'+
+                    '<span class="field"><textarea cols="80" rows="5" class="span6" name="descripcion" required=""></textarea></span>'+
                 '</p>'+
                 '<p>'+
                     '<label>Precio de su servicio</label>'+
-                    '<span class="field"><input type="text" name="precio_serv" class="input-xxlarge" /></span>'+
+                    '<span class="field"><input type="text" name="precio_serv" class="input-xxlarge" required=""/></span>'+
                 '</p>'+
                 '<label>Subir Imagenes:</label>'+
-                '<span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="image/*" multiple="" onchange="loadFile(event)" /></span>'+
+                '<span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="image/*" multiple="" onchange="loadFile(event)" required=""/></span>'+
                 '</p>'+
                 '<div id="imagenes"></div>'+
             '</div>';
