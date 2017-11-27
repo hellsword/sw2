@@ -57,6 +57,7 @@ class ServiciosController extends Controller
             ->join ('comuna', 'comuna.COMUNA_ID', '=' , 'a.comuna')
             ->where('f.id_foto', '=', '0')
             ->where('a.condicion', '=', '1')
+            ->where('o.fecha_venc', '>=', $fecha_actual)
             ->where(\DB::raw("CONCAT(a.titulo, ' ', a.tipo_servicio, ' ', a.descripcion)"), 'LIKE', '%'.$query.'%')     //BUSCA POR EL TITULO DEL ANUNCIO
             ->where('a.tipo_servicio', 'LIKE', '%'.$request->get('sub_categoria').'%')
             ->where('a.region', '=', $request->get('region'))
@@ -351,14 +352,29 @@ class ServiciosController extends Controller
                     )
             ->first();
 
-        if($this->auth->user()){
-            $favoritos = DB::table('favoritos')->where('id_cliente', $this->auth->user()->id)->get();
-            return view("servicios.ver_anuncio", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor, "favoritos" => $favoritos, "face" => $face, "fono" => $fono, "lugar" => $lugar]);
-        }
-        else
-            return view("servicios.ver_anuncio", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor, "face" => $face, "fono" => $fono, "lugar" => $lugar]);
+        if ($servicio->tipo_servicio == 'mecanico' || $servicio->tipo_servicio == 'otros_per') {
+            
+            $persona = DB::table('persona')->where('rut', $servicio->rut)->first();
 
-        
+            if($this->auth->user()){
+                $favoritos = DB::table('favoritos')->where('id_cliente', $this->auth->user()->id)->get();
+                return view("servicios.ver_anuncio", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor, "favoritos" => $favoritos, "face" => $face, "fono" => $fono, "lugar" => $lugar, "persona" => $persona]);
+            }
+            else
+                return view("servicios.ver_anuncio", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor, "face" => $face, "fono" => $fono, "lugar" => $lugar, "persona" => $persona]);
+        }
+        else{
+
+            $vehiculo = DB::table('vehiculo')->where('patente', $servicio->patente)->first();
+
+            if($this->auth->user()){
+                $favoritos = DB::table('favoritos')->where('id_cliente', $this->auth->user()->id)->get();
+                return view("servicios.ver_anuncio", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor, "favoritos" => $favoritos, "face" => $face, "fono" => $fono, "lugar" => $lugar, "vehiculo" => $vehiculo]);
+            }
+            else
+                return view("servicios.ver_anuncio", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor, "face" => $face, "fono" => $fono, "lugar" => $lugar, "vehiculo" => $vehiculo]);
+        }
+
     }
 
   }

@@ -40,6 +40,7 @@
 					
 				</section>
 			</div>
+
 			<div class="6u">
 				<section class="special box">
 					
@@ -92,16 +93,35 @@
 		</div>
 	</div>
 
+	<!-- PARTE INFERIOR DEL ANUNCIO -->
 
 	<div class="container">
 		<div class="row">
-			<div class="12u">
-			<section class="special box">
-				<p>Descripción: {{$servicio -> descripcion}}</p>
-			</section>
+			<div class="6u">
+				<section class="special box">
+					@if($servicio->tipo_servicio == 'mecanico' OR $servicio->tipo_servicio == 'otros_per')
+						<h4>Datos de la persona:</h4><br>
+						<p>RUT: {{$persona -> rut}}</p>
+						<p>Nombre: {{$persona -> nombre}}</p>
+						<p>Apellido: {{$persona -> apellido}}</p>
+						<p>Profesión: {{$persona -> profesion}}</p>
+						<p>Años de experiencia: {{$persona -> años_experiencia}}</p>
+						<p>Curriculum: {{$persona -> curriculum}}</p>
+					@else
+						<h4>Datos del vehículo:</h4><br>
+						<p>Patente: {{$vehiculo -> patente}}</p>
+						<p>Categoría: {{$vehiculo -> categoria}}</p>
+						<p>Capacidad: {{$vehiculo -> capacidad}}</p>
+					@endif
+				</section>
+			</div>
+
+			<div class="6u">
+				<section class="special box">
+					<p>Descripción: {{$servicio -> descripcion}}</p>
+				</section>
 			</div>
 		</div>
-
 	</div>
 
 
