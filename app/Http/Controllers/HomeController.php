@@ -26,12 +26,15 @@ class HomeController extends Controller
     public function index()
     {
 
+        $fecha_actual=date('Y-m-d');
 
         $servicios = DB::table('anuncio as a')
         ->join ('orden as o', 'a.id_anuncio', '=' , 'o.id_anuncio')
         ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
         ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
         ->where('f.id_foto', '=', '0')
+        ->where('a.condicion', '=', '1')
+        ->where('o.fecha_venc', '>=', $fecha_actual)
         ->select('a.id_anuncio as id_anuncio',
                 'a.titulo as titulo',
                 'a.descripcion as descripcion',
