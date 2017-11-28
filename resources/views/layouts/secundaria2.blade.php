@@ -130,7 +130,6 @@
                           </ul>
                           @else
                            <ul class="dropdown-menu">
-                            <li><a href="#">Ver perfil</a></li>
                             <li><a href="/mis_anuncios">Mis anuncios</a></li>
                             <li><a href="/favoritos">Favoritos</a></li>
                             <li><a href="/cupones">Subir Cupón</a></li>
