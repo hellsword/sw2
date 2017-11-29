@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2017 a las 03:13:59
--- Versión del servidor: 10.1.25-MariaDB
--- Versión de PHP: 7.1.7
+-- Tiempo de generación: 29-11-2017 a las 21:01:30
+-- Versión del servidor: 10.1.28-MariaDB
+-- Versión de PHP: 7.1.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -487,6 +487,8 @@ CREATE TABLE `contacto` (
 --
 
 INSERT INTO `contacto` (`id`, `medio`, `contacto`) VALUES
+(2, 'facebook', 'https://www.facebook.com/dsa'),
+(2, 'telefono', '943543534543'),
 (5, 'facebook', 'https://www.facebook.com/ccontreras'),
 (5, 'telefono', '887323273283'),
 (7, 'facebook', 'https://www.facebook.com/apatamala'),
@@ -554,6 +556,7 @@ CREATE TABLE `orden` (
   `id_anuncio` int(11) NOT NULL,
   `id_cliente` int(11) NOT NULL,
   `fecha` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `fecha_venc` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
   `precio_uni` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `duracion` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `id_secretaria` int(11) DEFAULT NULL
@@ -698,8 +701,8 @@ CREATE TABLE `secretaria` (
 --
 
 INSERT INTO `secretaria` (`id_secretaria`, `anuncios_pend`) VALUES
-(3, 6),
-(5, 6);
+(3, 7),
+(5, 7);
 
 -- --------------------------------------------------------
 
@@ -764,12 +767,12 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `rut`, `nombre`, `apellido`, `email`, `password`, `tipo`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, '19.344.212-2', 'Boris', 'Mora', 'admin@ucm.cl', '$2y$10$aIZ6WaeH7CgP/EjyxmS3dOr20aG9cRsgnUMiXrBlyUZgBI80R6WxC', 'admin', 'S1TDcLZ3O9Oknz1y92dQqSfO67x9rkWtnbOKNkpUZrIpVsIlJ9U0XVRDz7Ft', '2017-10-17 00:51:12.0', '2017-10-17 00:51:12.0'),
-(2, '17.324.545-6', 'Flaco', 'Renegado', 'cliente@ucm.cl', '$2y$10$8fxHUBybt8ux4zVJ7eQmHOuZvLFJbilnnEMT65ei2Lw8dtqqN/qCS', 'cliente', '63PK0zRGDKsFA2gvmCOpe2XR0t7eqneeySitRE78WtKy53TAlg8k2rDn1fn4', '2017-10-17 00:54:59.0', '2017-10-17 00:54:59.0'),
-(3, '18938323-5', 'Fernanda', 'Fernandez', 'secretaria@ucm.cl', '$2y$10$tAoGISY0s4T0jikX4JCQpOBEGMDODSpmC34bDsMdenNU9eLcQ6aBy', 'secretaria', 'tAJGk1dZrROY50wOYLZjnQORGQ8s6tARlQP6GxkKNoW4JN0uaradGJr95ywf', '2017-10-17 00:55:50.0', '2017-10-17 00:55:50.0'),
-(5, '172232323-2', 'Constanza', 'Contreras', 'secretaria2@ucm.cl', '$2y$10$G9AAb3zvRTJd3mSQaL9Tv.dY15n6hwpi1DjstN882WEVcZNBX49jy', 'secretaria', NULL, '2017-10-18 07:03:02.0', '2017-10-18 07:03:02.0'),
+(2, '17.324.545-6', 'Flaco', 'Renegado', 'cliente@ucm.cl', '$2y$10$8fxHUBybt8ux4zVJ7eQmHOuZvLFJbilnnEMT65ei2Lw8dtqqN/qCS', 'cliente', 'uqOsIg6U9xIsMHVu6Bx6B1n7Kex5GyUIYni5VDy5KWUIp4X1R2Qu4Fv5bQDg', '2017-10-17 00:54:59.0', '2017-10-17 00:54:59.0'),
+(3, '18938323-5', 'Fernanda', 'Fernandez', 'secretaria@ucm.cl', '$2y$10$tAoGISY0s4T0jikX4JCQpOBEGMDODSpmC34bDsMdenNU9eLcQ6aBy', 'secretaria', 'C4V3LFyDj4gdzGqrWjIXnGRE35DJB4OuVl2XoXyjUu1EVHAOSyi6R5ivKmnC', '2017-10-17 00:55:50.0', '2017-10-17 00:55:50.0'),
+(5, '172232323-2', 'Constanza', 'Contreras', 'secretaria2@ucm.cl', '$2y$10$G9AAb3zvRTJd3mSQaL9Tv.dY15n6hwpi1DjstN882WEVcZNBX49jy', 'secretaria', 'tQonfX7dlIlMjBe1lHnjnBJGJCxj65L5hXRH0ocYasE74eSvUVhu6gzKEO92', '2017-10-18 07:03:02.0', '2017-10-18 07:03:02.0'),
 (7, '1832832324-5', 'Alfonso', 'Patamala', 'cliente4@ucm.cl', '$2y$10$1Nx0CdeN4yMYKEg6vCyjgev0PxA6N63iIXsSUh8b8uKpOfJQoGkMa', 'cliente', NULL, '2017-10-18 08:04:06.0', '2017-10-18 08:04:06.0'),
-(8, '1734234234-5', 'Susana', 'Castillo', 'cliente2@ucm.cl', '$2y$10$oy5hmF1Fe/6qo5By742VweZrk.v9wvF5MOO7XqR0tgPIFSvJ0mz8u', 'cliente', 'CINNGZ2GJ6wkiwtYDHWyd2YMjNQ6g3C11wcZ15ZCG5luldX5dXp4aK3Cl0jE', '2017-10-18 21:01:18.0', '2017-10-18 21:01:18.0'),
-(9, '173626363-k', 'Pedro', 'Perez', 'cliente3@ucm.cl', '$2y$10$/IG1.odVPfrb1wXauGNT7.RIMMdaEDwkQdQlU1YyOkQzJy7E5FisG', 'cliente', 'FxcG6JvNwzEzAz0kVt5yIeyfEFOp3q3hXlQOvX9pu0KQP38bsUVj8JZ7txiz', '2017-10-18 21:03:40.0', '2017-10-18 21:03:40.0');
+(8, '1734234234-5', 'Susana', 'Castillo', 'cliente2@ucm.cl', '$2y$10$oy5hmF1Fe/6qo5By742VweZrk.v9wvF5MOO7XqR0tgPIFSvJ0mz8u', 'cliente', '9BBXcyxnO5W09TEknEC8qhnMhiZSGx8tde67EqSBFT1byGo4H3Oa12SkLsQu', '2017-10-18 21:01:18.0', '2017-10-18 21:01:18.0'),
+(9, '173626363-k', 'Pedro', 'Perez', 'cliente3@ucm.cl', '$2y$10$/IG1.odVPfrb1wXauGNT7.RIMMdaEDwkQdQlU1YyOkQzJy7E5FisG', 'cliente', 'aTIok9g6YbM8uVmYehM0apewFVMCAGuTtn1bJbNeGLTawsdkuWEC3eLEO6of', '2017-10-18 21:03:40.0', '2017-10-18 21:03:40.0');
 
 -- --------------------------------------------------------
 
@@ -920,16 +923,19 @@ ALTER TABLE `vehiculo`
 --
 ALTER TABLE `categorias`
   MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `forma_pago`
 --
 ALTER TABLE `forma_pago`
-  MODIFY `num_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `num_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
 -- Restricciones para tablas volcadas
 --
