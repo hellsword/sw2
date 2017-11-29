@@ -53,10 +53,12 @@
 					<!--  Valoración: ★★★★★ <br>  -->
 					@if($val == 0)
 						@if(Auth::check())
-							{!!Form::open(array('url'=>'favoritos', 'method'=>'POST', 'class'=>'stdform', 'id'=>'formu', 'name'=>'formu', 'autocomplete'=>'off'))!!}
-								<input type="hidden" name="id_anuncio" value="{{$servicio -> id_anuncio}}">
-								<a class="button" href="javascript:;" onclick="document.getElementById('formu').submit(); alert('Anuncio añadido');">Añadir a favoritos</a>
-							{!!Form::close()!!}
+							@if(Auth::user()->tipo=='cliente')
+								{!!Form::open(array('url'=>'favoritos', 'method'=>'POST', 'class'=>'stdform', 'id'=>'formu', 'name'=>'formu', 'autocomplete'=>'off'))!!}
+									<input type="hidden" name="id_anuncio" value="{{$servicio -> id_anuncio}}">
+									<a class="button" href="javascript:;" onclick="document.getElementById('formu').submit(); alert('Anuncio añadido');">Añadir a favoritos</a>
+								{!!Form::close()!!}
+							@endif
 						@else
 							<a href="login2" class="button ">Añadir a favoritos</a>
 						@endif

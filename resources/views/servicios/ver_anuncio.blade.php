@@ -48,7 +48,7 @@
 						<h3>{{$servicio -> titulo}}</h3>
 						<h5 style="color: blue"> Autor: {{$autor -> nombre}} {{$autor -> apellido}}</h5>
 						
-						Valoración: ★★★★★ 
+						<!-- Valoración: ★★★★★  -->
 						<div style="border-top: 1px solid silver;"></div><br>
 
 						<h1 style="color: #DE5122">Precio: ${{$servicio -> precio_serv}}</h1><br>
