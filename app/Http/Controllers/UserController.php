@@ -170,6 +170,12 @@ class UserController extends Controller
     }
 
 
+    public function gestion(){
+      return view('usuarios.gestion');
+    }
+
+/*
+
     public function tarjeta_store(Request $request){
       $tarjeta = new Tarjeta;
       $tarjeta->id_cliente=$request->get('id_cliente');
@@ -183,6 +189,6 @@ class UserController extends Controller
 
       return Redirect::to('/');
     }
-
+*/
 
 }

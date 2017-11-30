@@ -15,6 +15,7 @@
 //Route::post('usuarios.tarjeta.store','UserController@tarjeta_store');
 //Route::post('/servicios/ver_anuncio','ServiciosController@ver_anuncio');
 
+Route::get('/usuarios/gestion','UserController@gestion');
 
 Route::post('/anuncios/actualizar','AnuncioController@actualizar');
 Route::post('/anuncios/ver_cupon','CuponController@verCupon');
