@@ -171,7 +171,17 @@ class UserController extends Controller
 
 
     public function gestion(){
-      return view('usuarios.gestion');
+
+       $secretarias = DB::table('secretaria')
+            ->join ('users', 'users.id', '=' , 'id_secretaria')
+            ->select('secretaria.id_secretaria as id_secretaria',
+                    'users.nombre as nombre',
+                    'users.apellido as apellido',
+                    'users.rut as rut'
+                    )
+            ->get();
+
+      return view('usuarios.gestion', ["secretarias" => $secretarias]);
     }
 
 /*

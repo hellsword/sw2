@@ -1,6 +1,7 @@
 @extends('layouts.secundaria')
 @section('contenido')
 
+	<!-- obtiene la ruta actual-->
 	<?php $ruta = $_SERVER['REQUEST_URI']; ?>
 
 	<!-- pull-right:posiciona el elemento a la derecha de la pantalla -->

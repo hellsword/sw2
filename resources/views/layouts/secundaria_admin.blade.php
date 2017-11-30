@@ -12,28 +12,31 @@
 		<meta name="keywords" content="" />
 		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
 
-		<script src="js/jquery.min.js"></script>
-		<script src="js/skel.min.js"></script>
-		<script src="js/skel-layers.min.js"></script>
-		<script src="js/init.js"></script>
+		 <script type="text/javascript" src="{!! asset('js/jquery.min.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('js/skel.min.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('js/skel-layers.min.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('js/init.js') !!}"></script>
 
-    <script src="extra/js/jquery-1.10.2.js" type="text/javascript"></script>
-    <script src="extra/js/bootstrap.js" type="text/javascript"></script>
-    <script src="extra/js/ct-navbar.js"></script>
+    <script type="text/javascript" src="{!! asset('extra/js/jquery-1.10.2.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('extra/js/bootstrap.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('extra/js/ct-navbar.js') !!}"></script>
 
-    <link href="extra/css/bootstrap.css" rel="stylesheet" />
-    <link href="extra/css/pe-icon-7-stroke.css" rel="stylesheet" />
-    <link href="extra/css/ct-navbar.css" rel="stylesheet" />  
 
-		<noscript>
-			<link rel="stylesheet" href="css/skel.css" />
-			<link rel="stylesheet" href="css/style.css" />
-			<link rel="stylesheet" href="css/style-xlarge.css" />
-		</noscript>
+		
+		
+			<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+			<link rel="stylesheet" href="{{ asset('css/style-xlarge.css') }}">
+		
+
+
+	<link rel="stylesheet" href="{{ asset('extra/css/bootstrap.css') }}">
+	<link rel="stylesheet" href="{{ asset('extra/css/pe-icon-7-stroke.css') }}">
+	<link rel="stylesheet" href="{{ asset('extra/css/ct-navbar.css') }}">
 
 
  <!--ESTILO PARA LOS BOTONES-->
     <link rel="stylesheet" href="{{ asset('css/boton.css') }}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 
 	</head>
@@ -164,22 +167,39 @@
 							<section>
 								<h3>¿Qué buscas?</h3>
 								
-								{!! Form::open(array('url'=>'usuarios', 'method'=>'GET','autocomplete'=>'off', 'role'=>'search')) !!}
+							<!--	{!! Form::open(array('url'=>'usuarios', 'method'=>'GET','autocomplete'=>'off', 'role'=>'search')) !!}  -->
 									<div class="form-group">
 										<div class="input-group">
-											<input type="text" class="form-control" name="searchText" placeholder="Ingrese lo que busca..." value="{{$searchText}}">
+										
 											
 												<br><button type="submit" class="btn btn-primary">Buscar</button>
 											
 										</div>
 									</div>
 								
-
+								<p>
 								<h5>Personalice su busqueda por: </h5><br>
-							        <label>Fecha inicial: </label>
-                <input type="" name="">
-                <label>Fecha final: </label>
-                <input type="" name="">
+						        <label>Fecha inicial: </label>
+				                <input type="" name="">
+				                <label>Fecha final: </label>
+				                <input type="" name=""><br>
+
+
+				                <h6>Secretaria: </h6>
+							    <select class="form-control" id="categoria_vehiculo" name="vehiculo">
+							    	<option value="" >Todos</option>
+							    	@foreach($secretarias as $secretaria)
+	                                    <option value="{{$secretaria -> id_secretaria}}" >{{$secretaria -> rut}} | {{$secretaria -> nombre}} {{$secretaria -> apellido}}</option>
+	                                @endforeach
+							    </select> 
+
+							    <h6>Estado del anuncio: </h6>
+							    <select class="form-control" id="categoria_vehiculo" name="vehiculo">
+							    	<option value="" >Todos</option>
+	                                    <option value="" >Pagado</option>
+	                                     <option value="" >No pagado</option>
+							    </select> 
+
 							    
 							</section>
 							<hr />
@@ -190,7 +210,7 @@
 						@yield('contenido')
 						<!-- AQUI TERMINA EL CONTENIDO -->
 						</div>
-						{{Form::close()}}
+					<!--	{{Form::close()}}  -->
 
 					</div>
 				</div>
