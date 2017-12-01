@@ -174,7 +174,7 @@ class ServiciosController extends Controller
       $duracion=$request->get('tiempo2'); //captura el titulo del anuncio
 
 
-      $totalPagar=$request->get('total2');
+      $totalPagar=$request->get('total');
       $tipoPago=$request->get('modo_pago'); //captura el tipo de pago
       
        $duracionA=$request->get('tiempo');
@@ -199,6 +199,7 @@ class ServiciosController extends Controller
             $anuncio->provincia = $request->get('provincia');
             $anuncio->comuna = $request->get('comuna');
             $anuncio->tipo_servicio = $request->get('tipo');
+            $anuncio->total = $request->get('total');
            
             if($tipoPago=='efectivo'){
                 $anuncio->forma_pago = 1;// 1 si es en efectivo 

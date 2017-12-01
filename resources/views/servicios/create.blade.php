@@ -252,7 +252,7 @@
 
                                     '<p>'+
                                         '<label>Total: </label>'+
-                                        '<span class="field"><input type="text" id="total" name="" class="input-xxlarge" value="" readonly/></span>'+
+                                        '<span class="field"><input type="text" id="total" name="total" class="input-xxlarge" value="" readonly/></span>'+
                                     '</p>'+
 
                                 '</div><br>';
