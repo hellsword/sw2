@@ -11,7 +11,8 @@ use App\Tarjeta;
 use App\Cliente;
 use App\Secretaria;
 use App\Contacto;
-
+use App\Anuncio;
+use App\Region;
 //hacemos referencias a redirect para hacer algunas redirrecciones
 use Illuminate\Support\Facades\Redirect;
 
@@ -181,7 +182,18 @@ class UserController extends Controller
                     )
             ->get();
 
-      return view('usuarios.gestion', ["secretarias" => $secretarias]);
+
+        $region=DB::table('anuncio as a')
+         ->join ('region as r', 'r.REGION_ID', '=' , 'a.region')
+         ->select('r.REGION_NOMBRE',DB::raw('count(a.region) as cantidad'),DB::raw('sum(total) as total'))
+         ->groupBy('r.REGION_NOMBRE')
+         ->get();
+        
+        //DB::table('user_visits')->groupBy('user_id')->count();
+
+      return view('usuarios.gestion', ["secretarias" => $secretarias,"region"=>$region]);
+
+
     }
 
 /*

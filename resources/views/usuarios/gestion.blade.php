@@ -15,12 +15,26 @@
             @endif
 
 
-            <div class="container">
+<table class="table table-striped table-bordered table-condensed table-hover">
+                <thead>
+                    <th>Regiones</th>
+                    <th>Cantidad de Anuncios</th>
+                    <th>Monto Total</th>
+                 
+                </thead>
+                @foreach ($region as $r)
+                <tr>
+                    <td>{{$r -> REGION_NOMBRE}}</td>
+                    <td>{{$r -> cantidad}}</td>
+                    <td>{{$r -> total}}</td>
 
-                Arica: 4 $3434  <br>
-                Maule: 4 $3434  <br>
-                Magallanes: 4 $3434 <br>
-            </div>
+                    
+
+                </tr>
+        
+                @endforeach
+            </table>
+
 
             
             
