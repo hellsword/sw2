@@ -55,10 +55,14 @@
 					@if($val == 0)
 						@if(Auth::check())
 							@if(Auth::user()->tipo=='cliente')
-								{!!Form::open(array('url'=>'favoritos', 'method'=>'POST', 'class'=>'stdform', 'id'=>'formu', 'name'=>'formu', 'autocomplete'=>'off'))!!}
-									<input type="hidden" name="id_anuncio" value="{{$servicio -> id_anuncio}}">
-									<a class="button" href="javascript:;" onclick="document.getElementById('formu').submit(); alert('Anuncio añadido');">Añadir a favoritos</a>
-								{!!Form::close()!!}
+
+								{!!Form::open(array('url'=>'favoritos/almacenar', 'id'=>$servicio -> id_anuncio, 'method'=>'POST', 'autocomplete'=>'off'))!!}
+									<input type="" name="id_anuncio" value="{{$servicio -> id_anuncio}}" hidden>
+									<a class="button" onclick="favorito({{$servicio -> id_anuncio}})" >Añadir a favoritos</a>
+
+						        {!!Form::close()!!}
+									
+								
 							@endif
 						@else
 							<a href="login2" class="button ">Añadir a favoritos</a>
@@ -75,5 +79,22 @@
 
 
 <br><br><br>
+
+
+<script type="text/javascript">
+	
+	function favorito(id_anuncio){
+		swal({
+		  title: "Anuncio agregado",
+		  icon: "success",
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+		    document.getElementById(id_anuncio).submit();
+		  } 
+		});
+	}
+
+</script>
 
 @stop

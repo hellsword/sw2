@@ -32,6 +32,10 @@
 		</noscript>
 
 
+		<!-- SweetAlert2 -->
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
  <!--ESTILO PARA LOS BOTONES-->
     <link rel="stylesheet" href="{{ asset('css/boton.css') }}">
 
@@ -207,6 +211,7 @@
 							    <select class="form-control" id="comuna" name="comuna">
 							    	<option value="" >-</option>
 							    </select> 
+							    {{Form::close()}}
 							</section>
 							<hr />
 							<!--
@@ -230,7 +235,7 @@
 						@yield('contenido')
 						<!-- AQUI TERMINA EL CONTENIDO -->
 						</div>
-						{{Form::close()}}
+						
 
 					</div>
 				</div>

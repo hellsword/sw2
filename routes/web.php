@@ -19,6 +19,7 @@ Route::get('/usuarios/gestion','UserController@gestion');
 
 Route::post('/anuncios/actualizar','AnuncioController@actualizar');
 Route::post('/anuncios/ver_cupon','CuponController@verCupon');
+Route::post('/favoritos/almacenar','FavoritoController@almacenar');
 
 Route::resource('/anuncios','AnuncioController');
 Route::resource('/','HomeController');

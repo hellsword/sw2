@@ -162,7 +162,18 @@ class CuponController extends Controller
         $orden = DB::table('orden')->where('id_anuncio', $id_anuncio)->first();
         $autor = DB::table('users')->where('id', $orden->id_cliente)->first();
 
-      return view("cupones.create", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor]);
+
+        $lugar = DB::table('anuncio as a')
+            ->join ('region', 'a.region', '=' , 'region.REGION_ID')
+            ->join ('provincia', 'a.provincia', '=' , 'provincia.PROVINCIA_ID')
+            ->join ('comuna', 'a.comuna', '=' , 'comuna.COMUNA_ID')
+            ->select('region.REGION_NOMBRE as region',
+                    'provincia.PROVINCIA_NOMBRE as provincia',
+                    'comuna.COMUNA_NOMBRE as comuna'
+                    )
+            ->first();
+
+      return view("cupones.create", ['servicio' => $servicio, 'imagenes' => $imagenes, 'autor' => $autor, "lugar" => $lugar]);
 
         
     }

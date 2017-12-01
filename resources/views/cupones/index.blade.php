@@ -10,7 +10,7 @@
 		<div class="row" >
 			<div class="4u" style="vertical-align: middle;" >
 				<section>
-					<a href="{{URL::action('CuponController@show', $servicio->id_anuncio)}}" class=""><img src="data:image/png;base64, {{$servicio -> foto}}" alt="" height="200" width="200" ></a>
+					<a href="{{URL::action('CuponController@show', $servicio->id_anuncio)}}" class=""><img src="{{$servicio -> foto}}" alt="" height="150" width="200" ></a>
 				</section>
 			</div>
 			<div class="8u">

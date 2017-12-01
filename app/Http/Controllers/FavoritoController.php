@@ -137,7 +137,16 @@ class FavoritoController extends Controller
     }
 
 
-    public function store(Request $request, Guard $auth)
+    public function store(Request $request, Guard $auth, $id)
+    {   
+
+      
+
+    }
+
+
+
+    public function almacenar(Request $request, Guard $auth)
     {   
 
       $this->middleware('auth');
@@ -146,7 +155,7 @@ class FavoritoController extends Controller
       try {
 
         DB::beginTransaction();
-      
+
         $favorito = new Favorito;
         $favorito->id_cliente= $this->auth->user()->id;
         $favorito->id_anuncio=$request->get('id_anuncio');
