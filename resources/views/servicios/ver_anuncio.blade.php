@@ -7,6 +7,15 @@
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 
+	<style type="text/css">
+		#visor_fotos{
+			border-top: 100px solid #FAFAFA;
+			border-bottom: 100px solid #FAFAFA;
+    		background-color: white;
+		}
+	</style>
+
+
 <br><br><br>
 
 	<?php $val = 0; ?>
@@ -28,11 +37,11 @@
 		
 		<div class="row">
 			<div class="6u">
-				<section class="special box">
+				<section class="special box" id="visor_fotos">
 					
 					<div class="w3-content w3-display-container">
 						@foreach ($imagenes as $imagen)
-					  	  <img class="mySlides" src="data:image/png;base64, {{$imagen -> foto}}" style="width:100%; height: 520px">
+					  	  <img class="mySlides" src="{{$imagen -> foto}}" style="width:100%; height: 100%">
 					  	@endforeach
 					  <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
 					  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>

@@ -286,6 +286,7 @@ class ServiciosController extends Controller
             //Se recorren y asignan los array
             while($cont < count($file)){
 
+                /*
                 $temp = file_get_contents($file[$cont] );
                 $image = base64_encode($temp);
 
@@ -296,6 +297,23 @@ class ServiciosController extends Controller
                 $imagen->save();   
 
                 $cont = $cont+1;
+                */
+
+                $aleatorio = str_random(50);
+                $nombre = $aleatorio.'-'.$file[$cont]->getClientOriginalName();
+                $path = public_path('uploads/'.$nombre);
+                $url = '/uploads/'.$nombre;
+                $imagen = Image::make($file[$cont]->getRealPath())->resize(1280, 820);
+                $imagen->save($path);
+
+                $imagen = new Imagenes;
+                $imagen->id_foto = $cont;
+                $imagen->id_anuncio = $anuncio->id_anuncio;
+                $imagen->foto = $url;
+                $imagen->save();   
+
+                $cont = $cont+1;
+
             }
 
 
