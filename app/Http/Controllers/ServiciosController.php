@@ -342,10 +342,13 @@ class ServiciosController extends Controller
 
 
                $pdf = PDF::loadView('servicios.pdf', ["anuncio" => $anuncio,"total" => $totalPagar,"comprobante" => $numero_aleatorio,"fecha" => $fechaActual,"fechaV" => $fechaVencimiento,"duracion" => $duracion]);
+
+               alert()->success('Su anuncio ha sido creado exitosamente.', '¡Felicidades!')->persistent('Cerrar');
+               
                return $pdf->download('cupon.pdf');
-               return Redirect::to('/servicios');
         }
  
+        alert()->success('Su anuncio ha sido creado exitosamente.', '¡Felicidades!')->persistent('Cerrar');
         return Redirect::to('/servicios');
 
     }
@@ -421,7 +424,8 @@ class ServiciosController extends Controller
       } catch (Exception $e) {
           DB::rollback();
       }
-      
+
+      alert()->success('El anuncio ha sido eliminado.', '¡Listo!')->persistent('Cerrar');
       return Redirect::to('/servicios');
 
 

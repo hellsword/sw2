@@ -167,6 +167,7 @@ class FavoritoController extends Controller
           DB::rollback();
       }
 
+      alert()->success('Anuncio añadido a Favoritos.', '¡Excelente!')->persistent('Cerrar');
       return Redirect::to('/servicios');  
 
     }

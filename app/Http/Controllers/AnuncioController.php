@@ -20,6 +20,7 @@ use App\Secretaria;
 use Image; 
 use DB;
 use PDF;
+use Alert;
 use Illuminate\Support\Facades\Input;
 
 
@@ -99,6 +100,7 @@ class AnuncioController extends Controller
           DB::rollback();
       }
 
+      alert()->success('El anuncio ha sido aceptado.', '¡Santos cacahuates Batman!')->persistent('Cerrar');
        return Redirect::to('anuncios');
     }
 

@@ -184,6 +184,8 @@ return [
 
         Intervention\Image\ImageServiceProvider::class,
 
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+
 
     ],
 
@@ -239,6 +241,8 @@ return [
       'PDF' => Barryvdh\DomPDF\Facade::class,
 
       'Image' => Intervention\Image\Facades\Image::class,
+
+      'Alert' => UxWeb\SweetAlert\SweetAlert::class,
 
 
     ],

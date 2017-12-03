@@ -114,7 +114,7 @@
                                 </p>
                                 <p>
                                     <label>Años de experiencia</label>
-                                    <span class="field"><input type="text" name="years" class="input-xxlarge" required="" placeholder="12"/></span>
+                                    <span class="field"><input type="text" name="years" class="input-xxlarge" required="" placeholder="12" onkeypress="return validaNumericos(event)" /></span>
                                 </p>
                                 <p>
                                     <label>Curriculum</label>
@@ -126,7 +126,7 @@
                                 </p>
                                 <p>
                                     <label>Defina el precio de su servicio</label>
-                                    <span class="field"><input type="text" name="precio_serv" class="input-xxlarge" required="" placeholder="40990"/></span>
+                                    <span class="field"><input type="text" name="precio_serv" class="input-xxlarge" required="" placeholder="40990" onkeypress="return validaNumericos(event)" /></span>
                                 </p>
                                 
                                 <p>
@@ -198,16 +198,7 @@
         jQuery('#wizard4').smartWizard({onFinish: onFinishCallback});
         
         function onFinishCallback(){
-
-            swal({
-              title: "El anuncio ha sido enviado",
-              icon: "success",
-            })
-            .then((willDelete) => {
-              if (willDelete) {
-                document.formu.submit();
-              } 
-            });
+            document.formu.submit();
         } 
         
         jQuery(".inline").colorbox({inline:true, width: '60%', height: '500px'});
@@ -215,6 +206,15 @@
         jQuery('select, input:checkbox').uniform();
 
     });
+
+
+
+    function validaNumericos(event) {
+        if(event.charCode >= 48 && event.charCode <= 57){
+          return true;
+         }
+         return false;        
+    }
 
  
 
@@ -240,9 +240,9 @@
 
                                      '<p>'+
                                         '<label>Fecha de caducidad: </label><div id="row-fluid" class="row-fluid">'+
-                                            '<div class="span1"><input id="mes" type="text" class="form-control" name="mes" value="" required placeholder="MM" ></div>'+
-                                            '<div class="span1"><input id="year" type="text" class="form-control" name="year" value="" required placeholder="YY"></div>'+
-                                            '<div class="span1"><input id="c_seguridad" type="text" class="form-control" name="c_seguridad" value="" required placeholder="637"></div> <div class="span1"><i class="fa fa-credit-card" aria-hidden="true"></i></div>'+
+                                            '<div class="span1"><input id="mes" type="text" class="form-control" name="mes" value="" required placeholder="MM" maxlength="2" onkeypress="return validaNumericos(event)" ></div>'+
+                                            '<div class="span1"><input id="year" type="text" class="form-control" name="year" value="" required placeholder="YY" maxlength="2" onkeypress="return validaNumericos(event)" ></div>'+
+                                            '<div class="span1"><input id="c_seguridad" type="text" class="form-control" name="c_seguridad" value="" required placeholder="637" maxlength="3" onkeypress="return validaNumericos(event)" ></div> <div class="span1"><i class="fa fa-credit-card" aria-hidden="true"></i></div>'+
                                     '</div></p>'+
 
                                     '<p>'+
@@ -256,7 +256,7 @@
 
                                     '<p>'+
                                         '<label>Duración del anuncio (meses): </label>'+
-                                        '<span class="field"><input type="text" id="tiempo" name="tiempo" class="input-small input-spinner" onchange="calcula_total()" required="" placeholder="12"/></span>'+
+                                        '<span class="field"><input type="text" id="tiempo" name="tiempo" class="input-small input-spinner" onchange="calcula_total()" required="" placeholder="12" onkeypress="return validaNumericos(event)" /></span>'+
                                     '</p>'+
 
                                     '<p>'+
@@ -278,7 +278,7 @@
                  
                                     '<p>'+
                                         '<label>Duración del anuncio (meses): </label>'+
-                                        '<span class="field"><input type="text" id="tiempo" name="tiempo" class="input-small input-spinner" onchange="calcula_total2()" required="" placeholder="4"/></span>'+
+                                        '<span class="field"><input type="text" id="tiempo" name="tiempo" class="input-small input-spinner" onchange="calcula_total2()" required="" placeholder="4" onkeypress="return validaNumericos(event)" /></span>'+
                                     '</p>'+
                                     '<p>'+
                                         '<label>Total: </label>'+
@@ -389,7 +389,7 @@ var loadFile = function(event) {
                 '</p>'+
                 '<p>'+
                     '<label>Años de experiencia</label>'+
-                    '<span class="field"><input type="text" name="years" class="input-xxlarge" required="" placeholder="12"/></span>'+
+                    '<span class="field"><input type="text" name="years" class="input-xxlarge" required="" placeholder="12" onkeypress="return validaNumericos(event)" /></span>'+
                 '</p>'+
                 '<p>'+
                     '<label>Curriculum</label>'+
@@ -401,7 +401,7 @@ var loadFile = function(event) {
                 '</p>'+
                 '<p>'+
                     '<label>Defina el precio de su servicio</label>'+
-                    '<span class="field"><input type="text" name="precio_serv" class="input-xxlarge" required="" placeholder="40990"/></span>'+
+                    '<span class="field"><input type="text" name="precio_serv" class="input-xxlarge" required="" placeholder="40990" onkeypress="return validaNumericos(event)" /></span>'+
                 '</p>'+
                 '<label>Subir Imagenes:</label>'+
                 '<span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="image/*" multiple="" onchange="loadFile(event)" required=""/></span>'+
@@ -437,7 +437,7 @@ var loadFile = function(event) {
                 '</p>'+
                 '<p>'+
                     '<label>Precio de su servicio</label>'+
-                    '<span class="field"><input type="text" name="precio_serv" class="input-xxlarge" required="" placeholder="40990"/></span>'+
+                    '<span class="field"><input type="text" name="precio_serv" class="input-xxlarge" required="" placeholder="40990" onkeypress="return validaNumericos(event)" /></span>'+
                 '</p>'+
                 '<label>Subir Imagenes:</label>'+
                 '<span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="image/*" multiple="" onchange="loadFile(event)" required=""/></span>'+

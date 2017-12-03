@@ -32,7 +32,7 @@
 
 
 <!-- SweetAlert2 -->
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="js/sweetalert2/sweetalert2.all.js"></script>   
 
 </head>
 
@@ -144,5 +144,6 @@
 
 </script>
 
+@include('sweet::alert')
 </body>
 </html>

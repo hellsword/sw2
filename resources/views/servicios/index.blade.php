@@ -23,6 +23,10 @@
 			@endif
 		@endif
 
+		@if($ruta == '/favoritos')
+			<?php $val = 3; ?>
+		@endif
+
 		<hr>
 		<div class="row" >
 			<div class="4u" style="vertical-align: middle;" >
@@ -70,9 +74,11 @@
 					@elseif($val == 1)
 						<a class="button" style="text-decoration:line-through;">Añadir a favoritos</a>
 					@else
-						{{Form::Open(array('action'=>array('ServiciosController@destroy', $servicio -> id_anuncio), 'method'=>'delete', 'id'=>$servicio -> id_anuncio.'-destroy' ))}}
-							<a onclick="eliminar({{$servicio -> id_anuncio}})"><btn class="btn btn-danger"><i class="fa fa-trash" style="font-size:20px;color:white"></i></btn></a>
-						 {!!Form::close()!!}
+						@if($val != 3)
+							{{Form::Open(array('action'=>array('ServiciosController@destroy', $servicio -> id_anuncio), 'method'=>'delete', 'id'=>$servicio -> id_anuncio.'-destroy' ))}}
+								<a onclick="eliminar({{$servicio -> id_anuncio}})"><btn class="btn btn-danger"><i class="fa fa-trash" style="font-size:20px;color:white"></i></btn></a>
+							 {!!Form::close()!!}
+						@endif
 					@endif
 				</section>
 			</div>
@@ -90,35 +96,30 @@
 
 	function eliminar(id_anuncio){
 
+
 		swal({
-		  title: "¿Seguro que desea eliminar el anuncio?",
+		  title: '¿Seguro que desea eliminar el anuncio?',
 		  text: "Una vez eliminado, no se podrá recuperar",
-		  icon: "warning",
-		  buttons: true,
-		  dangerMode: true,
-		})
-		.then((willDelete) => {
-		  if (willDelete) {
+		  type: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: '¡Sí, eliminalo!'
+		}).then((result) => {
+		  if (result.value) {
 		    document.getElementById(id_anuncio+'-destroy').submit();
-		  } 
-		});
+		  }
+		})
 
 	}
 
 
 	
 	function favorito(id_anuncio){
-		swal({
-		  title: "Anuncio agregado",
-		  icon: "success",
-		})
-		.then((willDelete) => {
-		  if (willDelete) {
-		    document.getElementById(id_anuncio).submit();
-		  } 
-		});
+		document.getElementById(id_anuncio).submit();
 	}
 
 </script>
+
 
 @stop

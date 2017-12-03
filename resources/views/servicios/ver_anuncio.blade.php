@@ -75,9 +75,9 @@
 
 						@if($val == 0)
 							@if(Auth::check())
-								{!!Form::open(array('url'=>'favoritos', 'method'=>'POST', 'class'=>'stdform', 'id'=>'formu', 'name'=>'formu', 'autocomplete'=>'off'))!!}
+								{!!Form::open(array('url'=>'favoritos/almacenar', 'method'=>'POST', 'class'=>'stdform', 'id'=>'formu', 'name'=>'formu', 'autocomplete'=>'off'))!!}
 									<input type="hidden" name="id_anuncio" value="{{$servicio -> id_anuncio}}">
-									<a class="w3-button w3-red w3-round-xlarge" href="javascript:;" onclick="document.getElementById('formu').submit(); alert('Anuncio añadido');">Añadir a favoritos</a>
+									<a class="w3-button w3-red w3-round-xlarge" href="javascript:;" onclick="document.getElementById('formu').submit();">Añadir a favoritos</a>
 									<a href="javascript:;" class="w3-button w3-orange w3-round-xlarge" onclick="mostrar()">Contactar anunciante</a>
 								{!!Form::close()!!}
 							@else
@@ -127,7 +127,7 @@
 
 			<div class="6u">
 				<section class="special box">
-					<p>Descripción: {{$servicio -> descripcion}}</p>
+					<p><textarea cols="80" rows="20" class="span6" style="background-color: #FAFAFA;">Descripción: {{$servicio -> descripcion}}</textarea></p>
 				</section>
 			</div>
 		</div>

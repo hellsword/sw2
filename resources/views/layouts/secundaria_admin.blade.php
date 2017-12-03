@@ -38,6 +38,9 @@
     <link rel="stylesheet" href="{{ asset('css/boton.css') }}">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
+    <!-- SweetAlert2 -->
+    <script type="text/javascript" src="{!! asset('js/sweetalert2/sweetalert2.all.js') !!}"></script>
+
 
 	</head>
 	<body id="top">
@@ -228,6 +231,7 @@
 				</div>
 			</footer>
 
+	@include('sweet::alert')
 	</body>
 
 

@@ -33,7 +33,8 @@
 
 
 		<!-- SweetAlert2 -->
-		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script src="js/sweetalert2/sweetalert2.all.js"></script>	
+	    
 
 
  <!--ESTILO PARA LOS BOTONES-->
@@ -252,6 +253,8 @@
 				</div>
 			</footer>
 
+	@include('sweet::alert')
+
 	</body>
 
 <script type="text/javascript">
@@ -336,6 +339,5 @@
 
 	});
 </script>
-
 
 </html>

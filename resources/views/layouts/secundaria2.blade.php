@@ -38,6 +38,9 @@
  <!--ESTILO PARA LOS BOTONES-->
     <link rel="stylesheet" href="{{ asset('css/boton.css') }}">
 
+    <!-- SweetAlert2 -->
+    <script type="text/javascript" src="{!! asset('js/sweetalert2/sweetalert2.all.js') !!}"></script>
+
 
 	</head>
 	<body id="top">
@@ -255,5 +258,6 @@
 				</div>
 			</footer>
 
+	@include('sweet::alert')
 	</body>
 </html>
