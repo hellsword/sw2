@@ -3,7 +3,7 @@
 
 
             
-                <legend><h3>Gestión de la página: </h3></legend>
+                <a href="/usuarios/gestion"><legend><h3>Gestión de la página: </h3></legend></a>
             @if(count($errors) > 0)
             <div class="alert alert-danger">
                 <ul>
