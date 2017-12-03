@@ -30,6 +30,10 @@
 <script type="text/javascript" src="{!! asset('katniss/js/forms.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('katniss/js/jquery.smartWizard.min.js') !!}"></script>
 
+
+<!-- SweetAlert2 -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 

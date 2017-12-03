@@ -198,7 +198,16 @@
         jQuery('#wizard4').smartWizard({onFinish: onFinishCallback});
         
         function onFinishCallback(){
-            document.formu.submit();
+
+            swal({
+              title: "El anuncio ha sido enviado",
+              icon: "success",
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+                document.formu.submit();
+              } 
+            });
         } 
         
         jQuery(".inline").colorbox({inline:true, width: '60%', height: '500px'});
@@ -345,7 +354,6 @@ var loadFile = function(event) {
             
             total.value = tiempo.value*5290;
         }
-
 
    
 

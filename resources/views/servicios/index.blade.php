@@ -69,6 +69,10 @@
 						@endif
 					@elseif($val == 1)
 						<a class="button" style="text-decoration:line-through;">Añadir a favoritos</a>
+					@else
+						{{Form::Open(array('action'=>array('ServiciosController@destroy', $servicio -> id_anuncio), 'method'=>'delete', 'id'=>$servicio -> id_anuncio.'-destroy' ))}}
+							<a onclick="eliminar({{$servicio -> id_anuncio}})"><btn class="btn btn-danger"><i class="fa fa-trash" style="font-size:20px;color:white"></i></btn></a>
+						 {!!Form::close()!!}
 					@endif
 				</section>
 			</div>
@@ -82,6 +86,26 @@
 
 
 <script type="text/javascript">
+
+
+	function eliminar(id_anuncio){
+
+		swal({
+		  title: "¿Seguro que desea eliminar el anuncio?",
+		  text: "Una vez eliminado, no se podrá recuperar",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+		    document.getElementById(id_anuncio+'-destroy').submit();
+		  } 
+		});
+
+	}
+
+
 	
 	function favorito(id_anuncio){
 		swal({

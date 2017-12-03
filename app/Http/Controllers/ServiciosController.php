@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\Auth\Guard;
+use Alert;
 
 //Modelos
 use App\Imagenes;
@@ -342,6 +343,7 @@ class ServiciosController extends Controller
 
                $pdf = PDF::loadView('servicios.pdf', ["anuncio" => $anuncio,"total" => $totalPagar,"comprobante" => $numero_aleatorio,"fecha" => $fechaActual,"fechaV" => $fechaVencimiento,"duracion" => $duracion]);
                return $pdf->download('cupon.pdf');
+               return Redirect::to('/servicios');
         }
  
         return Redirect::to('/servicios');
@@ -395,5 +397,36 @@ class ServiciosController extends Controller
         }
 
     }
+
+
+
+    public function destroy($id_anuncio)
+    {
+
+        try {
+
+        DB::beginTransaction();
+
+        $orden=DB::table('orden')->where('id_anuncio', '=', $id_anuncio)->select('id_secretaria as id_secretaria')->first();
+
+        $secretaria=DB::table('secretaria')->where('id_secretaria', '=', $orden->id_secretaria)->select('anuncios_pend as anuncios_pend')->first();
+
+            Secretaria::where('id_secretaria', $orden->id_secretaria)
+                  ->update(['anuncios_pend' => $secretaria->anuncios_pend-1]);
+      
+        DB::table('anuncio')->where('id_anuncio', '=', $id_anuncio)->delete();
+
+        DB::commit();
+          
+      } catch (Exception $e) {
+          DB::rollback();
+      }
+      
+      return Redirect::to('/servicios');
+
+
+    }
+
+
 
   }

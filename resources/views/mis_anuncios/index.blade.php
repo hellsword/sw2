@@ -31,8 +31,6 @@
 			</div>
 			<div class="4u">
 				<section>
-					${{$servicio -> precio_serv}} <br>
-					Valoración: ★★★★★ <br>
 					
 				</section>
 			</div>
