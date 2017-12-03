@@ -167,7 +167,7 @@
 							<section>
 								<h3>¿Qué buscas?</h3>
 								
-							<!--	{!! Form::open(array('url'=>'usuarios', 'method'=>'GET','autocomplete'=>'off', 'role'=>'search')) !!}  -->
+							{!! Form::open(array('url'=>'usuarios/secretarias', 'method'=>'GET','autocomplete'=>'off', 'role'=>'search')) !!}  
 									<div class="form-group">
 										<div class="input-group">
 										
@@ -186,7 +186,7 @@
 
 
 				                <h6>Secretaria: </h6>
-							    <select class="form-control" id="categoria_vehiculo" name="vehiculo">
+							    <select class="form-control" id="searchText" name="searchText">
 							    	<option value="" >Todos</option>
 							    	@foreach($secretarias as $secretaria)
 	                                    <option value="{{$secretaria -> id_secretaria}}" >{{$secretaria -> rut}} | {{$secretaria -> nombre}} {{$secretaria -> apellido}}</option>
@@ -194,10 +194,10 @@
 							    </select> 
 
 							    <h6>Estado del anuncio: </h6>
-							    <select class="form-control" id="categoria_vehiculo" name="vehiculo">
+							    <select class="form-control" id="searchText2" name="searchText2">
 							    	<option value="" >Todos</option>
-	                                    <option value="" >Pagado</option>
-	                                     <option value="" >No pagado</option>
+	                                    <option value="1" >Pagado</option>
+	                                     <option value="0" >No pagado</option>
 							    </select> 
 
 							    
@@ -205,17 +205,18 @@
 							<hr />
 
 						</div>
+						
 						<!-- AQUI INICIA EL CONTENIDO -->
 						<div class="9u pull-right">
 						@yield('contenido')
 						<!-- AQUI TERMINA EL CONTENIDO -->
 						</div>
-					<!--	{{Form::close()}}  -->
+			
 
 					</div>
 				</div>
 			</section>
-
+	{{Form::close()}} 
 		<!-- Footer -->
 			<footer id="footer">
 				<div class="container">

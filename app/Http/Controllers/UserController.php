@@ -196,6 +196,47 @@ class UserController extends Controller
 
     }
 
+
+    public function filtro(Request $request){
+   
+       $query=trim($request->get('searchText'));
+       $query2=trim($request->get('searchText2'));
+
+
+      
+      $anuncios = DB::table('orden as o')
+             ->join ('anuncio as a', 'o.id_anuncio', '=' ,'a.id_anuncio')
+             //->join ('cupones as c', 'c.id_anuncio', '=' ,'a.id_anuncio')
+             ->where('o.id_secretaria','LIKE', '%'.$query.'%')
+              ->where('a.condicion','LIKE', '%'.$query2.'%')   
+             ->select('a.titulo','a.descripcion','a.condicion','a.id_anuncio','a.forma_pago')
+             ->paginate(5);
+
+
+             $secretarias = DB::table('secretaria')
+            ->join ('users', 'users.id', '=' , 'id_secretaria')
+            ->select('secretaria.id_secretaria as id_secretaria',
+                    'users.nombre as nombre',
+                    'users.apellido as apellido',
+                    'users.rut as rut'
+                    )
+            ->get();
+
+
+        $region=DB::table('anuncio as a')
+         ->join ('region as r', 'r.REGION_ID', '=' , 'a.region')
+         ->select('r.REGION_NOMBRE',DB::raw('count(a.region) as cantidad'),DB::raw('sum(total) as total'))
+         ->groupBy('r.REGION_NOMBRE')
+         ->get();
+        
+        
+        //DB::table('user_visits')->groupBy('user_id')->count();
+
+      return view('usuarios.secretarias', ["anuncios" => $anuncios,"secretarias" => $secretarias,"region"=>$region]);
+
+
+    }
+
 /*
 
     public function tarjeta_store(Request $request){

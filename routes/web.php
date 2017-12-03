@@ -17,6 +17,8 @@
 
 Route::get('/usuarios/gestion','UserController@gestion');
 
+Route::get('/usuarios/secretarias','UserController@filtro');
+
 Route::post('/anuncios/actualizar','AnuncioController@actualizar');
 Route::post('/anuncios/ver_cupon','CuponController@verCupon');
 Route::post('/favoritos/almacenar','FavoritoController@almacenar');
