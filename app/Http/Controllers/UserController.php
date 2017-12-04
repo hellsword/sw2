@@ -211,7 +211,7 @@ class UserController extends Controller
              //->join ('cupones as c', 'c.id_anuncio', '=' ,'a.id_anuncio')
              ->where('o.id_secretaria','LIKE', '%'.$query.'%')
               ->where('a.condicion','LIKE', '%'.$query2.'%')
-               ->where('o.fecha','>=',$fechaMin,'AND','o.fecha_venc','<=',$fechaMax)  
+               ->where('o.fecha','<=',$fechaMin,'AND','o.fecha_venc','>=',$fechaMax)  
              ->select('a.titulo','a.descripcion','a.condicion','a.id_anuncio','a.forma_pago','a.tipo_servicio')
              ->paginate(5);
 
