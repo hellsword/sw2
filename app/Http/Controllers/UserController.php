@@ -201,14 +201,17 @@ class UserController extends Controller
    
        $query=trim($request->get('searchText'));
        $query2=trim($request->get('searchText2'));
-
+       $fechaMin=trim($request->get('fechaMin'));
+       $fechaMax=trim($request->get('fechaMax'));
+               
 
       
       $anuncios = DB::table('orden as o')
              ->join ('anuncio as a', 'o.id_anuncio', '=' ,'a.id_anuncio')
              //->join ('cupones as c', 'c.id_anuncio', '=' ,'a.id_anuncio')
              ->where('o.id_secretaria','LIKE', '%'.$query.'%')
-              ->where('a.condicion','LIKE', '%'.$query2.'%')   
+              ->where('a.condicion','LIKE', '%'.$query2.'%')
+               ->where('o.fecha','>=',$fechaMin,'AND','o.fecha_venc','<=',$fechaMax)  
              ->select('a.titulo','a.descripcion','a.condicion','a.id_anuncio','a.forma_pago','a.tipo_servicio')
              ->paginate(5);
 
