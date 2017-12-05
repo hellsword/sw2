@@ -106,7 +106,7 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="6u">
+			<div class="3u">
 				<section class="special box">
 					@if($servicio->tipo_servicio == 'mecanico' OR $servicio->tipo_servicio == 'otros_per')
 						<h4>Datos de la persona:</h4><br>
@@ -125,9 +125,9 @@
 				</section>
 			</div>
 
-			<div class="6u">
+			<div class="9u">
 				<section class="special box">
-					<p><textarea cols="80" rows="20" class="span6" style="background-color: #FAFAFA;">Descripción: {{$servicio -> descripcion}}</textarea></p>
+					<p>{!!$servicio -> descripcion!!}</p>
 				</section>
 			</div>
 		</div>

@@ -1,6 +1,9 @@
 @extends('layouts.nueva')
 @section('contenido')
 
+<!-- EDITOR DE TEXTO -->
+<script src="{{ asset('/vendors/ckeditor/ckeditor.js') }}"></script>
+
 <style type="text/css">
     .imagen {
       border: thick solid #bec0c4;
@@ -89,6 +92,23 @@
                                     </select> 
                                 </p>
 
+
+                                <h4 class="widgettitle">Descripción de su anuncio</h4>
+
+                                <p>
+                                <span class="field"> 
+                                    <div class="panel-body">
+                                        <textarea class="ckeditor" rows="10" cols="80" id="descripcion" name="descripcion">
+                                           
+                                        </textarea>
+                                   </div>
+                                </span> 
+                                </p>
+                                <p>
+                                    <label>Defina el precio de su servicio</label>
+                                    <span class="field"><input type="text" name="precio_serv" id="precio_serv" class="input-xxlarge" required="" placeholder="40990" onkeypress="return validaNumericos(event)" /></span>
+                                </p>
+
                                 
                         </div><!--#wiz1step1-->
                         
@@ -98,46 +118,37 @@
                             <div id="cambia_servicio">
                                 <p>
                                     <label>RUT</label>
-                                    <span class="field"><input type="text" name="rut" class="input-xxlarge" required="" placeholder="18.355.344-2" /></span>
+                                    <span class="field"><input type="text" name="rut" id="rut" class="input-xxlarge" required="" placeholder="18.355.344-2" /></span>
                                 </p>
                                 <p>
                                     <label>Nombre</label>
-                                    <span class="field"><input type="text" name="nombre" class="input-xxlarge" required="" placeholder="Roberto"/></span>
+                                    <span class="field"><input type="text" name="nombre" id="nombre" class="input-xxlarge" required="" placeholder="Roberto"/></span>
                                 </p>
                                 <p>
                                     <label>Apellido</label>
-                                    <span class="field"><input type="text" name="apellido" class="input-xxlarge" required="" placeholder="Rodriguez"/></span>
+                                    <span class="field"><input type="text" name="apellido" id="apellido" class="input-xxlarge" required="" placeholder="Rodriguez"/></span>
                                 </p>
                                 <p>
                                     <label>Profesión</label>
-                                    <span class="field"><input type="text" name="profesion" class="input-xxlarge" required="" placeholder="Mecánico"/></span>
+                                    <span class="field"><input type="text" name="profesion" id="profesion" class="input-xxlarge" required="" placeholder="Mecánico"/></span>
                                 </p>
                                 <p>
                                     <label>Años de experiencia</label>
-                                    <span class="field"><input type="text" name="years" class="input-xxlarge" required="" placeholder="12" onkeypress="return validaNumericos(event)" /></span>
+                                    <span class="field"><input type="text" name="years" id="years" class="input-xxlarge" required="" placeholder="12" onkeypress="return validaNumericos(event)" /></span>
                                 </p>
                                 <p>
                                     <label>Curriculum</label>
-                                    <span class="field"><input type="text" name="curriculum" class="input-xxlarge" required="" placeholder="mecánico naval, magister en mecánica automotriz"/></span>
+                                    <span class="field"><input type="text" name="curriculum" id="curriculum" class="input-xxlarge" required="" placeholder="mecánico naval, magister en mecánica automotriz"/></span>
                                 </p>
+
                                 <p>
-                                    <label>Descripción: (Agregue aquí toda la información adicional para su anuncio)</label>
-                                    <span class="field"><textarea cols="80" rows="5" class="span6" name="descripcion" required="" placeholder="Aquí va la información adicional que desee agregar"></textarea></span>
-                                </p>
-                                <p>
-                                    <label>Defina el precio de su servicio</label>
-                                    <span class="field"><input type="text" name="precio_serv" class="input-xxlarge" required="" placeholder="40990" onkeypress="return validaNumericos(event)" /></span>
-                                </p>
-                                
-                                <p>
-                                <label>Subir Imagenes:</label>
-                                <!-- VER LA PROPIEDAD multiple PARA AGREGAR VARIOS ARCHIVOS -->
-                                <span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="image/*" multiple="" onchange="loadFile(event)" required=""/></span>
+                                    <label>Subir Imagenes:</label>
+                                    <!-- VER LA PROPIEDAD multiple PARA AGREGAR VARIOS ARCHIVOS -->
+                                    <span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="image/*" multiple="" onchange="loadFile(event)" required=""/></span>
                                 </p>
 
 
                                 <div id="imagenes"></div>
-                               
 
                             </div>
                                                                                                
@@ -198,7 +209,76 @@
         jQuery('#wizard4').smartWizard({onFinish: onFinishCallback});
         
         function onFinishCallback(){
-            document.formu.submit();
+
+            var valido = 0;
+
+            if(document.getElementById("titulo").value == '' || document.getElementById("region").value == ''
+                || document.getElementById("provincia").value == '' || document.getElementById("comuna").value == '' 
+                || document.getElementById("descripcion").value == '' || document.getElementById("precio_serv").value == ''){
+                valido = 1;
+            }
+            else if (document.getElementById("tipo").value == 'mecanico' || document.getElementById("tipo").value == 'otros_per') {
+                if(document.getElementById("rut").value == '' || document.getElementById("nombre").value == ''
+                || document.getElementById("apellido").value == '' || document.getElementById("profesion").value == '' 
+                || document.getElementById("years").value == '' || document.getElementById("curriculum").value == ''){
+                    valido = 2;
+                }
+            }
+            else if (document.getElementById("tipo").value == 'arriendo' || document.getElementById("tipo").value == 'transporte') {
+                if(document.getElementById("patente").value == '' || document.getElementById("categoria").value == ''
+                || document.getElementById("capacidad").value == '' ){
+                    valido = 2;
+                }
+            }
+            else if(document.getElementById("total") == null ){
+                valido = 4;
+            }
+            else if (document.getElementById("modo_pago").value == 'tarjeta' ) {
+                if(document.getElementById("num_tarjeta").value == '' || document.getElementById("mes").value == ''
+                || document.getElementById("year").value == '' || document.getElementById("c_seguridad").value == '' 
+                || document.getElementById("nombre").value == '' || document.getElementById("apellidos").value == ''
+                || document.getElementById("tiempo").value == '' || document.getElementById("total").value == ''){
+                    valido = 3;
+                }
+            }
+            else if (document.getElementById("modo_pago").value == 'efectivo' ) {
+                if(document.getElementById("tiempo").value == '' || document.getElementById("total").value == '' ){
+                    valido = 3;
+                }
+            }
+
+
+
+            if (valido == 1) {
+                swal(
+                  'Oops...',
+                  '¡Falta rellenar algunos campos en el Paso 1!',
+                  'error'
+                )
+            }
+            else if (valido == 2) {
+                swal(
+                  'Oops...',
+                  '¡Falta rellenar algunos campos en el Paso 2!',
+                  'error'
+                )
+            }
+            else if (valido == 3) {
+                swal(
+                  'Oops...',
+                  '¡Falta rellenar algunos campos en el Paso 3!',
+                  'error'
+                )
+            }
+            else if (valido == 4) {
+                swal(
+                  'Oops...',
+                  '¡Debe seleccionar un modo de pago en el Paso 3!',
+                  'error'
+                )
+            }
+            else
+                document.formu.submit();
         } 
         
         jQuery(".inline").colorbox({inline:true, width: '60%', height: '500px'});
@@ -366,56 +446,52 @@ var loadFile = function(event) {
         cambia_servicio.parentNode.removeChild(cambia_servicio);
 
         var tipo = document.getElementById("tipo").value;     //Obtiene el tipo seleccionado
+        var str = '';
         
         if(tipo == 'mecanico' || tipo == 'otros_per'){
-            document.getElementById('wiz1step2').innerHTML = 
+            str = str+
             '<div id="cambia_servicio">'+
                 '<h4 class="widgettitle">Paso 2: Información Avanzada</h4>'+
                 '<p>'+
                     '<label>RUT</label>'+
-                    '<span class="field"><input type="text" name="rut" class="input-xxlarge" required="" placeholder="18.355.344-2" /></span>'+
+                    '<span class="field"><input type="text" name="rut" id="rut" class="input-xxlarge" required="" placeholder="18.355.344-2" /></span>'+
                 '</p>'+
                 '<p>'+
                     '<label>Nombre</label>'+
-                    '<span class="field"><input type="text" name="nombre" class="input-xxlarge" required="" placeholder="Roberto"/></span>'+
+                    '<span class="field"><input type="text" name="nombre" id="nombre" class="input-xxlarge" required="" placeholder="Roberto"/></span>'+
                 '</p>'+
                 '<p>'+
                     '<label>Apellido</label>'+
-                    '<span class="field"><input type="text" name="apellido" class="input-xxlarge" required="" placeholder="Rodriguez"/></span>'+
+                    '<span class="field"><input type="text" name="apellido" id="apellido" class="input-xxlarge" required="" placeholder="Rodriguez"/></span>'+
                 '</p>'+
                 '<p>'+
                     '<label>Profesión</label>'+
-                    '<span class="field"><input type="text" name="profesion" class="input-xxlarge" required="" placeholder="Mecánico"/></span>'+
+                    '<span class="field"><input type="text" name="profesion" id="profesion" class="input-xxlarge" required="" placeholder="Mecánico"/></span>'+
                 '</p>'+
                 '<p>'+
                     '<label>Años de experiencia</label>'+
-                    '<span class="field"><input type="text" name="years" class="input-xxlarge" required="" placeholder="12" onkeypress="return validaNumericos(event)" /></span>'+
+                    '<span class="field"><input type="text" name="years" id="years" class="input-xxlarge" required="" placeholder="12" onkeypress="return validaNumericos(event)" /></span>'+
                 '</p>'+
                 '<p>'+
                     '<label>Curriculum</label>'+
-                    '<span class="field"><input type="text" name="curriculum" class="input-xxlarge" required="" placeholder="mecánico naval, magister en mecánica automotriz"/></span>'+
+                    '<span class="field"><input type="text" name="curriculum" id="curriculum" class="input-xxlarge" required="" placeholder="mecánico naval, magister en mecánica automotriz"/></span>'+
                 '</p>'+
                 '<p>'+
-                    '<label>Descripción: (Agregue aquí toda la información adicional para su anuncio)</label>'+
-                    '<span class="field"><textarea cols="80" rows="5" class="span6" name="descripcion" required="" placeholder="Aquí va la información adicional que desee agregar"></textarea></span>'+
+                    '<label>Subir Imagenes:</label>'+
+                    '<span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="image/*" multiple="" onchange="loadFile(event)" required=""/></span>'+
                 '</p>'+
-                '<p>'+
-                    '<label>Defina el precio de su servicio</label>'+
-                    '<span class="field"><input type="text" name="precio_serv" class="input-xxlarge" required="" placeholder="40990" onkeypress="return validaNumericos(event)" /></span>'+
-                '</p>'+
-                '<label>Subir Imagenes:</label>'+
-                '<span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="image/*" multiple="" onchange="loadFile(event)" required=""/></span>'+
-                '</p>'+
+
+
                 '<div id="imagenes"></div>'+
             '</div>';
         }
         else if(tipo == 'arriendo' || tipo == 'transporte'){
-            document.getElementById('wiz1step2').innerHTML = 
+            str = str+
             '<div id="cambia_servicio">'+
                 '<h4 class="widgettitle">Paso 2: Información Avanzada</h4>'+
                 '<p>'+
                     '<label>Patente</label>'+
-                    '<span class="field"><input type="text" name="patente" class="input-xxlarge" required="" placeholder="ZC-4566"/></span>'+
+                    '<span class="field"><input type="text" name="patente" id="patente" class="input-xxlarge" required="" placeholder="ZC-4566"/></span>'+
                 '</p>'+
                 '<p>'+
                     '<label>Categoria</label>'+
@@ -429,22 +505,19 @@ var loadFile = function(event) {
                 '</p>'+
                 '<p>'+
                     '<label>Capacidad</label>'+
-                    '<span class="field"><input type="text" name="capacidad" class="input-xxlarge" required="" placeholder="Ej: 100kg, 4 personas, etc."/></span>'+
+                    '<span class="field"><input type="text" name="capacidad" id="capacidad" class="input-xxlarge" required="" placeholder="Ej: 100kg, 4 personas, etc."/></span>'+
                 '</p>'+
                 '<p>'+
-                    '<label>Descripción: (Agregue aquí toda la información adicional para su anuncio)</label>'+
-                    '<span class="field"><textarea cols="80" rows="5" class="span6" name="descripcion" required=""></textarea></span>'+
+                    '<label>Subir Imagenes:</label>'+
+                    '<span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="image/*" multiple="" onchange="loadFile(event)" required=""/></span>'+
                 '</p>'+
-                '<p>'+
-                    '<label>Precio de su servicio</label>'+
-                    '<span class="field"><input type="text" name="precio_serv" class="input-xxlarge" required="" placeholder="40990" onkeypress="return validaNumericos(event)" /></span>'+
-                '</p>'+
-                '<label>Subir Imagenes:</label>'+
-                '<span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="image/*" multiple="" onchange="loadFile(event)" required=""/></span>'+
-                '</p>'+
+
+
                 '<div id="imagenes"></div>'+
             '</div>';
         }
+
+        document.getElementById('wiz1step2').innerHTML = str;
     }
 </script>
 

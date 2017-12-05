@@ -32,7 +32,7 @@
 
 
 <!-- SweetAlert2 -->
-<script src="js/sweetalert2/sweetalert2.all.js"></script>   
+<script type="text/javascript" src="{!! asset('js/sweetalert2/sweetalert2.all.js') !!}"></script>
 
 </head>
 

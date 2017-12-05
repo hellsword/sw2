@@ -86,7 +86,7 @@
         <div class="row">
             <div class="12u">
             <section class="special box">
-                <p>Descripción: {{$servicio -> descripcion}}</p>
+                <p>{!!$servicio -> descripcion!!}</p>
             </section>
             </div>
         </div>

@@ -22,14 +22,12 @@
 				<thead>
 					<th>ID</th>
 					<th>Titulo</th>
-					<th>Descripción</th>
 				
 				</thead>
 				@foreach ($anuncios as $a)
 				<tr>
 					<td>{{$a -> id_anuncio}}</td>
 					<td>{{$a -> titulo}}</td>
-					<td>{{$a -> descripcion}}</td>
 				
 					<td>
 			
