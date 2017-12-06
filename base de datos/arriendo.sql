@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-11-2017 a las 01:43:54
--- Versión del servidor: 10.1.26-MariaDB
--- Versión de PHP: 7.1.9
+-- Tiempo de generación: 06-12-2017 a las 22:29:03
+-- Versión del servidor: 10.1.28-MariaDB
+-- Versión de PHP: 7.1.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `anuncio` (
   `id_anuncio` int(11) NOT NULL,
   `titulo` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `descripcion` varchar(800) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `descripcion` text COLLATE utf8_spanish2_ci,
   `condicion` tinyint(4) DEFAULT NULL,
   `rut` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `patente` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -40,7 +40,8 @@ CREATE TABLE `anuncio` (
   `region` varchar(150) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `provincia` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
   `comuna` varchar(150) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `forma_pago` int(11) NOT NULL
+  `forma_pago` int(11) NOT NULL,
+  `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -605,7 +606,7 @@ CREATE TABLE `forma_pago` (
 CREATE TABLE `fotos` (
   `id_foto` int(11) NOT NULL,
   `id_anuncio` int(11) NOT NULL,
-  `foto` mediumblob
+  `foto` text COLLATE utf8_spanish2_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -829,13 +830,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `rut`, `nombre`, `apellido`, `email`, `password`, `tipo`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, '19.344.212-2', 'Boris', 'Mora', 'admin@ucm.cl', '$2y$10$aIZ6WaeH7CgP/EjyxmS3dOr20aG9cRsgnUMiXrBlyUZgBI80R6WxC', 'admin', 'S1TDcLZ3O9Oknz1y92dQqSfO67x9rkWtnbOKNkpUZrIpVsIlJ9U0XVRDz7Ft', '2017-10-17 00:51:12.0', '2017-10-17 00:51:12.0'),
-(2, '17.324.545-6', 'Flaco', 'Renegado', 'cliente@ucm.cl', '$2y$10$8fxHUBybt8ux4zVJ7eQmHOuZvLFJbilnnEMT65ei2Lw8dtqqN/qCS', 'cliente', 'Z6nX6slTXyi4xbYUaU0uAWHnDWwhYdaimq6Ieus1IhERuWp9OQu0pvio9cCX', '2017-10-17 00:54:59.0', '2017-10-17 00:54:59.0'),
-(3, '18938323-5', 'Fernanda', 'Fernandez', 'secretaria@ucm.cl', '$2y$10$tAoGISY0s4T0jikX4JCQpOBEGMDODSpmC34bDsMdenNU9eLcQ6aBy', 'secretaria', '2LoLMhSlxZ9zMlZJJOz0jg5Ehp8D737r4TpDoY9qb0K4fX007C9xLKEXj3KB', '2017-10-17 00:55:50.0', '2017-10-17 00:55:50.0'),
-(5, '172232323-2', 'Constanza', 'Contreras', 'secretaria2@ucm.cl', '$2y$10$G9AAb3zvRTJd3mSQaL9Tv.dY15n6hwpi1DjstN882WEVcZNBX49jy', 'secretaria', 'tQonfX7dlIlMjBe1lHnjnBJGJCxj65L5hXRH0ocYasE74eSvUVhu6gzKEO92', '2017-10-18 07:03:02.0', '2017-10-18 07:03:02.0'),
+(1, '19.344.212-2', 'Boris', 'Mora', 'admin@ucm.cl', '$2y$10$aIZ6WaeH7CgP/EjyxmS3dOr20aG9cRsgnUMiXrBlyUZgBI80R6WxC', 'admin', 'xkSbxPYZreP6i7GsHU7KJdQkqG4n6Dxl3nEIkd6GeL3EQEOmp9l1K29YJHlf', '2017-10-17 00:51:12.0', '2017-10-17 00:51:12.0'),
+(2, '17.324.545-6', 'Flaco', 'Renegado', 'cliente@ucm.cl', '$2y$10$8fxHUBybt8ux4zVJ7eQmHOuZvLFJbilnnEMT65ei2Lw8dtqqN/qCS', 'cliente', 'YUMZzpkfRtC1GOjTNwGAsHjlmixveZUIBmykR9PwfGR3m43thuGeM8qXz5gh', '2017-10-17 00:54:59.0', '2017-10-17 00:54:59.0'),
+(3, '18938323-5', 'Fernanda', 'Fernandez', 'secretaria@ucm.cl', '$2y$10$tAoGISY0s4T0jikX4JCQpOBEGMDODSpmC34bDsMdenNU9eLcQ6aBy', 'secretaria', 'maCbmlsRm9xLW6GdIcfB1iX9aSwFrnitrbkLLZgR6b4aULzFNFw1rYdbUD75', '2017-10-17 00:55:50.0', '2017-10-17 00:55:50.0'),
+(5, '172232323-2', 'Constanza', 'Contreras', 'secretaria2@ucm.cl', '$2y$10$G9AAb3zvRTJd3mSQaL9Tv.dY15n6hwpi1DjstN882WEVcZNBX49jy', 'secretaria', 'DmvdePjGtt6e8W6qbLtAI6DKMM7Cgq9UIxslycyOapOW5ghzjiew4jmwl5pO', '2017-10-18 07:03:02.0', '2017-10-18 07:03:02.0'),
 (7, '1832832324-5', 'Alfonso', 'Patamala', 'cliente4@ucm.cl', '$2y$10$1Nx0CdeN4yMYKEg6vCyjgev0PxA6N63iIXsSUh8b8uKpOfJQoGkMa', 'cliente', NULL, '2017-10-18 08:04:06.0', '2017-10-18 08:04:06.0'),
-(8, '1734234234-5', 'Susana', 'Castillo', 'cliente2@ucm.cl', '$2y$10$oy5hmF1Fe/6qo5By742VweZrk.v9wvF5MOO7XqR0tgPIFSvJ0mz8u', 'cliente', '9BBXcyxnO5W09TEknEC8qhnMhiZSGx8tde67EqSBFT1byGo4H3Oa12SkLsQu', '2017-10-18 21:01:18.0', '2017-10-18 21:01:18.0'),
-(9, '173626363-k', 'Pedro', 'Perez', 'cliente3@ucm.cl', '$2y$10$/IG1.odVPfrb1wXauGNT7.RIMMdaEDwkQdQlU1YyOkQzJy7E5FisG', 'cliente', 'aTIok9g6YbM8uVmYehM0apewFVMCAGuTtn1bJbNeGLTawsdkuWEC3eLEO6of', '2017-10-18 21:03:40.0', '2017-10-18 21:03:40.0'),
+(8, '1734234234-5', 'Susana', 'Castillo', 'cliente2@ucm.cl', '$2y$10$oy5hmF1Fe/6qo5By742VweZrk.v9wvF5MOO7XqR0tgPIFSvJ0mz8u', 'cliente', 'LeiP7I6Zpt06HjPjvSdv4hyELnS2YQOjQqoneh2shC79N97QzJcnTU7BEQR0', '2017-10-18 21:01:18.0', '2017-10-18 21:01:18.0'),
+(9, '173626363-k', 'Pedro', 'Perez', 'cliente3@ucm.cl', '$2y$10$/IG1.odVPfrb1wXauGNT7.RIMMdaEDwkQdQlU1YyOkQzJy7E5FisG', 'cliente', 'b9yLhxyLfsgvjAaEb36eJHhNqZ2DuSaXQ4aCtw3CSq4jdFmpVT6ZPx68rjwQ', '2017-10-18 21:03:40.0', '2017-10-18 21:03:40.0'),
 (11, '172232323-2', 'DANIEL EDUARDO', 'ALARCON CHAMBLES', 'daniel.alarcon.ch@gmail.com', '$2y$10$G9AAb3zvRTJd3mSQaL9Tv.dY15n6hwpi1DjstN882WEVcZNBX49jy', 'cliente', NULL, '2017-11-29 07:03:02.0', '2017-11-29 07:03:02.0'),
 (12, '18573726-8', 'JUAN CARLOS', 'ALARCON VILLAMAN', 'j.alarconvillaman@outlook.com', '$2y$10$G9AAb3zvRTJd3mSQaL9Tv.dY15n6hwpi1DjstN882WEVcZNBX49jy', 'cliente', NULL, '2017-11-29 07:03:02.0', '2017-11-29 07:03:02.0'),
 (13, '18575902-4', 'CARLOS ALBERTO', 'CARRERA ZUNIGA', 'carlosacz1994@gmail.com', '$2y$10$G9AAb3zvRTJd3mSQaL9Tv.dY15n6hwpi1DjstN882WEVcZNBX49jy', 'cliente', NULL, '2017-11-29 07:03:02.0', '2017-11-29 07:03:02.0'),
@@ -855,7 +856,7 @@ INSERT INTO `users` (`id`, `rut`, `nombre`, `apellido`, `email`, `password`, `ti
 (27, '18780321-7', 'FUAD RICARDO', 'NAZAL JAQUE', 'fuad@gmail.com', '$2y$10$G9AAb3zvRTJd3mSQaL9Tv.dY15n6hwpi1DjstN882WEVcZNBX49jy', 'cliente', NULL, '2017-11-29 07:03:02.0', '2017-11-29 07:03:02.0'),
 (28, '19106509-3', 'CARLOS MATIAS', 'ORELLANA FUENTES', 'carlosmof15@gmail.com', '$2y$10$G9AAb3zvRTJd3mSQaL9Tv.dY15n6hwpi1DjstN882WEVcZNBX49jy', 'cliente', NULL, '2017-11-29 07:03:02.0', '2017-11-29 07:03:02.0'),
 (29, '118576067-7', 'RICARDO MATIAS', 'RIFFO ARAYA', 'rr.ricardo.riffo@gmail.com', '$2y$10$G9AAb3zvRTJd3mSQaL9Tv.dY15n6hwpi1DjstN882WEVcZNBX49jy', 'cliente', NULL, '2017-11-29 07:03:02.0', '2017-11-29 07:03:02.0'),
-(30, '19105288-9', 'ESTEFANIA ANDREA', 'SILVA MOLINA', 'fanny.andrea@outlook.es', '$2y$10$G9AAb3zvRTJd3mSQaL9Tv.dY15n6hwpi1DjstN882WEVcZNBX49jy', 'cliente', NULL, '2017-11-29 07:03:02.0', '2017-11-29 07:03:02.0'),
+(30, '19105288-9', 'ESTEFANIA ANDREA', 'SILVA MOLINA', 'fanny.andrea@outlook.es', '$2y$10$G9AAb3zvRTJd3mSQaL9Tv.dY15n6hwpi1DjstN882WEVcZNBX49jy', 'cliente', 'JBW7nHnn0r0IUNUsjbvamvR8pF0WZgrqalZ2RCfW4TECyXPJ7gLXJ5lhAO6T', '2017-11-29 07:03:02.0', '2017-11-29 07:03:02.0'),
 (31, '18980990-5', 'JAIME MAURICIO', 'VALENZUELA MUNOZ', 'jiimy_94@hotmail.com', '$2y$10$G9AAb3zvRTJd3mSQaL9Tv.dY15n6hwpi1DjstN882WEVcZNBX49jy', 'cliente', NULL, '2017-11-29 07:03:02.0', '2017-11-29 07:03:02.0');
 
 -- --------------------------------------------------------
@@ -1012,7 +1013,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `forma_pago`
 --
 ALTER TABLE `forma_pago`
-  MODIFY `num_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `num_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
