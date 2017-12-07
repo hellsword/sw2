@@ -300,6 +300,10 @@ class ServiciosController extends Controller
 
                 $cont = $cont+1;
                 */
+                if ($file[$cont]->guessExtension() != 'jpeg') {
+                    alert()->error('Las imágenes deben estar en formato jpeg')->persistent('Cerrar');
+                    return Redirect::to('/servicios');
+                }
 
                 $aleatorio = str_random(50);
                 $nombre = $aleatorio.'-'.$file[$cont]->getClientOriginalName();

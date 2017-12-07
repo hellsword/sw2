@@ -142,7 +142,7 @@
                                 </p>
 
                                 <p>
-                                    <label>Subir Imagenes (sólo formato jpeg):</label>
+                                    <label>Subir Imagenes (sólo se admite formato jpeg):</label>
                                     <!-- VER LA PROPIEDAD multiple PARA AGREGAR VARIOS ARCHIVOS -->
                                     <span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="image/*" multiple="" onchange="loadFile(event)" required=""/></span>
                                 </p>
@@ -477,7 +477,7 @@ var loadFile = function(event) {
                     '<span class="field"><input type="text" name="curriculum" id="curriculum" class="input-xxlarge" required="" placeholder="mecánico naval, magister en mecánica automotriz"/></span>'+
                 '</p>'+
                 '<p>'+
-                    '<label>Subir Imagenes (sólo formato jpeg):</label>'+
+                    '<label>Subir Imagenes (sólo se admite formato jpeg):</label>'+
                     '<span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="image/*" multiple="" onchange="loadFile(event)" required=""/></span>'+
                 '</p>'+
 
@@ -508,7 +508,7 @@ var loadFile = function(event) {
                     '<span class="field"><input type="text" name="capacidad" id="capacidad" class="input-xxlarge" required="" placeholder="Ej: 100kg, 4 personas, etc."/></span>'+
                 '</p>'+
                 '<p>'+
-                    '<label>Subir Imagenes (sólo formato jpeg):</label>'+
+                    '<label>Subir Imagenes (sólo se admite formato jpeg):</label>'+
                     '<span class="field"><input type="file" name="imagen[]" id="imagen" class="input-xxlarge" accept="image/*" multiple="" onchange="loadFile(event)" required=""/></span>'+
                 '</p>'+
 
