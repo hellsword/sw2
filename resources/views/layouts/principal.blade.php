@@ -72,13 +72,7 @@
                           <p>Servicios</p>
                       </a>
                     </li> 
-                    <li>
-                      <a href="#">
-                          <i class="pe-7s-info">
-                          </i>
-                          <p>Sobre nosotros</p>
-                      </a>
-                    </li> 
+                    
                     @if(Auth::check() AND Auth::user()->tipo=='cliente')
                     <li>
                       @if(Auth::check())
