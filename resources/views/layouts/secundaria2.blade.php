@@ -111,7 +111,7 @@
                             </a>
                         @if(Auth::user()->tipo=='admin')
                         <ul class="dropdown-menu">
-                            <li><a href="#">Anuncios</a></li>
+                            <li><a href="/usuarios/gestion">Gestion</a></li>
                             <li><a href="/usuarios">Lista Usuarios</a></li>
                             <li><a href="{{ route('usuarios.create') }}">Crear Usuarios</a></li>
                             <li class="divider"></li>

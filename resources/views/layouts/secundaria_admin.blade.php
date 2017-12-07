@@ -111,7 +111,7 @@
                             </a>
                         @if(Auth::user()->tipo=='admin')
                         <ul class="dropdown-menu">
-                            <li><a href="#">Anuncios</a></li>
+                            <li><a href="/usuarios/gestion">Gestion</a></li>
                             <li><a href="/usuarios">Lista Usuarios</a></li>
                             <li><a href="{{ route('usuarios.create') }}">Crear Usuarios</a></li>
                             <li class="divider"></li>
@@ -163,7 +163,7 @@
 							<section>
 								<h3>¿Qué buscas?</h3>
 								
-							{!! Form::open(array('url'=>'usuarios/secretarias', 'method'=>'GET','autocomplete'=>'off', 'role'=>'search')) !!}  
+							{!! Form::open(array('url'=>'usuarios/gestion', 'method'=>'GET','autocomplete'=>'off', 'role'=>'search')) !!}  
 									<div class="form-group">
 										<div class="input-group">
 										

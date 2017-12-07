@@ -22,19 +22,13 @@
                     <th>ID</th>
                     <th>Titulo</th>
                     <th>Tipo de Servicio</th>
-                    <th>Descripción</th>
                 
                 </thead>
                 @foreach ($anuncios as $a)
                 <tr>
                     <td>{{$a -> id_anuncio}}</td>
                     <td>{{$a -> titulo}}</td>
-                    <td>{{$a -> tipo_servicio}}</td>       
-                    <td>{{$a -> descripcion}}</td>
-                
-                    <td>
-
-                    </td>
+                    <td>{{$a -> tipo_servicio}}</td>    
                 </tr>
             
                 @endforeach

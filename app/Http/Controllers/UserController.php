@@ -171,7 +171,12 @@ class UserController extends Controller
     }
 
 
-    public function gestion(){
+    public function gestion(Request $request){
+
+      $query=trim($request->get('searchText'));
+       $query2=trim($request->get('searchText2'));
+       $fechaMin=trim($request->get('fechaMin'));
+       $fechaMax=trim($request->get('fechaMax'));
 
        $secretarias = DB::table('secretaria')
             ->join ('users', 'users.id', '=' , 'id_secretaria')
@@ -182,12 +187,27 @@ class UserController extends Controller
                     )
             ->get();
 
-
-        $region=DB::table('anuncio as a')
-         ->join ('region as r', 'r.REGION_ID', '=' , 'a.region')
-         ->select('r.REGION_NOMBRE',DB::raw('count(a.region) as cantidad'),DB::raw('sum(total) as total'))
-         ->groupBy('r.REGION_NOMBRE')
-         ->get();
+        if ($fechaMin != '' AND $fechaMax != '') {
+            $region=DB::table('anuncio as a')
+           ->join ('region as r', 'r.REGION_ID', '=' , 'a.region')
+           ->join ('orden as o', 'o.id_anuncio', '=' , 'a.id_anuncio')
+           ->where('o.fecha','>=',$fechaMin,'AND','o.fecha_venc','<=',$fechaMax) 
+           ->where('o.id_secretaria','LIKE', '%'.$query.'%')
+             ->where('a.condicion','LIKE', '%'.$query2.'%') 
+           ->select('r.REGION_NOMBRE',DB::raw('count(a.region) as cantidad'),DB::raw('sum(total) as total'))
+           ->groupBy('r.REGION_NOMBRE')
+           ->get();
+        }   
+        else{
+            $region=DB::table('anuncio as a')
+             ->join ('region as r', 'r.REGION_ID', '=' , 'a.region')
+             ->join ('orden as o', 'o.id_anuncio', '=' , 'a.id_anuncio')
+             ->where('o.id_secretaria','LIKE', '%'.$query.'%')
+             ->where('a.condicion','LIKE', '%'.$query2.'%')
+             ->select('r.REGION_NOMBRE',DB::raw('count(a.region) as cantidad'),DB::raw('sum(total) as total'))
+             ->groupBy('r.REGION_NOMBRE')
+             ->get();
+       }
         
         //DB::table('user_visits')->groupBy('user_id')->count();
 
