@@ -1,0 +1,6 @@
+Integrantes:
+-Rodrigo Ramírez
+-Boris Mora
+
+Carpeta para las imágenes (necesita permisos):  \public\uploads
+
