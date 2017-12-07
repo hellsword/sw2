@@ -78,7 +78,7 @@ class ServiciosController extends Controller
                     'f.foto as foto',
                     'o.fecha as fecha'
                     )
-            ->paginate(5);
+            ->paginate(15);
         }
         else{   //Carga un servicio con personas  
             $servicios = DB::table('anuncio as a')

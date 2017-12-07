@@ -15,6 +15,8 @@
 //Route::post('usuarios.tarjeta.store','UserController@tarjeta_store');
 //Route::post('/servicios/ver_anuncio','ServiciosController@ver_anuncio');
 
+Route::get('/usuarios/adm_categorias','UserController@adm_categorias');
+
 Route::get('/usuarios/gestion','UserController@gestion');
 
 Route::get('/usuarios/secretarias','UserController@filtro');

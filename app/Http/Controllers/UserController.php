@@ -217,6 +217,25 @@ class UserController extends Controller
     }
 
 
+    public function adm_categorias(Request $request){
+
+        $categorias = DB::table('categorias')->paginate(10);
+
+        $sub_categorias = DB::table('categorias')
+            ->join ('sub_categorias', 'sub_categorias.id_categoria', '=' , 'categorias.id_categoria')
+            ->select('categorias.id_categoria as id_categoria',
+                    'sub_categorias.sub_categoria as sub_categoria',
+                    'sub_categorias.nombre_completo as nombre_completo')
+            ->paginate(10);
+        
+        //DB::table('user_visits')->groupBy('user_id')->count();
+
+      return view('usuarios.adm_categorias', ["categorias" => $categorias, "sub_categorias" => $sub_categorias]);
+
+
+    }
+
+/*
     public function filtro(Request $request){
    
        $query=trim($request->get('searchText'));
@@ -260,7 +279,7 @@ class UserController extends Controller
 
     }
 
-/*
+
 
     public function tarjeta_store(Request $request){
       $tarjeta = new Tarjeta;

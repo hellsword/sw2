@@ -220,13 +220,14 @@
             else if (document.getElementById("tipo").value == 'mecanico' || document.getElementById("tipo").value == 'otros_per') {
                 if(document.getElementById("rut").value == '' || document.getElementById("nombre").value == ''
                 || document.getElementById("apellido").value == '' || document.getElementById("profesion").value == '' 
-                || document.getElementById("years").value == '' || document.getElementById("curriculum").value == ''){
+                || document.getElementById("years").value == '' || document.getElementById("curriculum").value == ''
+                || document.getElementById("imagen").value == ''){
                     valido = 2;
                 }
             }
             else if (document.getElementById("tipo").value == 'arriendo' || document.getElementById("tipo").value == 'transporte') {
                 if(document.getElementById("patente").value == '' || document.getElementById("categoria").value == ''
-                || document.getElementById("capacidad").value == '' ){
+                || document.getElementById("capacidad").value == '' || document.getElementById("imagen").value == ''){
                     valido = 2;
                 }
             }

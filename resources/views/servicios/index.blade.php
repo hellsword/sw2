@@ -31,6 +31,7 @@
 		<div class="row" >
 			<div class="4u" style="vertical-align: middle;" >
 				<section>
+						
 					<a href="{{URL::action('ServiciosController@show', $servicio->id_anuncio)}}" class=""><img src="{{$servicio -> foto}}" alt="" height="150" width="200" ></a>
 				</section>
 			</div>
