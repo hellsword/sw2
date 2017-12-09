@@ -112,7 +112,8 @@
                             </a>
                         @if(Auth::user()->tipo=='admin')
                         <ul class="dropdown-menu">
-                            <li><a href="#">Anuncios</a></li>
+                            <li><a href="/usuarios/gestion">Gestion</a></li>
+                            <li><a href="/usuarios/adm_categorias">Administrar categorías</a></li>
                             <li><a href="/usuarios">Lista Usuarios</a></li>
                             <li><a href="{{ route('usuarios.create') }}">Crear Usuarios</a></li>
                             <li class="divider"></li>
@@ -166,6 +167,7 @@
 								<p><a href="/usuarios" class="w3-button w3-green w3-round-xlarge">Lista de usuarios</a></p>
 								<p><a href="/usuarios/create" class="w3-button w3-green w3-round-xlarge">Crear usuario</a></p>
                 <p><a href="/usuarios/gestion" class="w3-button w3-green w3-round-xlarge">Gestión</a></p>
+                <p><a href="/usuarios/adm_categorias" class="w3-button w3-green w3-round-xlarge">Administración de categorías</a></p>
 							</section>
 						</div>
 						<!-- AQUI INICIA EL CONTENIDO -->

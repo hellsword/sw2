@@ -16,14 +16,25 @@
 //Route::post('/servicios/ver_anuncio','ServiciosController@ver_anuncio');
 
 Route::get('/usuarios/adm_categorias','UserController@adm_categorias');
-
 Route::get('/usuarios/gestion','UserController@gestion');
-
 Route::get('/usuarios/secretarias','UserController@filtro');
 
 Route::post('/anuncios/actualizar','AnuncioController@actualizar');
 Route::post('/anuncios/ver_cupon','CuponController@verCupon');
 Route::post('/favoritos/almacenar','FavoritoController@almacenar');
+
+//Rutas para categorias
+Route::post('/usuarios/nueva_categoria','UserController@nueva_categoria');
+Route::post('/usuarios/nueva_sub_categoria','UserController@nueva_sub_categoria');
+Route::post('/usuarios/actualiza_categoria','UserController@actualiza_categoria');
+Route::post('/usuarios/elimina_categoria','UserController@elimina_categoria');
+Route::post('/usuarios/actualiza_sub_categoria','UserController@actualiza_sub_categoria');
+Route::post('/usuarios/elimina_sub_categoria','UserController@elimina_sub_categoria');
+Route::post('/usuarios/actualiza_relacion','UserController@actualiza_relacion');
+Route::post('/usuarios/nueva_categoria_vehiculo','UserController@nueva_categoria_vehiculo');
+Route::post('/usuarios/actualiza_categoria_vehiculo','UserController@actualiza_categoria_vehiculo');
+Route::post('/usuarios/elimina_categoria_vehiculo','UserController@elimina_categoria_vehiculo');
+
 
 Route::resource('/anuncios','AnuncioController');
 Route::resource('/','HomeController');

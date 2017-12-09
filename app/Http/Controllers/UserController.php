@@ -13,6 +13,9 @@ use App\Secretaria;
 use App\Contacto;
 use App\Anuncio;
 use App\Region;
+use App\Categoria;
+use App\SubCategoria;
+use App\CategoriaVehiculo;
 //hacemos referencias a redirect para hacer algunas redirrecciones
 use Illuminate\Support\Facades\Redirect;
 
@@ -224,16 +227,313 @@ class UserController extends Controller
         $sub_categorias = DB::table('categorias')
             ->join ('sub_categorias', 'sub_categorias.id_categoria', '=' , 'categorias.id_categoria')
             ->select('categorias.id_categoria as id_categoria',
+                    'categorias.nombre_completo as nombre_categoria',
                     'sub_categorias.sub_categoria as sub_categoria',
                     'sub_categorias.nombre_completo as nombre_completo')
             ->paginate(10);
+
+        $categorias_vehiculo = DB::table('categoria_vehiculo')->paginate(10);
         
         //DB::table('user_visits')->groupBy('user_id')->count();
 
-      return view('usuarios.adm_categorias', ["categorias" => $categorias, "sub_categorias" => $sub_categorias]);
+      return view('usuarios.adm_categorias', ["categorias" => $categorias, "sub_categorias" => $sub_categorias, "categorias_vehiculo" => $categorias_vehiculo]);
 
 
     }
+
+    public function nueva_categoria(Request $request){
+
+      try {
+
+        DB::beginTransaction();
+      
+        $categoria = new Categoria;
+        $categoria->nombre=$request->get('nombre');
+        $categoria->nombre_completo=$request->get('nombre_completo');
+        $categoria->save(); 
+
+        DB::commit();
+          
+      } catch (Exception $e) {
+          DB::rollback();
+      }
+
+      alert()->success('Categoría creada')->persistent('Cerrar');
+      return Redirect::to('usuarios/adm_categorias');  
+
+    }
+
+
+    public function nueva_sub_categoria(Request $request){
+
+      try {
+
+        DB::beginTransaction();
+      
+        $sub_categoria = new SubCategoria;
+        $sub_categoria->id_categoria=$request->get('id_categoria');
+        $sub_categoria->sub_categoria=$request->get('sub_categoria');
+        $sub_categoria->nombre_completo=$request->get('nombre_completo');
+        $sub_categoria->save(); 
+
+        DB::commit();
+          
+      } catch (Exception $e) {
+          DB::rollback();
+      }
+
+      alert()->success('Sub-Categoría creada')->persistent('Cerrar');
+      return Redirect::to('usuarios/adm_categorias');  
+
+    }
+
+
+    public function actualiza_categoria(Request $request){
+
+      //COMPROBACIONES
+
+      //Comprueba que los campos no esten vacios
+      if ($request->get('nombre') == null OR $request->get('nombre_completo') == null) {
+        alert()->error('Hay campos sin llenar', 'Tenemos un problema')->persistent('Cerrar');
+        return Redirect::to('usuarios/adm_categorias');  
+      }
+
+      //Comprueba que el ID no este duplicado
+      $categoria_cont = DB::table('categorias')->where('id_categoria', $request->get('id_categoria'))->count();
+      if ($categoria_cont != 0) {
+        alert()->error('ID duplicado', 'Tenemos un problema')->persistent('Cerrar');
+        return Redirect::to('usuarios/adm_categorias');  
+      }
+
+
+
+      try {
+
+        DB::beginTransaction();
+      
+        Categoria::where('id_categoria', '=', $request->get('id_categoria'))
+              ->update(['nombre' => $request->get('nombre'), 'nombre_completo' => $request->get('nombre_completo')]);
+
+        DB::commit();
+          
+      } catch (Exception $e) {
+          DB::rollback();
+      }
+
+        alert()->success('Categoría actualizada')->persistent('Cerrar');
+
+      return Redirect::to('usuarios/adm_categorias');  
+    }
+
+
+    public function actualiza_sub_categoria(Request $request){
+
+      //COMPROBACIONES
+
+      //Comprueba que los campos no esten vacios
+      if ($request->get('sub_categoria_nueva') == null OR $request->get('nombre_completo') == null) {
+        alert()->error('Hay campos sin llenar', 'Tenemos un problema')->persistent('Cerrar');
+        return Redirect::to('usuarios/adm_categorias');  
+      }
+
+      //Comprueba que el ID no este duplicado
+      $categoria_cont = DB::table('sub_categorias')->where('id_categoria', $request->get('id_categoria'))->where('sub_categoria', $request->get('sub_categoria_nueva'))
+      ->count();
+      if ($categoria_cont != 0) {
+        alert()->error('ID duplicado', 'Tenemos un problema')->persistent('Cerrar');
+        return Redirect::to('usuarios/adm_categorias');  
+      }
+
+      try {
+
+        DB::beginTransaction();
+
+        $id_categoria = $request->get('id_categoria');
+        $sub_categoria = $request->get('sub_categoria');
+
+        SubCategoria::where('id_categoria', '=', $id_categoria)->where('sub_categoria', '=', $sub_categoria)
+              ->update(['sub_categoria' => $request->get('sub_categoria_nueva'), 'nombre_completo' => $request->get('nombre_completo')]);
+
+        DB::commit();
+          
+      } catch (Exception $e) {
+          DB::rollback();
+      }
+
+        alert()->success('Sub-categoría actualizada')->persistent('Cerrar');
+
+      return Redirect::to('usuarios/adm_categorias');  
+    }
+
+
+
+    public function elimina_sub_categoria(Request $request){
+
+
+      try {
+
+        DB::beginTransaction();
+
+        $id_categoria = $request->get('id_categoria');
+        $sub_categoria = $request->get('sub_categoria');
+
+        DB::table('sub_categorias')->where('id_categoria', '=', $id_categoria)->where('sub_categoria', '=', $sub_categoria)->delete();
+
+      
+
+        DB::commit();
+          
+      } catch (Exception $e) {
+          DB::rollback();
+      }
+
+        alert()->warning('Sub-categoría eliminada')->persistent('Cerrar');
+
+      return Redirect::to('usuarios/adm_categorias');  
+    }
+
+
+
+
+
+    public function elimina_categoria(Request $request){
+
+
+      try {
+
+        DB::beginTransaction();
+
+        DB::table('categorias')->where('id_categoria', '=', $request->get('id_categoria'))->delete();
+
+      
+
+        DB::commit();
+          
+      } catch (Exception $e) {
+          DB::rollback();
+      }
+
+        alert()->warning('Categoría eliminada')->persistent('Cerrar');
+
+      return Redirect::to('usuarios/adm_categorias');  
+    }
+
+
+
+    public function actualiza_relacion(Request $request){
+
+
+      try {
+
+        DB::beginTransaction();
+
+        $id_categoria = $request->get('id_categoria');
+        $sub_categoria = $request->get('sub_categoria');
+
+        //return $id_categoria.' - '.$sub_categoria;
+
+        SubCategoria::where('id_categoria', '=', $id_categoria)->where('sub_categoria', '=', $sub_categoria)
+              ->update(['id_categoria' => $request->get('id_categoria_nueva')]);
+
+        DB::commit();
+          
+      } catch (Exception $e) {
+          DB::rollback();
+      }
+
+        alert()->success('Relación actualizada')->persistent('Cerrar');
+
+      return Redirect::to('usuarios/adm_categorias');  
+    }
+
+
+
+
+    public function nueva_categoria_vehiculo(Request $request){
+
+      try {
+
+        DB::beginTransaction();
+      
+        $categoria_vehiculo = new CategoriaVehiculo;
+        $categoria_vehiculo->cod=$request->get('cod');
+        $categoria_vehiculo->nombre=$request->get('nombre');
+        $categoria_vehiculo->save(); 
+
+        DB::commit();
+          
+      } catch (Exception $e) {
+          DB::rollback();
+      }
+
+      alert()->success('Categoría de vehículo creada')->persistent('Cerrar');
+      return Redirect::to('usuarios/adm_categorias');  
+
+    }
+
+
+
+    public function actualiza_categoria_vehiculo(Request $request){
+
+      //COMPROBACIONES
+
+      //Comprueba que los campos no esten vacios
+      if ($request->get('cod_nuevo') == null OR $request->get('nombre') == null) {
+        alert()->error('Hay campos sin llenar', 'Tenemos un problema')->persistent('Cerrar');
+        return Redirect::to('usuarios/adm_categorias');  
+      }
+
+      //Comprueba que el ID no este duplicado
+      $categoria_cont = DB::table('categoria_vehiculo')->where('cod', $request->get('cod_nuevo'))->count();
+      if ($categoria_cont != 0) {
+        alert()->error('ID duplicado', 'Tenemos un problema')->persistent('Cerrar');
+        return Redirect::to('usuarios/adm_categorias');  
+      }
+
+
+      try {
+
+        DB::beginTransaction();
+      
+        CategoriaVehiculo::where('cod', '=', $request->get('cod'))
+              ->update(['cod' => $request->get('cod_nuevo'), 'nombre' => $request->get('nombre')]);
+
+        DB::commit();
+          
+      } catch (Exception $e) {
+          DB::rollback();
+      }
+
+        alert()->success('Categoría de vehículo actualizada')->persistent('Cerrar');
+
+      return Redirect::to('usuarios/adm_categorias');  
+    }
+
+
+    public function elimina_categoria_vehiculo(Request $request){
+
+
+      try {
+
+        DB::beginTransaction();
+
+        DB::table('categoria_vehiculo')->where('cod', '=', $request->get('cod'))->delete();
+
+      
+
+        DB::commit();
+          
+      } catch (Exception $e) {
+          DB::rollback();
+      }
+
+        alert()->warning('Categoría de vehículo eliminada')->persistent('Cerrar');
+
+      return Redirect::to('usuarios/adm_categorias');  
+    }
+
+
+
 
 /*
     public function filtro(Request $request){
