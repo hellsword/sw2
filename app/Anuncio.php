@@ -13,7 +13,7 @@ class Anuncio extends Model
     public $timestamps = false;
 
     protected $fillable = [
-    	'titulo', 'descripcion', 'condicion', 'rut', 'patente', 'precio_serv', 'region', 'comuna', 'provincia','forma_pago'
+    	'titulo', 'descripcion', 'condicion', 'rut', 'patente', 'precio_serv', 'region', 'comuna', 'provincia','forma_pago', 'id_categoria', 'tipo_servicio'
     	
     ];
 }

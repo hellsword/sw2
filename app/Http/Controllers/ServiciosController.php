@@ -45,6 +45,7 @@ class ServiciosController extends Controller
 
             $fecha_actual=date('Y-m-d');
        
+        //return $request->get('vehiculo');
 
         //Carga un servicio con vehiculo        
         if($request->get('vehiculo') != null){
@@ -61,10 +62,10 @@ class ServiciosController extends Controller
             ->where('o.fecha_venc', '>=', $fecha_actual)
             ->where(\DB::raw("CONCAT(a.titulo, ' ', a.tipo_servicio, ' ', a.descripcion)"), 'LIKE', '%'.$query.'%')     //BUSCA POR EL TITULO DEL ANUNCIO
             ->where('a.tipo_servicio', 'LIKE', '%'.$request->get('sub_categoria').'%')
-            ->where('a.region', '=', $request->get('region'))
-            ->where('a.provincia', '=', $request->get('provincia'))
-            ->where('a.comuna', '=', $request->get('comuna'))
-            ->where('v.categoria', 'LIKE', '%'.$request->get('vehiculo').'%')
+            ->where('a.comuna', 'LIKE', '%'.$request->get('region').'%')
+            ->where('a.comuna', 'LIKE', '%'.$request->get('provincia').'%')
+            ->where('a.comuna', 'LIKE', '%'.$request->get('comuna').'%')
+            ->where('v.categoria', '=', $request->get('vehiculo'))
             ->select('o.id_cliente as id_cliente',
                     'a.id_anuncio as id_anuncio',
                     'a.titulo as titulo',
@@ -74,6 +75,7 @@ class ServiciosController extends Controller
                     'region.REGION_NOMBRE as region',
                     'provincia.PROVINCIA_NOMBRE as provincia',
                     'comuna.COMUNA_NOMBRE as comuna',
+                    'u.nombre as nombre',
                     'u.apellido as apellido',
                     'f.foto as foto',
                     'o.fecha as fecha'
@@ -166,10 +168,12 @@ class ServiciosController extends Controller
     public function store(Request $request, Guard $auth){ 
 
 
+        $tipo = explode("|",$request->get('tipo'));
+
         $this->middleware('auth');
         $this->auth =$auth;
 
-        $tipoServicio=$request->get('tipo'); //captura el tipo de servicio
+        $tipoServicio= $tipo[1]; //captura el tipo de servicio
 
       $tituloAnuncio=$request->get('titulo'); //captura el titulo del anuncio
       $duracion=$request->get('tiempo2'); //captura el titulo del anuncio
@@ -199,7 +203,8 @@ class ServiciosController extends Controller
             $anuncio->region = $request->get('region');
             $anuncio->provincia = $request->get('provincia');
             $anuncio->comuna = $request->get('comuna');
-            $anuncio->tipo_servicio = $request->get('tipo');
+            $anuncio->tipo_servicio = $tipo[1];
+            $anuncio->id_categoria = $tipo[0];
             $anuncio->total = $request->get('total');
            
             if($tipoPago=='efectivo'){
@@ -393,7 +398,7 @@ class ServiciosController extends Controller
         }
         else{
 
-            $vehiculo = DB::table('vehiculo')->where('patente', $servicio->patente)->first();
+            $vehiculo = DB::table('vehiculo')->join ('categoria_vehiculo', 'categoria_vehiculo.cod', 'vehiculo.categoria')->where('patente', $servicio->patente)->first();
 
             if($this->auth->user()){
                 $favoritos = DB::table('favoritos')->where('id_cliente', $this->auth->user()->id)->get();

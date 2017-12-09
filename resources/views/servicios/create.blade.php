@@ -60,7 +60,7 @@
                                             <option value="{{$categoria -> nombre}}" disabled style="background-color: pink" >{{$categoria -> nombre_completo}}</option>
                                             @foreach($sub_categorias as $sub_categoria)
                                                 @if($sub_categoria->id_categoria == $categoria->id_categoria)
-                                                    <option value="{{$sub_categoria -> sub_categoria}}" >{{$sub_categoria -> nombre_completo}}</option>
+                                                    <option value="{{$sub_categoria -> id_categoria}}|{{$sub_categoria -> sub_categoria}}" >{{$sub_categoria -> nombre_completo}}</option>
                                                 @endif
                                             @endforeach
                                         @endforeach
@@ -447,6 +447,8 @@ var loadFile = function(event) {
         cambia_servicio.parentNode.removeChild(cambia_servicio);
 
         var tipo = document.getElementById("tipo").value;     //Obtiene el tipo seleccionado
+        var temp = tipo.split('|');
+        tipo = temp[1];
         var str = '';
         
         if(tipo == 'mecanico' || tipo == 'otros_per'){
@@ -499,7 +501,7 @@ var loadFile = function(event) {
                     '<span class="field">'+
                         '<select class="form-control" id="categoria" name="categoria" required="">'+
                         @foreach($categoria_vehiculos as $cat_vehiculo)
-                            '<option value="{{$cat_vehiculo -> nombre}}" >{{$cat_vehiculo -> nombre}}</option>'+
+                            '<option value="{{$cat_vehiculo -> cod}}" >{{$cat_vehiculo -> nombre}}</option>'+
                         @endforeach
                         '</select>'+
                     '</span>'+
