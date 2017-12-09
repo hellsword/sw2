@@ -189,7 +189,7 @@
 							    <select class="form-control" id="categoria_vehiculo" name="vehiculo">
 							    	<option value="" >Todos</option>
 							    	@foreach($categoria_vehiculos as $categoria_vehiculo)
-	                                    <option value="{{$categoria_vehiculo -> nombre}}" >{{$categoria_vehiculo -> nombre}}</option>
+	                                    <option value="{{$categoria_vehiculo -> cod}}" >{{$categoria_vehiculo -> nombre}}</option>
 	                                @endforeach
 							    </select> <br>
 

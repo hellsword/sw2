@@ -162,13 +162,23 @@
 				<div class="container">
 					<div class="row ">
 						<div class="3u">
-							<section>
-								<h3>Sección del administrador</h3>
-								<p><a href="/usuarios" class="w3-button w3-green w3-round-xlarge">Lista de usuarios</a></p>
-								<p><a href="/usuarios/create" class="w3-button w3-green w3-round-xlarge">Crear usuario</a></p>
-                <p><a href="/usuarios/gestion" class="w3-button w3-green w3-round-xlarge">Gestión</a></p>
-                <p><a href="/usuarios/adm_categorias" class="w3-button w3-green w3-round-xlarge">Administración de categorías</a></p>
-							</section>
+              @if(Auth::check())
+                @if(Auth::user()->tipo=='admin')
+    							<section>
+    								<h3>Sección del administrador</h3>
+    								<p><a href="/usuarios" class="w3-button w3-green w3-round-xlarge">Lista de usuarios</a></p>
+    								<p><a href="/usuarios/create" class="w3-button w3-green w3-round-xlarge">Crear usuario</a></p>
+                    <p><a href="/usuarios/gestion" class="w3-button w3-green w3-round-xlarge">Gestión</a></p>
+                    <p><a href="/usuarios/adm_categorias" class="w3-button w3-green w3-round-xlarge">Administración de categorías</a></p>
+    							</section>
+                @elseif(Auth::user()->tipo=='secretaria')
+                  <section>
+                    <h3>Sección de la secretaria</h3>
+                    <p><a href="/usuarios" class="w3-button w3-green w3-round-xlarge">Lista de usuarios</a></p>
+                    <p><a href="/anuncios" class="w3-button w3-green w3-round-xlarge">Anuncios</a></p>
+                  </section>  
+                @endif
+              @endif
 						</div>
 						<!-- AQUI INICIA EL CONTENIDO -->
 						<div class="9u pull-right">

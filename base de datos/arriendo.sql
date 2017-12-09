@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-12-2017 a las 02:04:07
--- Versión del servidor: 10.1.26-MariaDB
--- Versión de PHP: 7.1.9
+-- Tiempo de generación: 09-12-2017 a las 06:08:20
+-- Versión del servidor: 10.1.28-MariaDB
+-- Versión de PHP: 7.1.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -36,12 +36,21 @@ CREATE TABLE `anuncio` (
   `rut` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `patente` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `precio_serv` int(11) DEFAULT NULL,
-  `tipo_servicio` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `tipo_servicio` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
+  `id_categoria` int(11) NOT NULL,
   `region` varchar(150) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `provincia` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
   `comuna` varchar(150) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `forma_pago` int(11) NOT NULL
+  `forma_pago` int(11) NOT NULL,
+  `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `anuncio`
+--
+
+INSERT INTO `anuncio` (`id_anuncio`, `titulo`, `descripcion`, `condicion`, `rut`, `patente`, `precio_serv`, `tipo_servicio`, `id_categoria`, `region`, `provincia`, `comuna`, `forma_pago`, `total`) VALUES
+(1, 'werw543453r', '<p>ewqeqweqw</p>', 1, NULL, 'wqeqwe', 23233, 'arriendo', 2, '5', '52', '5201', 1, 26450);
 
 -- --------------------------------------------------------
 
@@ -603,6 +612,13 @@ CREATE TABLE `forma_pago` (
   `fecha_pago` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `forma_pago`
+--
+
+INSERT INTO `forma_pago` (`num_pago`, `modo`, `fecha_pago`) VALUES
+(1, 'efectivo', '2017-12-09 01:42:10');
+
 -- --------------------------------------------------------
 
 --
@@ -614,6 +630,14 @@ CREATE TABLE `fotos` (
   `id_anuncio` int(11) NOT NULL,
   `foto` mediumblob
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `fotos`
+--
+
+INSERT INTO `fotos` (`id_foto`, `id_anuncio`, `foto`) VALUES
+(0, 1, 0x2f75706c6f6164732f69526a50434d4841486d6c6657663675616a66474a4e5375643356564f4356536c38575646345179384971376d71425850492d6e697373616e5f6164765f315f6774725f77616c6c70617065725f62795f73757065726765636b6f39392d6439646f79676d2e6a7067),
+(1, 1, 0x2f75706c6f6164732f56777a647a3944456734796676767a6d313166636c4f4d33423078383875646577766159594f73324f676b784b6d5857306b2d566f6c6b73776167656e2d476f6c662d4754492d626c61636b2d636f6c6f722d6361722d726f61642d73756e7365745f3136303078313230302e6a7067);
 
 -- --------------------------------------------------------
 
@@ -631,6 +655,13 @@ CREATE TABLE `orden` (
   `duracion` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `id_secretaria` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `orden`
+--
+
+INSERT INTO `orden` (`num_pago`, `id_anuncio`, `id_cliente`, `fecha`, `fecha_venc`, `precio_uni`, `duracion`, `id_secretaria`) VALUES
+(1, 1, 2, '2017-12-09', '2018-05-09', '5290', '5', 3);
 
 -- --------------------------------------------------------
 
@@ -837,8 +868,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `rut`, `nombre`, `apellido`, `email`, `password`, `tipo`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, '19.344.212-2', 'Boris', 'Mora', 'admin@ucm.cl', '$2y$10$aIZ6WaeH7CgP/EjyxmS3dOr20aG9cRsgnUMiXrBlyUZgBI80R6WxC', 'admin', 'S1TDcLZ3O9Oknz1y92dQqSfO67x9rkWtnbOKNkpUZrIpVsIlJ9U0XVRDz7Ft', '2017-10-17 00:51:12.0', '2017-10-17 00:51:12.0'),
-(2, '17.324.545-6', 'Rodrigo', 'Rodirguez', 'cliente@ucm.cl', '$2y$10$8fxHUBybt8ux4zVJ7eQmHOuZvLFJbilnnEMT65ei2Lw8dtqqN/qCS', 'cliente', 'Z6nX6slTXyi4xbYUaU0uAWHnDWwhYdaimq6Ieus1IhERuWp9OQu0pvio9cCX', '2017-10-17 00:54:59.0', '2017-10-17 00:54:59.0'),
-(3, '18938323-5', 'Fernanda', 'Fernandez', 'secretaria@ucm.cl', '$2y$10$tAoGISY0s4T0jikX4JCQpOBEGMDODSpmC34bDsMdenNU9eLcQ6aBy', 'secretaria', '2LoLMhSlxZ9zMlZJJOz0jg5Ehp8D737r4TpDoY9qb0K4fX007C9xLKEXj3KB', '2017-10-17 00:55:50.0', '2017-10-17 00:55:50.0'),
+(2, '17.324.545-6', 'Rodrigo', 'Rodirguez', 'cliente@ucm.cl', '$2y$10$8fxHUBybt8ux4zVJ7eQmHOuZvLFJbilnnEMT65ei2Lw8dtqqN/qCS', 'cliente', 'Cmpw3GNzFzUrIlFfqPR3sqNgLNDoipx2CGlZhdMnzsrahLW79qEkOpeBSVxO', '2017-10-17 00:54:59.0', '2017-10-17 00:54:59.0'),
+(3, '18938323-5', 'Fernanda', 'Fernandez', 'secretaria@ucm.cl', '$2y$10$tAoGISY0s4T0jikX4JCQpOBEGMDODSpmC34bDsMdenNU9eLcQ6aBy', 'secretaria', 'MtgB744W6imLpgyvaWXQpHpKWKvBSY2YfXYNA5RrxwOdAaUW45IjX5W6qmpK', '2017-10-17 00:55:50.0', '2017-10-17 00:55:50.0'),
 (5, '172232323-2', 'Constanza', 'Contreras', 'secretaria2@ucm.cl', '$2y$10$G9AAb3zvRTJd3mSQaL9Tv.dY15n6hwpi1DjstN882WEVcZNBX49jy', 'secretaria', 'tQonfX7dlIlMjBe1lHnjnBJGJCxj65L5hXRH0ocYasE74eSvUVhu6gzKEO92', '2017-10-18 07:03:02.0', '2017-10-18 07:03:02.0'),
 (7, '1832832324-5', 'Alfonso', 'Patamala', 'cliente4@ucm.cl', '$2y$10$1Nx0CdeN4yMYKEg6vCyjgev0PxA6N63iIXsSUh8b8uKpOfJQoGkMa', 'cliente', NULL, '2017-10-18 08:04:06.0', '2017-10-18 08:04:06.0'),
 (8, '1734234234-5', 'Susana', 'Castillo', 'cliente2@ucm.cl', '$2y$10$oy5hmF1Fe/6qo5By742VweZrk.v9wvF5MOO7XqR0tgPIFSvJ0mz8u', 'cliente', '9BBXcyxnO5W09TEknEC8qhnMhiZSGx8tde67EqSBFT1byGo4H3Oa12SkLsQu', '2017-10-18 21:01:18.0', '2017-10-18 21:01:18.0'),
@@ -878,6 +909,13 @@ CREATE TABLE `vehiculo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
+-- Volcado de datos para la tabla `vehiculo`
+--
+
+INSERT INTO `vehiculo` (`patente`, `categoria`, `capacidad`) VALUES
+('wqeqwe', 'auto', 'wqeqwe');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -887,7 +925,8 @@ CREATE TABLE `vehiculo` (
 ALTER TABLE `anuncio`
   ADD PRIMARY KEY (`id_anuncio`),
   ADD KEY `fk_Anuncio_Persona1_idx` (`rut`),
-  ADD KEY `fk_Anuncio_Vehiculo1_idx` (`patente`);
+  ADD KEY `fk_Anuncio_Vehiculo1_idx` (`patente`),
+  ADD KEY `fk_categoria` (`id_categoria`,`tipo_servicio`);
 
 --
 -- Indices de la tabla `categorias`
@@ -1003,7 +1042,8 @@ ALTER TABLE `users`
 -- Indices de la tabla `vehiculo`
 --
 ALTER TABLE `vehiculo`
-  ADD PRIMARY KEY (`patente`);
+  ADD PRIMARY KEY (`patente`),
+  ADD KEY `fk_categoria_vehiculo` (`categoria`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -1036,7 +1076,8 @@ ALTER TABLE `users`
 --
 ALTER TABLE `anuncio`
   ADD CONSTRAINT `fk_Anuncio_Persona1` FOREIGN KEY (`rut`) REFERENCES `persona` (`rut`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_Anuncio_Vehiculo1` FOREIGN KEY (`patente`) REFERENCES `vehiculo` (`patente`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_Anuncio_Vehiculo1` FOREIGN KEY (`patente`) REFERENCES `vehiculo` (`patente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_categoria` FOREIGN KEY (`id_categoria`,`tipo_servicio`) REFERENCES `sub_categorias` (`id_categoria`, `sub_categoria`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `cliente`
@@ -1101,6 +1142,12 @@ ALTER TABLE `sub_categorias`
 --
 ALTER TABLE `tarjeta`
   ADD CONSTRAINT `fk_tarjeta` FOREIGN KEY (`num_pago`) REFERENCES `forma_pago` (`num_pago`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `vehiculo`
+--
+ALTER TABLE `vehiculo`
+  ADD CONSTRAINT `fk_categoria_vehiculo` FOREIGN KEY (`categoria`) REFERENCES `categoria_vehiculo` (`cod`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

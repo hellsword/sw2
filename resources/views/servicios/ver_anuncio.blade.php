@@ -119,7 +119,7 @@
 					@else
 						<h4>Datos del vehículo:</h4><br>
 						<p>Patente: {{$vehiculo -> patente}}</p>
-						<p>Categoría: {{$vehiculo -> categoria}}</p>
+						<p>Categoría: {{$vehiculo -> nombre}}</p>
 						<p>Capacidad: {{$vehiculo -> capacidad}}</p>
 					@endif
 				</section>
