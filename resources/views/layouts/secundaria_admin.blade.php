@@ -177,10 +177,9 @@
 								<p>
 								<h5>Personalice su busqueda por: </h5><br>
 						        <label>Fecha inicial: </label>
-				                <input type="fechaMin" name="fechaMin" placeholder="2017-12-03">
+						        <input type="date" name="fechaMin">
 				                <label>Fecha final: </label>
-				                <input type="fechaMax" name="fechaMax" placeholder="2018-04-03"><br>
-
+				                <input type="date" name="fechaMax">
 
 				                <h6>Secretaria: </h6>
 							    <select class="form-control" id="searchText" name="searchText">
