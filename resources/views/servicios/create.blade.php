@@ -163,9 +163,8 @@
                                         <label>Modo de pago</label>
                                            
                                                 <select name="modo_pago" id="modo_pago" class="uniformselect"  onclick="modo_pago1()" required="">
-                                                
-                                                    <option value="tarjeta" >Tarjeta de crédito</option>
                                                     <option value="efectivo" >Efectivo</option>
+                                                    <option value="tarjeta" >Tarjeta de crédito</option>
                                                 </select>
                                             
                                     </p>

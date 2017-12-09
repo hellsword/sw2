@@ -45,6 +45,9 @@ class CuponController extends Controller
             ->join ('orden as o', 'a.id_anuncio', '=' , 'o.id_anuncio')
             ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
             ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
+            ->join ('region', 'region.REGION_ID', '=' , 'a.region')
+            ->join ('provincia', 'provincia.PROVINCIA_ID', '=' , 'a.provincia')
+            ->join ('comuna', 'comuna.COMUNA_ID', '=' , 'a.comuna')
             ->where('f.id_foto', '=', '0')
             ->where('o.id_cliente', '=', $this->auth->user()->id)
             ->where('a.forma_pago','=','1')
@@ -55,8 +58,9 @@ class CuponController extends Controller
                     'a.descripcion as descripcion',
                     'a.precio_serv as precio_serv',
                     'a.tipo_servicio as tipo_servicio',
-                    'a.region as region',
-                    'a.comuna as comuna',
+                    'region.REGION_NOMBRE as region',
+                    'provincia.PROVINCIA_NOMBRE as provincia',
+                    'comuna.COMUNA_NOMBRE as comuna',
                     'u.nombre as nombre',
                     'u.apellido as apellido',
                     'f.foto as foto',

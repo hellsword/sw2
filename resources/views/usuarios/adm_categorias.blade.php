@@ -19,13 +19,13 @@
     @endif
     <br>
 
-
+<!--
     <h5>Nueva Categoría</h5>
     {!!Form::open(array('url'=>'usuarios/nueva_categoria', 'method'=>'POST', 'class'=>'stdform stdform2', 'autocomplete'=>'off'))!!}
         <input type="" name="nombre" placeholder="nombre clave categoría" required=""> <input type="" name="nombre_completo" placeholder="nombre completo categoría" required=""> <button type="submit" class="w3-button w3-circle w3-teal w3-card-4">+</button>
     {!!Form::close()!!}
     <br>
-
+-->
 
     <h5>Nueva Sub-categoría</h5>
     {!!Form::open(array('url'=>'usuarios/nueva_sub_categoria', 'method'=>'POST', 'class'=>'stdform stdform2', 'autocomplete'=>'off'))!!}
@@ -38,7 +38,7 @@
     {!!Form::close()!!}
     <br>
 
-
+<!--
     <h5>Actualizar Categoría</h5>
     <table class="table table-striped table-bordered table-condensed table-hover">
         <thead>
@@ -49,12 +49,11 @@
          
         </thead>
 
-        <!-- ID PARA IDENTIFICAR EL FORMULARIO -->
         <?php $id_form = 0; ?>
 
         @foreach ($categorias as $categoria)
 
-        <!-- FORMULARIO PARA EDITAR CATEGORIA -->
+        
         {!!Form::open(array('url'=>'usuarios/actualiza_categoria', 'method'=>'POST', 'class'=>'stdform stdform2', 'autocomplete'=>'off', 'id'=>'update_cat-'.$id_form))!!}
         <tr>
             <input type="hidden" name="id_categoria" value="{{$categoria->id_categoria}}" required="">
@@ -64,7 +63,7 @@
         
         {!!Form::close()!!}
 
-        <!-- FORMULARIO PARA BORRAR CATEGORIA -->
+     
         {!!Form::open(array('url'=>'usuarios/elimina_categoria', 'method'=>'POST', 'class'=>'stdform stdform2', 'autocomplete'=>'off', 'id'=>'delete_cat-'.$id_form))!!}
 
             <input type="hidden" name="id_categoria" value="{{$categoria->id_categoria}}" required="">
@@ -80,6 +79,9 @@
 
         @endforeach
     </table>
+-->
+
+
 
     <h5>Actualizar Sub-categoría</h5>
     <table class="table table-striped table-bordered table-condensed table-hover">
