@@ -174,8 +174,20 @@
 
                                   <div id="cambio_pago">
 
+                                        <label>Pago en efectivo</label><br>        
+                 
+                                    <p>
+                                        <label>Duración del anuncio (meses): </label>
+                                        <span class="field"><input type="text" id="tiempo" name="tiempo" class="input-small input-spinner" onchange="calcula_total2()" required="" placeholder="4" onkeypress="return validaNumericos(event)" /></span>'
+                                    </p>
+                                    <p>
+                                        <label>Total: </label>
+                                        <span class="field"><input type="text" id="total" name="total" class="input-xxlarge" value="" readonly/></span>
+                                    </p>
+                                </div><br>;
+
                                 
-                            </div></div>
+                            </div>
 
                         </div><!--#wiz1step3-->
                         
